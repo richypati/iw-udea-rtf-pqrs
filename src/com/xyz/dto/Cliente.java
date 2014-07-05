@@ -11,14 +11,18 @@ import java.util.Set;
  */
 public class Cliente implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ClienteId id;
 	private Cuenta cuenta;
 	private String nombres;
 	private String apellidos;
 	private Date fechaNacimiento;
 	private String sexo;
-	private Set solicituds = new HashSet(0);
-	private Set detalleClientes = new HashSet(0);
+	private Set<Solicitud> solicituds = new HashSet<Solicitud>(0);
+	private Set<DetalleCliente> detalleClientes = new HashSet<DetalleCliente>(0);
 
 	public Cliente() {
 	}
@@ -35,7 +39,7 @@ public class Cliente implements java.io.Serializable {
 
 	public Cliente(ClienteId id, Cuenta cuenta, String nombres,
 			String apellidos, Date fechaNacimiento, String sexo,
-			Set solicituds, Set detalleClientes) {
+			Set<Solicitud> solicituds, Set<DetalleCliente> detalleClientes) {
 		this.id = id;
 		this.cuenta = cuenta;
 		this.nombres = nombres;
@@ -94,19 +98,19 @@ public class Cliente implements java.io.Serializable {
 		this.sexo = sexo;
 	}
 
-	public Set getSolicituds() {
+	public Set<Solicitud> getSolicituds() {
 		return this.solicituds;
 	}
 
-	public void setSolicituds(Set solicituds) {
+	public void setSolicituds(Set<Solicitud> solicituds) {
 		this.solicituds = solicituds;
 	}
 
-	public Set getDetalleClientes() {
+	public Set<DetalleCliente> getDetalleClientes() {
 		return this.detalleClientes;
 	}
 
-	public void setDetalleClientes(Set detalleClientes) {
+	public void setDetalleClientes(Set<DetalleCliente> detalleClientes) {
 		this.detalleClientes = detalleClientes;
 	}
 

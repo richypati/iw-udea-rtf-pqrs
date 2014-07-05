@@ -10,12 +10,16 @@ import java.util.Set;
  */
 public class Sucursal implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String codigo;
 	private String nombre;
 	private String direccion;
 	private String pais;
 	private String ciudad;
-	private Set productos = new HashSet(0);
+	private Set<Producto> productos = new HashSet<Producto>(0);
 
 	public Sucursal() {
 	}
@@ -30,7 +34,7 @@ public class Sucursal implements java.io.Serializable {
 	}
 
 	public Sucursal(String codigo, String nombre, String direccion,
-			String pais, String ciudad, Set productos) {
+			String pais, String ciudad, Set<Producto> productos) {
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.direccion = direccion;
@@ -79,11 +83,11 @@ public class Sucursal implements java.io.Serializable {
 		this.ciudad = ciudad;
 	}
 
-	public Set getProductos() {
+	public Set<Producto> getProductos() {
 		return this.productos;
 	}
 
-	public void setProductos(Set productos) {
+	public void setProductos(Set<Producto> productos) {
 		this.productos = productos;
 	}
 

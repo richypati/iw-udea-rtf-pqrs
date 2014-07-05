@@ -7,6 +7,10 @@ package com.xyz.dto;
  */
 public class ClienteId implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String tipoDocumento;
 	private String numeroDocumento;
 

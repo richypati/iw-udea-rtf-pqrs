@@ -10,10 +10,14 @@ import java.util.Set;
  */
 public class Cuenta implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String nombreUsuario;
 	private String password;
-	private Set clientes = new HashSet(0);
-	private Set analistas = new HashSet(0);
+	private Set<Cliente> clientes = new HashSet<Cliente>(0);
+	private Set<Analista> analistas = new HashSet<Analista>(0);
 
 	public Cuenta() {
 	}
@@ -23,8 +27,8 @@ public class Cuenta implements java.io.Serializable {
 		this.password = password;
 	}
 
-	public Cuenta(String nombreUsuario, String password, Set clientes,
-			Set analistas) {
+	public Cuenta(String nombreUsuario, String password, Set<Cliente> clientes,
+			Set<Analista> analistas) {
 		this.nombreUsuario = nombreUsuario;
 		this.password = password;
 		this.clientes = clientes;
@@ -47,19 +51,19 @@ public class Cuenta implements java.io.Serializable {
 		this.password = password;
 	}
 
-	public Set getClientes() {
+	public Set<Cliente> getClientes() {
 		return this.clientes;
 	}
 
-	public void setClientes(Set clientes) {
+	public void setClientes(Set<Cliente> clientes) {
 		this.clientes = clientes;
 	}
 
-	public Set getAnalistas() {
+	public Set<Analista> getAnalistas() {
 		return this.analistas;
 	}
 
-	public void setAnalistas(Set analistas) {
+	public void setAnalistas(Set<Analista> analistas) {
 		this.analistas = analistas;
 	}
 

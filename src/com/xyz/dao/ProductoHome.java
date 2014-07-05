@@ -1,14 +1,18 @@
-package com.xyz.dto;
+package com.xyz.dao;
 
 // Generated 4/07/2014 07:36:05 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.List;
+
 import javax.naming.InitialContext;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
+
+import com.xyz.dto.Producto;
 
 /**
  * Home object for domain model class Producto.
@@ -54,6 +58,7 @@ public class ProductoHome {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	public void attachClean(Producto instance) {
 		log.debug("attaching clean Producto instance");
 		try {
@@ -106,10 +111,11 @@ public class ProductoHome {
 		}
 	}
 
-	public List findByExample(Producto instance) {
+	@SuppressWarnings("unchecked")
+	public List<Producto> findByExample(Producto instance) {
 		log.debug("finding Producto instance by example");
 		try {
-			List results = sessionFactory.getCurrentSession()
+			List<Producto> results = sessionFactory.getCurrentSession()
 					.createCriteria("com.xyz.dto.Producto")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "

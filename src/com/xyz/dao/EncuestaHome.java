@@ -1,23 +1,27 @@
-package com.xyz.dto;
+package com.xyz.dao;
 
 // Generated 4/07/2014 07:36:05 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.List;
+
 import javax.naming.InitialContext;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 
+import com.xyz.dto.Encuesta;
+
 /**
- * Home object for domain model class Sucursal.
- * @see com.xyz.dto.Sucursal
+ * Home object for domain model class Encuesta.
+ * @see com.xyz.dto.Encuesta
  * @author Hibernate Tools
  */
-public class SucursalHome {
+public class EncuestaHome {
 
-	private static final Log log = LogFactory.getLog(SucursalHome.class);
+	private static final Log log = LogFactory.getLog(EncuestaHome.class);
 
 	private final SessionFactory sessionFactory = getSessionFactory();
 
@@ -32,8 +36,8 @@ public class SucursalHome {
 		}
 	}
 
-	public void persist(Sucursal transientInstance) {
-		log.debug("persisting Sucursal instance");
+	public void persist(Encuesta transientInstance) {
+		log.debug("persisting Encuesta instance");
 		try {
 			sessionFactory.getCurrentSession().persist(transientInstance);
 			log.debug("persist successful");
@@ -43,8 +47,8 @@ public class SucursalHome {
 		}
 	}
 
-	public void attachDirty(Sucursal instance) {
-		log.debug("attaching dirty Sucursal instance");
+	public void attachDirty(Encuesta instance) {
+		log.debug("attaching dirty Encuesta instance");
 		try {
 			sessionFactory.getCurrentSession().saveOrUpdate(instance);
 			log.debug("attach successful");
@@ -54,8 +58,9 @@ public class SucursalHome {
 		}
 	}
 
-	public void attachClean(Sucursal instance) {
-		log.debug("attaching clean Sucursal instance");
+	@SuppressWarnings("deprecation")
+	public void attachClean(Encuesta instance) {
+		log.debug("attaching clean Encuesta instance");
 		try {
 			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
@@ -65,8 +70,8 @@ public class SucursalHome {
 		}
 	}
 
-	public void delete(Sucursal persistentInstance) {
-		log.debug("deleting Sucursal instance");
+	public void delete(Encuesta persistentInstance) {
+		log.debug("deleting Encuesta instance");
 		try {
 			sessionFactory.getCurrentSession().delete(persistentInstance);
 			log.debug("delete successful");
@@ -76,10 +81,10 @@ public class SucursalHome {
 		}
 	}
 
-	public Sucursal merge(Sucursal detachedInstance) {
-		log.debug("merging Sucursal instance");
+	public Encuesta merge(Encuesta detachedInstance) {
+		log.debug("merging Encuesta instance");
 		try {
-			Sucursal result = (Sucursal) sessionFactory.getCurrentSession()
+			Encuesta result = (Encuesta) sessionFactory.getCurrentSession()
 					.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
@@ -89,11 +94,11 @@ public class SucursalHome {
 		}
 	}
 
-	public Sucursal findById(java.lang.String id) {
-		log.debug("getting Sucursal instance with id: " + id);
+	public Encuesta findById(java.lang.String id) {
+		log.debug("getting Encuesta instance with id: " + id);
 		try {
-			Sucursal instance = (Sucursal) sessionFactory.getCurrentSession()
-					.get("com.xyz.dto.Sucursal", id);
+			Encuesta instance = (Encuesta) sessionFactory.getCurrentSession()
+					.get("com.xyz.dto.Encuesta", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
@@ -106,11 +111,12 @@ public class SucursalHome {
 		}
 	}
 
-	public List findByExample(Sucursal instance) {
-		log.debug("finding Sucursal instance by example");
+	@SuppressWarnings("unchecked")
+	public List<Encuesta> findByExample(Encuesta instance) {
+		log.debug("finding Encuesta instance by example");
 		try {
-			List results = sessionFactory.getCurrentSession()
-					.createCriteria("com.xyz.dto.Sucursal")
+			List<Encuesta> results = sessionFactory.getCurrentSession()
+					.createCriteria("com.xyz.dto.Encuesta")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());

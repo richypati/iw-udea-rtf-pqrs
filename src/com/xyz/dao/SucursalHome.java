@@ -1,23 +1,27 @@
-package com.xyz.dto;
+package com.xyz.dao;
 
 // Generated 4/07/2014 07:36:05 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.List;
+
 import javax.naming.InitialContext;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 
+import com.xyz.dto.Sucursal;
+
 /**
- * Home object for domain model class DetalleCliente.
- * @see com.xyz.dto.DetalleCliente
+ * Home object for domain model class Sucursal.
+ * @see com.xyz.dto.Sucursal
  * @author Hibernate Tools
  */
-public class DetalleClienteHome {
+public class SucursalHome {
 
-	private static final Log log = LogFactory.getLog(DetalleClienteHome.class);
+	private static final Log log = LogFactory.getLog(SucursalHome.class);
 
 	private final SessionFactory sessionFactory = getSessionFactory();
 
@@ -32,8 +36,8 @@ public class DetalleClienteHome {
 		}
 	}
 
-	public void persist(DetalleCliente transientInstance) {
-		log.debug("persisting DetalleCliente instance");
+	public void persist(Sucursal transientInstance) {
+		log.debug("persisting Sucursal instance");
 		try {
 			sessionFactory.getCurrentSession().persist(transientInstance);
 			log.debug("persist successful");
@@ -43,8 +47,8 @@ public class DetalleClienteHome {
 		}
 	}
 
-	public void attachDirty(DetalleCliente instance) {
-		log.debug("attaching dirty DetalleCliente instance");
+	public void attachDirty(Sucursal instance) {
+		log.debug("attaching dirty Sucursal instance");
 		try {
 			sessionFactory.getCurrentSession().saveOrUpdate(instance);
 			log.debug("attach successful");
@@ -54,8 +58,9 @@ public class DetalleClienteHome {
 		}
 	}
 
-	public void attachClean(DetalleCliente instance) {
-		log.debug("attaching clean DetalleCliente instance");
+	@SuppressWarnings("deprecation")
+	public void attachClean(Sucursal instance) {
+		log.debug("attaching clean Sucursal instance");
 		try {
 			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
@@ -65,8 +70,8 @@ public class DetalleClienteHome {
 		}
 	}
 
-	public void delete(DetalleCliente persistentInstance) {
-		log.debug("deleting DetalleCliente instance");
+	public void delete(Sucursal persistentInstance) {
+		log.debug("deleting Sucursal instance");
 		try {
 			sessionFactory.getCurrentSession().delete(persistentInstance);
 			log.debug("delete successful");
@@ -76,11 +81,11 @@ public class DetalleClienteHome {
 		}
 	}
 
-	public DetalleCliente merge(DetalleCliente detachedInstance) {
-		log.debug("merging DetalleCliente instance");
+	public Sucursal merge(Sucursal detachedInstance) {
+		log.debug("merging Sucursal instance");
 		try {
-			DetalleCliente result = (DetalleCliente) sessionFactory
-					.getCurrentSession().merge(detachedInstance);
+			Sucursal result = (Sucursal) sessionFactory.getCurrentSession()
+					.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -89,11 +94,11 @@ public class DetalleClienteHome {
 		}
 	}
 
-	public DetalleCliente findById(java.lang.String id) {
-		log.debug("getting DetalleCliente instance with id: " + id);
+	public Sucursal findById(java.lang.String id) {
+		log.debug("getting Sucursal instance with id: " + id);
 		try {
-			DetalleCliente instance = (DetalleCliente) sessionFactory
-					.getCurrentSession().get("com.xyz.dto.DetalleCliente", id);
+			Sucursal instance = (Sucursal) sessionFactory.getCurrentSession()
+					.get("com.xyz.dto.Sucursal", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
@@ -106,11 +111,12 @@ public class DetalleClienteHome {
 		}
 	}
 
-	public List findByExample(DetalleCliente instance) {
-		log.debug("finding DetalleCliente instance by example");
+	@SuppressWarnings("unchecked")
+	public List<Sucursal> findByExample(Sucursal instance) {
+		log.debug("finding Sucursal instance by example");
 		try {
-			List results = sessionFactory.getCurrentSession()
-					.createCriteria("com.xyz.dto.DetalleCliente")
+			List<Sucursal> results = sessionFactory.getCurrentSession()
+					.createCriteria("com.xyz.dto.Sucursal")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());

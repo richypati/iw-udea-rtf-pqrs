@@ -1,23 +1,27 @@
-package com.xyz.dto;
+package com.xyz.dao;
 
 // Generated 4/07/2014 07:36:05 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.List;
+
 import javax.naming.InitialContext;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 
+import com.xyz.dto.Solicitud;
+
 /**
- * Home object for domain model class Cuenta.
- * @see com.xyz.dto.Cuenta
+ * Home object for domain model class Solicitud.
+ * @see com.xyz.dto.Solicitud
  * @author Hibernate Tools
  */
-public class CuentaHome {
+public class SolicitudHome {
 
-	private static final Log log = LogFactory.getLog(CuentaHome.class);
+	private static final Log log = LogFactory.getLog(SolicitudHome.class);
 
 	private final SessionFactory sessionFactory = getSessionFactory();
 
@@ -32,8 +36,8 @@ public class CuentaHome {
 		}
 	}
 
-	public void persist(Cuenta transientInstance) {
-		log.debug("persisting Cuenta instance");
+	public void persist(Solicitud transientInstance) {
+		log.debug("persisting Solicitud instance");
 		try {
 			sessionFactory.getCurrentSession().persist(transientInstance);
 			log.debug("persist successful");
@@ -43,8 +47,8 @@ public class CuentaHome {
 		}
 	}
 
-	public void attachDirty(Cuenta instance) {
-		log.debug("attaching dirty Cuenta instance");
+	public void attachDirty(Solicitud instance) {
+		log.debug("attaching dirty Solicitud instance");
 		try {
 			sessionFactory.getCurrentSession().saveOrUpdate(instance);
 			log.debug("attach successful");
@@ -54,8 +58,9 @@ public class CuentaHome {
 		}
 	}
 
-	public void attachClean(Cuenta instance) {
-		log.debug("attaching clean Cuenta instance");
+	@SuppressWarnings("deprecation")
+	public void attachClean(Solicitud instance) {
+		log.debug("attaching clean Solicitud instance");
 		try {
 			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
@@ -65,8 +70,8 @@ public class CuentaHome {
 		}
 	}
 
-	public void delete(Cuenta persistentInstance) {
-		log.debug("deleting Cuenta instance");
+	public void delete(Solicitud persistentInstance) {
+		log.debug("deleting Solicitud instance");
 		try {
 			sessionFactory.getCurrentSession().delete(persistentInstance);
 			log.debug("delete successful");
@@ -76,11 +81,11 @@ public class CuentaHome {
 		}
 	}
 
-	public Cuenta merge(Cuenta detachedInstance) {
-		log.debug("merging Cuenta instance");
+	public Solicitud merge(Solicitud detachedInstance) {
+		log.debug("merging Solicitud instance");
 		try {
-			Cuenta result = (Cuenta) sessionFactory.getCurrentSession().merge(
-					detachedInstance);
+			Solicitud result = (Solicitud) sessionFactory.getCurrentSession()
+					.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -89,11 +94,11 @@ public class CuentaHome {
 		}
 	}
 
-	public Cuenta findById(java.lang.String id) {
-		log.debug("getting Cuenta instance with id: " + id);
+	public Solicitud findById(java.lang.String id) {
+		log.debug("getting Solicitud instance with id: " + id);
 		try {
-			Cuenta instance = (Cuenta) sessionFactory.getCurrentSession().get(
-					"com.xyz.dto.Cuenta", id);
+			Solicitud instance = (Solicitud) sessionFactory.getCurrentSession()
+					.get("com.xyz.dto.Solicitud", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
@@ -106,11 +111,12 @@ public class CuentaHome {
 		}
 	}
 
-	public List findByExample(Cuenta instance) {
-		log.debug("finding Cuenta instance by example");
+	@SuppressWarnings("unchecked")
+	public List<Solicitud> findByExample(Solicitud instance) {
+		log.debug("finding Solicitud instance by example");
 		try {
-			List results = sessionFactory.getCurrentSession()
-					.createCriteria("com.xyz.dto.Cuenta")
+			List<Solicitud> results = sessionFactory.getCurrentSession()
+					.createCriteria("com.xyz.dto.Solicitud")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());
