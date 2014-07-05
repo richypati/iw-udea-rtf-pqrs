@@ -1,23 +1,27 @@
-package com.xyz.dto;
+package com.xyz.dao;
 
 // Generated 4/07/2014 07:36:05 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.List;
+
 import javax.naming.InitialContext;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 
+import com.xyz.dto.DetalleCliente;
+
 /**
- * Home object for domain model class Rol.
- * @see com.xyz.dto.Rol
+ * Home object for domain model class DetalleCliente.
+ * @see com.xyz.dto.DetalleCliente
  * @author Hibernate Tools
  */
-public class RolHome {
+public class DetalleClienteHome {
 
-	private static final Log log = LogFactory.getLog(RolHome.class);
+	private static final Log log = LogFactory.getLog(DetalleClienteHome.class);
 
 	private final SessionFactory sessionFactory = getSessionFactory();
 
@@ -32,8 +36,8 @@ public class RolHome {
 		}
 	}
 
-	public void persist(Rol transientInstance) {
-		log.debug("persisting Rol instance");
+	public void persist(DetalleCliente transientInstance) {
+		log.debug("persisting DetalleCliente instance");
 		try {
 			sessionFactory.getCurrentSession().persist(transientInstance);
 			log.debug("persist successful");
@@ -43,8 +47,8 @@ public class RolHome {
 		}
 	}
 
-	public void attachDirty(Rol instance) {
-		log.debug("attaching dirty Rol instance");
+	public void attachDirty(DetalleCliente instance) {
+		log.debug("attaching dirty DetalleCliente instance");
 		try {
 			sessionFactory.getCurrentSession().saveOrUpdate(instance);
 			log.debug("attach successful");
@@ -54,8 +58,9 @@ public class RolHome {
 		}
 	}
 
-	public void attachClean(Rol instance) {
-		log.debug("attaching clean Rol instance");
+	@SuppressWarnings("deprecation")
+	public void attachClean(DetalleCliente instance) {
+		log.debug("attaching clean DetalleCliente instance");
 		try {
 			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
@@ -65,8 +70,8 @@ public class RolHome {
 		}
 	}
 
-	public void delete(Rol persistentInstance) {
-		log.debug("deleting Rol instance");
+	public void delete(DetalleCliente persistentInstance) {
+		log.debug("deleting DetalleCliente instance");
 		try {
 			sessionFactory.getCurrentSession().delete(persistentInstance);
 			log.debug("delete successful");
@@ -76,11 +81,11 @@ public class RolHome {
 		}
 	}
 
-	public Rol merge(Rol detachedInstance) {
-		log.debug("merging Rol instance");
+	public DetalleCliente merge(DetalleCliente detachedInstance) {
+		log.debug("merging DetalleCliente instance");
 		try {
-			Rol result = (Rol) sessionFactory.getCurrentSession().merge(
-					detachedInstance);
+			DetalleCliente result = (DetalleCliente) sessionFactory
+					.getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -89,11 +94,11 @@ public class RolHome {
 		}
 	}
 
-	public Rol findById(java.lang.String id) {
-		log.debug("getting Rol instance with id: " + id);
+	public DetalleCliente findById(java.lang.String id) {
+		log.debug("getting DetalleCliente instance with id: " + id);
 		try {
-			Rol instance = (Rol) sessionFactory.getCurrentSession().get(
-					"com.xyz.dto.Rol", id);
+			DetalleCliente instance = (DetalleCliente) sessionFactory
+					.getCurrentSession().get("com.xyz.dto.DetalleCliente", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
@@ -106,11 +111,12 @@ public class RolHome {
 		}
 	}
 
-	public List findByExample(Rol instance) {
-		log.debug("finding Rol instance by example");
+	@SuppressWarnings("unchecked")
+	public List<DetalleCliente> findByExample(DetalleCliente instance) {
+		log.debug("finding DetalleCliente instance by example");
 		try {
-			List results = sessionFactory.getCurrentSession()
-					.createCriteria("com.xyz.dto.Rol")
+			List<DetalleCliente> results = sessionFactory.getCurrentSession()
+					.createCriteria("com.xyz.dto.DetalleCliente")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());

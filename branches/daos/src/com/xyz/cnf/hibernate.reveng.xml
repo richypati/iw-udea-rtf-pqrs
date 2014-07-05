@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<!DOCTYPE hibernate-configuration PUBLIC 
+"-//Hibernate/Hibernate Configuration DTD//EN" 
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-reverse-engineering>
-  <schema-selection match-catalog="iwpqrs"/>
-  <table-filter match-name="solicitud"/>
-  <table-filter match-name="analista"/>
-  <table-filter match-name="rol"/>
-  <table-filter match-name="producto"/>
-  <table-filter match-name="cliente"/>
-  <table-filter match-name="sucursal"/>
-  <table-filter match-name="encuesta"/>
-  <table-filter match-name="cuenta"/>
-  <table-filter match-name="detalle_cliente"/>
+	<schema-selection match-catalog="iwpqrs" />
+	<table-filter match-name="solicitud" />
+	<table-filter match-name="analista" />
+	<table-filter match-name="rol" />
+	<table-filter match-name="producto" />
+	<table-filter match-name="cliente" />
+	<table-filter match-name="sucursal" />
+	<table-filter match-name="encuesta" />
+	<table-filter match-name="cuenta" />
+	<table-filter match-name="detalle_cliente" />
 </hibernate-reverse-engineering>

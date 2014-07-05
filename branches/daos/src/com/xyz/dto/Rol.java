@@ -10,10 +10,14 @@ import java.util.Set;
  */
 public class Rol implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String codigo;
 	private String nombre;
 	private String descripcion;
-	private Set analistas = new HashSet(0);
+	private Set<Rol> analistas = new HashSet<Rol>(0);
 
 	public Rol() {
 	}
@@ -24,7 +28,7 @@ public class Rol implements java.io.Serializable {
 		this.descripcion = descripcion;
 	}
 
-	public Rol(String codigo, String nombre, String descripcion, Set analistas) {
+	public Rol(String codigo, String nombre, String descripcion, Set<Rol> analistas) {
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -55,11 +59,11 @@ public class Rol implements java.io.Serializable {
 		this.descripcion = descripcion;
 	}
 
-	public Set getAnalistas() {
+	public Set<Rol> getAnalistas() {
 		return this.analistas;
 	}
 
-	public void setAnalistas(Set analistas) {
+	public void setAnalistas(Set<Rol> analistas) {
 		this.analistas = analistas;
 	}
 

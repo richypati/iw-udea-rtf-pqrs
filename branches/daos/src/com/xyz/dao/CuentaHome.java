@@ -1,23 +1,27 @@
-package com.xyz.dto;
+package com.xyz.dao;
 
 // Generated 4/07/2014 07:36:05 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.List;
+
 import javax.naming.InitialContext;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 
+import com.xyz.dto.Cuenta;
+
 /**
- * Home object for domain model class Encuesta.
- * @see com.xyz.dto.Encuesta
+ * Home object for domain model class Cuenta.
+ * @see com.xyz.dto.Cuenta
  * @author Hibernate Tools
  */
-public class EncuestaHome {
+public class CuentaHome {
 
-	private static final Log log = LogFactory.getLog(EncuestaHome.class);
+	private static final Log log = LogFactory.getLog(CuentaHome.class);
 
 	private final SessionFactory sessionFactory = getSessionFactory();
 
@@ -32,8 +36,8 @@ public class EncuestaHome {
 		}
 	}
 
-	public void persist(Encuesta transientInstance) {
-		log.debug("persisting Encuesta instance");
+	public void persist(Cuenta transientInstance) {
+		log.debug("persisting Cuenta instance");
 		try {
 			sessionFactory.getCurrentSession().persist(transientInstance);
 			log.debug("persist successful");
@@ -43,8 +47,8 @@ public class EncuestaHome {
 		}
 	}
 
-	public void attachDirty(Encuesta instance) {
-		log.debug("attaching dirty Encuesta instance");
+	public void attachDirty(Cuenta instance) {
+		log.debug("attaching dirty Cuenta instance");
 		try {
 			sessionFactory.getCurrentSession().saveOrUpdate(instance);
 			log.debug("attach successful");
@@ -54,8 +58,9 @@ public class EncuestaHome {
 		}
 	}
 
-	public void attachClean(Encuesta instance) {
-		log.debug("attaching clean Encuesta instance");
+	@SuppressWarnings("deprecation")
+	public void attachClean(Cuenta instance) {
+		log.debug("attaching clean Cuenta instance");
 		try {
 			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
@@ -65,8 +70,8 @@ public class EncuestaHome {
 		}
 	}
 
-	public void delete(Encuesta persistentInstance) {
-		log.debug("deleting Encuesta instance");
+	public void delete(Cuenta persistentInstance) {
+		log.debug("deleting Cuenta instance");
 		try {
 			sessionFactory.getCurrentSession().delete(persistentInstance);
 			log.debug("delete successful");
@@ -76,11 +81,11 @@ public class EncuestaHome {
 		}
 	}
 
-	public Encuesta merge(Encuesta detachedInstance) {
-		log.debug("merging Encuesta instance");
+	public Cuenta merge(Cuenta detachedInstance) {
+		log.debug("merging Cuenta instance");
 		try {
-			Encuesta result = (Encuesta) sessionFactory.getCurrentSession()
-					.merge(detachedInstance);
+			Cuenta result = (Cuenta) sessionFactory.getCurrentSession().merge(
+					detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -89,11 +94,11 @@ public class EncuestaHome {
 		}
 	}
 
-	public Encuesta findById(java.lang.String id) {
-		log.debug("getting Encuesta instance with id: " + id);
+	public Cuenta findById(java.lang.String id) {
+		log.debug("getting Cuenta instance with id: " + id);
 		try {
-			Encuesta instance = (Encuesta) sessionFactory.getCurrentSession()
-					.get("com.xyz.dto.Encuesta", id);
+			Cuenta instance = (Cuenta) sessionFactory.getCurrentSession().get(
+					"com.xyz.dto.Cuenta", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
@@ -106,11 +111,12 @@ public class EncuestaHome {
 		}
 	}
 
-	public List findByExample(Encuesta instance) {
-		log.debug("finding Encuesta instance by example");
+	@SuppressWarnings("unchecked")
+	public List<Cuenta> findByExample(Cuenta instance) {
+		log.debug("finding Cuenta instance by example");
 		try {
-			List results = sessionFactory.getCurrentSession()
-					.createCriteria("com.xyz.dto.Encuesta")
+			List<Cuenta> results = sessionFactory.getCurrentSession()
+					.createCriteria("com.xyz.dto.Cuenta")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());

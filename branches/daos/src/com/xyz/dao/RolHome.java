@@ -1,23 +1,27 @@
-package com.xyz.dto;
+package com.xyz.dao;
 
 // Generated 4/07/2014 07:36:05 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.List;
+
 import javax.naming.InitialContext;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 
+import com.xyz.dto.Rol;
+
 /**
- * Home object for domain model class Analista.
- * @see com.xyz.dto.Analista
+ * Home object for domain model class Rol.
+ * @see com.xyz.dto.Rol
  * @author Hibernate Tools
  */
-public class AnalistaHome {
+public class RolHome {
 
-	private static final Log log = LogFactory.getLog(AnalistaHome.class);
+	private static final Log log = LogFactory.getLog(RolHome.class);
 
 	private final SessionFactory sessionFactory = getSessionFactory();
 
@@ -32,8 +36,8 @@ public class AnalistaHome {
 		}
 	}
 
-	public void persist(Analista transientInstance) {
-		log.debug("persisting Analista instance");
+	public void persist(Rol transientInstance) {
+		log.debug("persisting Rol instance");
 		try {
 			sessionFactory.getCurrentSession().persist(transientInstance);
 			log.debug("persist successful");
@@ -43,8 +47,8 @@ public class AnalistaHome {
 		}
 	}
 
-	public void attachDirty(Analista instance) {
-		log.debug("attaching dirty Analista instance");
+	public void attachDirty(Rol instance) {
+		log.debug("attaching dirty Rol instance");
 		try {
 			sessionFactory.getCurrentSession().saveOrUpdate(instance);
 			log.debug("attach successful");
@@ -54,8 +58,9 @@ public class AnalistaHome {
 		}
 	}
 
-	public void attachClean(Analista instance) {
-		log.debug("attaching clean Analista instance");
+	@SuppressWarnings("deprecation")
+	public void attachClean(Rol instance) {
+		log.debug("attaching clean Rol instance");
 		try {
 			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
@@ -65,8 +70,8 @@ public class AnalistaHome {
 		}
 	}
 
-	public void delete(Analista persistentInstance) {
-		log.debug("deleting Analista instance");
+	public void delete(Rol persistentInstance) {
+		log.debug("deleting Rol instance");
 		try {
 			sessionFactory.getCurrentSession().delete(persistentInstance);
 			log.debug("delete successful");
@@ -76,11 +81,11 @@ public class AnalistaHome {
 		}
 	}
 
-	public Analista merge(Analista detachedInstance) {
-		log.debug("merging Analista instance");
+	public Rol merge(Rol detachedInstance) {
+		log.debug("merging Rol instance");
 		try {
-			Analista result = (Analista) sessionFactory.getCurrentSession()
-					.merge(detachedInstance);
+			Rol result = (Rol) sessionFactory.getCurrentSession().merge(
+					detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -89,11 +94,11 @@ public class AnalistaHome {
 		}
 	}
 
-	public Analista findById(java.lang.String id) {
-		log.debug("getting Analista instance with id: " + id);
+	public Rol findById(java.lang.String id) {
+		log.debug("getting Rol instance with id: " + id);
 		try {
-			Analista instance = (Analista) sessionFactory.getCurrentSession()
-					.get("com.xyz.dto.Analista", id);
+			Rol instance = (Rol) sessionFactory.getCurrentSession().get(
+					"com.xyz.dto.Rol", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
@@ -106,11 +111,12 @@ public class AnalistaHome {
 		}
 	}
 
-	public List findByExample(Analista instance) {
-		log.debug("finding Analista instance by example");
+	@SuppressWarnings("unchecked")
+	public List<Rol> findByExample(Rol instance) {
+		log.debug("finding Rol instance by example");
 		try {
-			List results = sessionFactory.getCurrentSession()
-					.createCriteria("com.xyz.dto.Analista")
+			List<Rol> results = sessionFactory.getCurrentSession()
+					.createCriteria("com.xyz.dto.Rol")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());

@@ -10,12 +10,16 @@ import java.util.Set;
  */
 public class Producto implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String codigo;
 	private Sucursal sucursal;
 	private String nombre;
 	private String tipo;
 	private float valor;
-	private Set solicituds = new HashSet(0);
+	private Set<Solicitud> solicituds = new HashSet<Solicitud>(0);
 
 	public Producto() {
 	}
@@ -30,7 +34,7 @@ public class Producto implements java.io.Serializable {
 	}
 
 	public Producto(String codigo, Sucursal sucursal, String nombre,
-			String tipo, float valor, Set solicituds) {
+			String tipo, float valor, Set<Solicitud> solicituds) {
 		this.codigo = codigo;
 		this.sucursal = sucursal;
 		this.nombre = nombre;
@@ -79,11 +83,11 @@ public class Producto implements java.io.Serializable {
 		this.valor = valor;
 	}
 
-	public Set getSolicituds() {
+	public Set<Solicitud> getSolicituds() {
 		return this.solicituds;
 	}
 
-	public void setSolicituds(Set solicituds) {
+	public void setSolicituds(Set<Solicitud> solicituds) {
 		this.solicituds = solicituds;
 	}
 

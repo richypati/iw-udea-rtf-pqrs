@@ -1,23 +1,27 @@
-package com.xyz.dto;
+package com.xyz.dao;
 
 // Generated 4/07/2014 07:36:05 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.List;
+
 import javax.naming.InitialContext;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 
+import com.xyz.dto.Analista;
+
 /**
- * Home object for domain model class Cliente.
- * @see com.xyz.dto.Cliente
+ * Home object for domain model class Analista.
+ * @see com.xyz.dto.Analista
  * @author Hibernate Tools
  */
-public class ClienteHome {
+public class AnalistaHome {
 
-	private static final Log log = LogFactory.getLog(ClienteHome.class);
+	private static final Log log = LogFactory.getLog(AnalistaHome.class);
 
 	private final SessionFactory sessionFactory = getSessionFactory();
 
@@ -32,8 +36,8 @@ public class ClienteHome {
 		}
 	}
 
-	public void persist(Cliente transientInstance) {
-		log.debug("persisting Cliente instance");
+	public void persist(Analista transientInstance) {
+		log.debug("persisting Analista instance");
 		try {
 			sessionFactory.getCurrentSession().persist(transientInstance);
 			log.debug("persist successful");
@@ -43,8 +47,8 @@ public class ClienteHome {
 		}
 	}
 
-	public void attachDirty(Cliente instance) {
-		log.debug("attaching dirty Cliente instance");
+	public void attachDirty(Analista instance) {
+		log.debug("attaching dirty Analista instance");
 		try {
 			sessionFactory.getCurrentSession().saveOrUpdate(instance);
 			log.debug("attach successful");
@@ -54,8 +58,9 @@ public class ClienteHome {
 		}
 	}
 
-	public void attachClean(Cliente instance) {
-		log.debug("attaching clean Cliente instance");
+	@SuppressWarnings("deprecation")
+	public void attachClean(Analista instance) {
+		log.debug("attaching clean Analista instance");
 		try {
 			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
@@ -65,8 +70,8 @@ public class ClienteHome {
 		}
 	}
 
-	public void delete(Cliente persistentInstance) {
-		log.debug("deleting Cliente instance");
+	public void delete(Analista persistentInstance) {
+		log.debug("deleting Analista instance");
 		try {
 			sessionFactory.getCurrentSession().delete(persistentInstance);
 			log.debug("delete successful");
@@ -76,10 +81,10 @@ public class ClienteHome {
 		}
 	}
 
-	public Cliente merge(Cliente detachedInstance) {
-		log.debug("merging Cliente instance");
+	public Analista merge(Analista detachedInstance) {
+		log.debug("merging Analista instance");
 		try {
-			Cliente result = (Cliente) sessionFactory.getCurrentSession()
+			Analista result = (Analista) sessionFactory.getCurrentSession()
 					.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
@@ -89,11 +94,11 @@ public class ClienteHome {
 		}
 	}
 
-	public Cliente findById(com.xyz.dto.ClienteId id) {
-		log.debug("getting Cliente instance with id: " + id);
+	public Analista findById(java.lang.String id) {
+		log.debug("getting Analista instance with id: " + id);
 		try {
-			Cliente instance = (Cliente) sessionFactory.getCurrentSession()
-					.get("com.xyz.dto.Cliente", id);
+			Analista instance = (Analista) sessionFactory.getCurrentSession()
+					.get("com.xyz.dto.Analista", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
@@ -106,11 +111,12 @@ public class ClienteHome {
 		}
 	}
 
-	public List findByExample(Cliente instance) {
-		log.debug("finding Cliente instance by example");
+	@SuppressWarnings("unchecked")
+	public List<Analista> findByExample(Analista instance) {
+		log.debug("finding Analista instance by example");
 		try {
-			List results = sessionFactory.getCurrentSession()
-					.createCriteria("com.xyz.dto.Cliente")
+			List<Analista> results = sessionFactory.getCurrentSession()
+					.createCriteria("com.xyz.dto.Analista")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());

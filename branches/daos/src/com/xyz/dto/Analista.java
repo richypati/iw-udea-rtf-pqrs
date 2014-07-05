@@ -10,6 +10,10 @@ import java.util.Set;
  */
 public class Analista implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String dni;
 	private Cuenta cuenta;
 	private Rol rol;
@@ -18,7 +22,7 @@ public class Analista implements java.io.Serializable {
 	private String direccion;
 	private String pais;
 	private String ciudad;
-	private Set solicituds = new HashSet(0);
+	private Set<Solicitud> solicituds = new HashSet<Solicitud>(0);
 
 	public Analista() {
 	}
@@ -37,7 +41,7 @@ public class Analista implements java.io.Serializable {
 
 	public Analista(String dni, Cuenta cuenta, Rol rol, String nombre,
 			String apellidos, String direccion, String pais, String ciudad,
-			Set solicituds) {
+			Set<Solicitud> solicituds) {
 		this.dni = dni;
 		this.cuenta = cuenta;
 		this.rol = rol;
@@ -113,11 +117,12 @@ public class Analista implements java.io.Serializable {
 		this.ciudad = ciudad;
 	}
 
-	public Set getSolicituds() {
-		return this.solicituds;
+	public Set<Solicitud> getSolicituds() {
+		Set<Solicitud> solicituds = this.solicituds;
+		return solicituds;
 	}
 
-	public void setSolicituds(Set solicituds) {
+	public void setSolicituds(Set<Solicitud> solicituds) {
 		this.solicituds = solicituds;
 	}
 
