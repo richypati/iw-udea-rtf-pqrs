@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 4/07/2014 07:36:05 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.xyz.dto.Encuesta" table="encuesta" catalog="iwpqrs">
+        <id name="id" type="string">
+            <column name="id" length="45" />
+            <generator class="assigned" />
+        </id>
+        <property name="preguntaA" type="string">
+            <column name="pregunta_a" length="200" not-null="true" />
+        </property>
+        <property name="preguntaB" type="string">
+            <column name="pregunta_b" length="200" not-null="true" />
+        </property>
+        <property name="fechaEnvio" type="timestamp">
+            <column name="fecha_envio" length="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

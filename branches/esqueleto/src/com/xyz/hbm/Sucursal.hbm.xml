@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 4/07/2014 07:36:05 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.xyz.dto.Sucursal" table="sucursal" catalog="iwpqrs">
+        <id name="codigo" type="string">
+            <column name="codigo" length="100" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="50" not-null="true" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="50" not-null="true" />
+        </property>
+        <property name="pais" type="string">
+            <column name="pais" length="50" not-null="true" />
+        </property>
+        <property name="ciudad" type="string">
+            <column name="ciudad" length="50" not-null="true" />
+        </property>
+        <set name="productos" table="producto" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="SUCURSAL_codigo" length="100" not-null="true" />
+            </key>
+            <one-to-many class="com.xyz.dto.Producto" />
+        </set>
+    </class>
+</hibernate-mapping>
