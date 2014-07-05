@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 4/07/2014 07:36:05 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.xyz.dto.Solicitud" table="solicitud" catalog="iwpqrs">
+        <id name="id" type="string">
+            <column name="id" length="100" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="producto" class="com.xyz.dto.Producto" fetch="select">
+            <column name="PRODUCTO_codigo" length="100" not-null="true" />
+        </many-to-one>
+        <many-to-one name="cliente" class="com.xyz.dto.Cliente" fetch="select">
+            <column name="CLIENTE_tipo_documento" length="100" not-null="true" />
+            <column name="CLIENTE_numero_documento" length="45" not-null="true" />
+        </many-to-one>
+        <many-to-one name="analista" class="com.xyz.dto.Analista" fetch="select">
+            <column name="ANALISTA_dni" length="20" not-null="true" />
+        </many-to-one>
+        <property name="tipo" type="string">
+            <column name="tipo" length="50" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="300" not-null="true" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="10" not-null="true" />
+        </property>
+        <property name="complejidad" type="string">
+            <column name="complejidad" length="10" />
+        </property>
+        <property name="prioridad" type="string">
+            <column name="prioridad" length="10" />
+        </property>
+        <property name="tiempoAtencion" type="time">
+            <column name="tiempo_atencion" length="0" />
+        </property>
+        <property name="fechaCreacion" type="timestamp">
+            <column name="fecha_creacion" length="0" not-null="true" />
+        </property>
+        <property name="fechaAtencion" type="timestamp">
+            <column name="fecha_atencion" length="0" />
+        </property>
+    </class>
+</hibernate-mapping>

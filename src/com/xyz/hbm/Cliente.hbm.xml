@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 4/07/2014 07:36:05 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.xyz.dto.Cliente" table="cliente" catalog="iwpqrs">
+        <composite-id name="id" class="com.xyz.dto.ClienteId">
+            <key-property name="tipoDocumento" type="string">
+                <column name="tipo_documento" length="100" />
+            </key-property>
+            <key-property name="numeroDocumento" type="string">
+                <column name="numero_documento" length="45" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="cuenta" class="com.xyz.dto.Cuenta" fetch="select">
+            <column name="CUENTA_nombre_usuario" length="45" not-null="true" />
+        </many-to-one>
+        <property name="nombres" type="string">
+            <column name="nombres" length="50" not-null="true" />
+        </property>
+        <property name="apellidos" type="string">
+            <column name="apellidos" length="50" not-null="true" />
+        </property>
+        <property name="fechaNacimiento" type="date">
+            <column name="fecha_nacimiento" length="0" not-null="true" />
+        </property>
+        <property name="sexo" type="string">
+            <column name="sexo" length="1" not-null="true" />
+        </property>
+        <set name="solicituds" table="solicitud" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CLIENTE_tipo_documento" length="100" not-null="true" />
+                <column name="CLIENTE_numero_documento" length="45" not-null="true" />
+            </key>
+            <one-to-many class="com.xyz.dto.Solicitud" />
+        </set>
+        <set name="detalleClientes" table="detalle_cliente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CLIENTE_tipo_documento" length="100" not-null="true" />
+                <column name="CLIENTE_numero_documento" length="45" not-null="true" />
+            </key>
+            <one-to-many class="com.xyz.dto.DetalleCliente" />
+        </set>
+    </class>
+</hibernate-mapping>
