@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 4/07/2014 07:36:05 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.xyz.dto.Cuenta" table="cuenta" catalog="iwpqrs">
+        <id name="nombreUsuario" type="string">
+            <column name="nombre_usuario" length="45" />
+            <generator class="assigned" />
+        </id>
+        <property name="password" type="string">
+            <column name="password" length="45" not-null="true" />
+        </property>
+        <set name="clientes" table="cliente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CUENTA_nombre_usuario" length="45" not-null="true" />
+            </key>
+            <one-to-many class="com.xyz.dto.Cliente" />
+        </set>
+        <set name="analistas" table="analista" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CUENTA_nombre_usuario" length="45" not-null="true" />
+            </key>
+            <one-to-many class="com.xyz.dto.Analista" />
+        </set>
+    </class>
+</hibernate-mapping>
