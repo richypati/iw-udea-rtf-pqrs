@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+  <table-filter match-catalog="iwpqrs" match-name="ANALISTA"/>
+  <table-filter match-catalog="iwpqrs" match-name="CLIENTE"/>
+  <table-filter match-catalog="iwpqrs" match-name="CUENTA"/>
+  <table-filter match-catalog="iwpqrs" match-name="DETALLE_CLIENTE"/>
+  <table-filter match-catalog="iwpqrs" match-name="ENCUESTA"/>
+  <table-filter match-catalog="iwpqrs" match-name="PRODUCTO"/>
+  <table-filter match-catalog="iwpqrs" match-name="ROL"/>
+  <table-filter match-catalog="iwpqrs" match-name="SOLICITUD"/>
+  <table-filter match-catalog="iwpqrs" match-name="SUCURSAL"/>
+</hibernate-reverse-engineering>
