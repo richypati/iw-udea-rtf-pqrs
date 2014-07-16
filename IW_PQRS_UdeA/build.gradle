@@ -20,6 +20,7 @@ dependencies {
 	compile 'org.hibernate:hibernate-core:4.3.5.Final'
 	compile 'mysql:mysql-connector-java:5.1.31'
 	compile 'commons-logging:commons-logging:1.1.1'
+	compile 'org.apache.commons:commons-lang3:3.3.2'
 	
     testCompile 'junit:junit:4.11'
 }

@@ -13,7 +13,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 
 import co.com.inversionesxyz.dto.Cliente;
-import co.com.inversionesxyz.dto.ClienteId;
+import co.com.inversionesxyz.dto.InformacionBasicaPersona;
 
 /**
  * Home object for domain model class Cliente.
@@ -95,22 +95,22 @@ public class ClienteHome {
 		}
 	}
 
-	public Cliente findById(ClienteId id) {
-		log.debug("getting Cliente instance with id: " + id);
-		try {
-			Cliente instance = (Cliente) sessionFactory.getCurrentSession()
-					.get("Cliente", id);
-			if (instance == null) {
-				log.debug("get successful, no instance found");
-			} else {
-				log.debug("get successful, instance found");
-			}
-			return instance;
-		} catch (RuntimeException re) {
-			log.error("get failed", re);
-			throw re;
-		}
-	}
+//	public Cliente findById(InformacionBasica id) {
+//		log.debug("getting Cliente instance with id: " + id);
+//		try {
+//			Cliente instance = (Cliente) sessionFactory.getCurrentSession()
+//					.get("Cliente", id);
+//			if (instance == null) {
+//				log.debug("get successful, no instance found");
+//			} else {
+//				log.debug("get successful, instance found");
+//			}
+//			return instance;
+//		} catch (RuntimeException re) {
+//			log.error("get failed", re);
+//			throw re;
+//		}
+//	}
 
 	@SuppressWarnings("rawtypes")
 	public List findByExample(Cliente instance) {
