@@ -1,26 +1,20 @@
 package co.com.inversionesxyz.dto;
 
-import org.apache.commons.lang3.Validate;
-
-
 public class Sucursal implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
 	private String codigo;
 	private String nombre;
-
-	public Sucursal(String codigo, String nombre) {
-		this.codigo = codigo;
-		this.nombre = nombre;
-	}
+	private String direccion;
+	private String pais;
+	private String ciudad;
 
 	public String getCodigo() {
 		return this.codigo;
 	}
 
 	public void setCodigo(String codigo) {
-		Validate.notNull(codigo, "El codigo no puede ser nulo");
 		this.codigo = codigo;
 	}
 
@@ -29,8 +23,31 @@ public class Sucursal implements java.io.Serializable {
 	}
 
 	public void setNombre(String nombre) {
-		Validate.notNull(nombre, "El nombre no puede ser nulo");
 		this.nombre = nombre;
+	}
+
+	public String getDireccion() {
+		return this.direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public String getPais() {
+		return this.pais;
+	}
+
+	public void setPais(String pais) {
+		this.pais = pais;
+	}
+
+	public String getCiudad() {
+		return this.ciudad;
+	}
+
+	public void setCiudad(String ciudad) {
+		this.ciudad = ciudad;
 	}
 
 }
