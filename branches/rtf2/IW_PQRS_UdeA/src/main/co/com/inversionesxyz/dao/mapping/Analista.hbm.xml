@@ -29,11 +29,5 @@
         <property name="ciudad" type="string">
             <column name="ciudad" length="45" not-null="true" />
         </property>
-        <set name="solicituds" table="SOLICITUD" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="ANALISTA_dni" length="20" not-null="true" />
-            </key>
-            <one-to-many class="Solicitud" />
-        </set>
     </class>
 </hibernate-mapping>

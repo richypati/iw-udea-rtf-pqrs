@@ -1,17 +1,10 @@
 package co.com.inversionesxyz.dao.impl;
 
-// Generated 14/07/2014 11:30:38 AM by Hibernate Tools 3.4.0.CR1
-
-import java.util.List;
-
-import javax.naming.InitialContext;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hibernate.LockMode;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Example;
 
+import co.com.inversionesxyz.dao.ISucursalDAO;
 import co.com.inversionesxyz.dto.Sucursal;
 
 /**
@@ -19,22 +12,11 @@ import co.com.inversionesxyz.dto.Sucursal;
  * @see .Sucursal
  * @author Hibernate Tools
  */
-public class SucursalHome {
+public class SucursalDAO extends AbstractDAO implements ISucursalDAO{
 
-	private static final Log log = LogFactory.getLog(SucursalHome.class);
+	private static final Log log = LogFactory.getLog(SucursalDAO.class);
 
 	private final SessionFactory sessionFactory = getSessionFactory();
-
-	protected SessionFactory getSessionFactory() {
-		try {
-			return (SessionFactory) new InitialContext()
-					.lookup("SessionFactory");
-		} catch (Exception e) {
-			log.error("Could not locate SessionFactory in JNDI", e);
-			throw new IllegalStateException(
-					"Could not locate SessionFactory in JNDI");
-		}
-	}
 
 	public void persist(Sucursal transientInstance) {
 		log.debug("persisting Sucursal instance");
@@ -51,18 +33,6 @@ public class SucursalHome {
 		log.debug("attaching dirty Sucursal instance");
 		try {
 			sessionFactory.getCurrentSession().saveOrUpdate(instance);
-			log.debug("attach successful");
-		} catch (RuntimeException re) {
-			log.error("attach failed", re);
-			throw re;
-		}
-	}
-
-	@SuppressWarnings("deprecation")
-	public void attachClean(Sucursal instance) {
-		log.debug("attaching clean Sucursal instance");
-		try {
-			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -111,19 +81,4 @@ public class SucursalHome {
 		}
 	}
 
-	@SuppressWarnings("rawtypes")
-	public List findByExample(Sucursal instance) {
-		log.debug("finding Sucursal instance by example");
-		try {
-			List results = sessionFactory.getCurrentSession()
-					.createCriteria("Sucursal").add(Example.create(instance))
-					.list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
-			return results;
-		} catch (RuntimeException re) {
-			log.error("find by example failed", re);
-			throw re;
-		}
-	}
 }
