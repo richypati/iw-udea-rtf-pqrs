@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://192.168.30.227:3306/clase"></property>
+		<property name="username" value="clase"></property>
+		<property name="password" value="clase"></property>
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="mappingResources">
+			<list>
+				<value>co/com/inversionesxyz/dao/mapping/Analista.hbm.xml</value>
+				<value>co/com/inversionesxyz/dao/mapping/Analista.hbm.xml</value>
+				<value>co/com/inversionesxyz/dao/mapping/Cliente.hbm.xml</value>
+				<value>co/com/inversionesxyz/dao/mapping/Cuenta.hbm.xml</value>
+				<value>co/com/inversionesxyz/dao/mapping/DetalleCliente.hbm.xml</value>
+				<value>co/com/inversionesxyz/dao/mapping/Encuesta.hbm.xml</value>
+				<value>co/com/inversionesxyz/dao/mapping/Producto.hbm.xml</value>
+				<value>co/com/inversionesxyz/dao/mapping/Rol.hbm.xml</value>
+				<value>co/com/inversionesxyz/dao/mapping/Solicitud.hbm.xml</value>
+				<value>co/com/inversionesxyz/dao/mapping/Sucursal.hbm.xml</value>
+				<value>co/edu/udea/iw/dto/Rol.hbm.xml</value>
+			</list>
+		</property>
+
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="javax.persistence.validation.mode">none</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="AnalistaDAO" class="co.com.inversionesxyz.dao.impl.AnalistaDAO">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+		<bean id="ClienteDAO" class="co.com.inversionesxyz.dao.impl.ClienteDAO">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+		<bean id="CuentaDAO" class="co.com.inversionesxyz.dao.impl.CuentaDAO">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+		<bean id="DetalleClienteDAO" class="co.com.inversionesxyz.dao.impl.DetalleClienteDAO">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+		<bean id="EncuestaDAO" class="co.com.inversionesxyz.dao.impl.EncuestaDAO">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+		<bean id="ProductoDAO" class="co.com.inversionesxyz.dao.impl.ProductoDAO">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+		<bean id="RolDAO" class="co.com.inversionesxyz.dao.impl.RolDAO">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+		<bean id="SolicitudDAO" class="co.com.inversionesxyz.dao.impl.SolicitudDAO">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+		<bean id="SucursalDAO" class="co.com.inversionesxyz.dao.impl.SucursalDAO">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+</beans>
