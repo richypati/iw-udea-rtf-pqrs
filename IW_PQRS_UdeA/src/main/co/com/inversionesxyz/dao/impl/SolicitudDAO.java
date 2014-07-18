@@ -1,17 +1,10 @@
 package co.com.inversionesxyz.dao.impl;
 
-// Generated 14/07/2014 11:30:38 AM by Hibernate Tools 3.4.0.CR1
-
-import java.util.List;
-
-import javax.naming.InitialContext;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hibernate.LockMode;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Example;
 
+import co.com.inversionesxyz.dao.ISolicitudDAO;
 import co.com.inversionesxyz.dto.Solicitud;
 
 /**
@@ -19,22 +12,11 @@ import co.com.inversionesxyz.dto.Solicitud;
  * @see .Solicitud
  * @author Hibernate Tools
  */
-public class SolicitudHome {
+public class SolicitudDAO extends AbstractDAO implements ISolicitudDAO{
 
-	private static final Log log = LogFactory.getLog(SolicitudHome.class);
-
+	private static final Log log = LogFactory.getLog(SolicitudDAO.class);
+	
 	private final SessionFactory sessionFactory = getSessionFactory();
-
-	protected SessionFactory getSessionFactory() {
-		try {
-			return (SessionFactory) new InitialContext()
-					.lookup("SessionFactory");
-		} catch (Exception e) {
-			log.error("Could not locate SessionFactory in JNDI", e);
-			throw new IllegalStateException(
-					"Could not locate SessionFactory in JNDI");
-		}
-	}
 
 	public void persist(Solicitud transientInstance) {
 		log.debug("persisting Solicitud instance");
@@ -51,18 +33,6 @@ public class SolicitudHome {
 		log.debug("attaching dirty Solicitud instance");
 		try {
 			sessionFactory.getCurrentSession().saveOrUpdate(instance);
-			log.debug("attach successful");
-		} catch (RuntimeException re) {
-			log.error("attach failed", re);
-			throw re;
-		}
-	}
-
-	@SuppressWarnings("deprecation")
-	public void attachClean(Solicitud instance) {
-		log.debug("attaching clean Solicitud instance");
-		try {
-			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -110,20 +80,5 @@ public class SolicitudHome {
 			throw re;
 		}
 	}
-
-	@SuppressWarnings("rawtypes")
-	public List findByExample(Solicitud instance) {
-		log.debug("finding Solicitud instance by example");
-		try {
-			List results = sessionFactory.getCurrentSession()
-					.createCriteria("Solicitud").add(Example.create(instance))
-					.list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
-			return results;
-		} catch (RuntimeException re) {
-			log.error("find by example failed", re);
-			throw re;
-		}
-	}
+	
 }
