@@ -1,17 +1,10 @@
 package co.com.inversionesxyz.dao.impl;
 
-// Generated 14/07/2014 11:30:38 AM by Hibernate Tools 3.4.0.CR1
-
-import java.util.List;
-
-import javax.naming.InitialContext;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hibernate.LockMode;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Example;
 
+import co.com.inversionesxyz.dao.IProductoDAO;
 import co.com.inversionesxyz.dto.Producto;
 
 /**
@@ -19,22 +12,11 @@ import co.com.inversionesxyz.dto.Producto;
  * @see .Producto
  * @author Hibernate Tools
  */
-public class ProductoHome {
+public class ProductoDAO extends AbstractDAO implements IProductoDAO{
 
-	private static final Log log = LogFactory.getLog(ProductoHome.class);
-
+	private static final Log log = LogFactory.getLog(ProductoDAO.class);
+	
 	private final SessionFactory sessionFactory = getSessionFactory();
-
-	protected SessionFactory getSessionFactory() {
-		try {
-			return (SessionFactory) new InitialContext()
-					.lookup("SessionFactory");
-		} catch (Exception e) {
-			log.error("Could not locate SessionFactory in JNDI", e);
-			throw new IllegalStateException(
-					"Could not locate SessionFactory in JNDI");
-		}
-	}
 
 	public void persist(Producto transientInstance) {
 		log.debug("persisting Producto instance");
@@ -51,18 +33,6 @@ public class ProductoHome {
 		log.debug("attaching dirty Producto instance");
 		try {
 			sessionFactory.getCurrentSession().saveOrUpdate(instance);
-			log.debug("attach successful");
-		} catch (RuntimeException re) {
-			log.error("attach failed", re);
-			throw re;
-		}
-	}
-
-	@SuppressWarnings("deprecation")
-	public void attachClean(Producto instance) {
-		log.debug("attaching clean Producto instance");
-		try {
-			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -111,19 +81,4 @@ public class ProductoHome {
 		}
 	}
 
-	@SuppressWarnings("rawtypes")
-	public List findByExample(Producto instance) {
-		log.debug("finding Producto instance by example");
-		try {
-			List results = sessionFactory.getCurrentSession()
-					.createCriteria("Producto").add(Example.create(instance))
-					.list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
-			return results;
-		} catch (RuntimeException re) {
-			log.error("find by example failed", re);
-			throw re;
-		}
-	}
 }
