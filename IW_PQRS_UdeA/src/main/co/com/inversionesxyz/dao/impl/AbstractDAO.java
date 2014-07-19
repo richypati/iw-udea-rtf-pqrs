@@ -1,24 +1,41 @@
 package co.com.inversionesxyz.dao.impl;
 
-import javax.naming.InitialContext;
+import java.io.Serializable;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.hibernate.SessionFactory;
+import org.hibernate.Session;
 
-public abstract class AbstractDAO {
+import co.com.inversionesxyz.dao.cfg.HibernateSessionFactory;
+import co.com.inversionesxyz.exception.InexistentObjectException;
+
+public abstract class AbstractDAO<T> {
 	
-	private static final Log log = LogFactory.getLog(AnalistaDAO.class);
+	private Session session;
+	private Class<T> type;
 	
-	protected SessionFactory getSessionFactory() {
-		try {
-			return (SessionFactory) new InitialContext()
-					.lookup("SessionFactory");
-		} catch (Exception e) {
-			log.error("Could not locate SessionFactory in JNDI", e);
-			throw new IllegalStateException(
-					"Could not locate SessionFactory in JNDI");
+	public AbstractDAO(Class<T> type){
+		this.type = type;
+	}
+	protected Session getSession() {
+		return HibernateSessionFactory.getInstance().getSession();
+	}
+	
+	protected void close(){
+		if(session.isOpen()){
+			session.close();
 		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	protected T consultar(String field) throws InexistentObjectException{
+		try{
+			session = getSession();
+			return (T)session.get(type, (Serializable) field);
+		}catch(Exception e){
+			throw new InexistentObjectException(e);
+		}finally{
+			close();
+		}
+		
 	}
 
 }
