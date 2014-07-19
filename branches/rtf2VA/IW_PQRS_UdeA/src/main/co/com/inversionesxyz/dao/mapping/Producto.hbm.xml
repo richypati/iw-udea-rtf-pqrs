@@ -20,11 +20,5 @@
         <property name="valor" type="float">
             <column name="valor" precision="12" scale="0" not-null="true" />
         </property>
-        <set name="solicituds" table="SOLICITUD" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="PRODUCTO_codigo" length="100" not-null="true" />
-            </key>
-            <one-to-many class="Solicitud" />
-        </set>
     </class>
 </hibernate-mapping>
