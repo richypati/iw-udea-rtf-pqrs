@@ -4,13 +4,16 @@
 <!-- Generated 14/07/2014 11:15:24 AM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="Encuesta" table="ENCUESTA" catalog="iwpqrs">
-        <id name="id" type="string">
-            <column name="id" length="45" />
-            <generator class="assigned" />
+    	<meta attribute="class-description">
+         	Esta clase contiene la informacion de una encuesta a una solicitud.
+      	</meta>
+      	
+        <id name="idSolicitud" type="string">
+            <column name="id_solicitud" length="100" />
+            <generator class="foreign" />
         </id>
-        <many-to-one name="solicitud" class="Solicitud" fetch="select">
-            <column name="SOLICITUD_id" length="100" not-null="true" />
-        </many-to-one>
+        <one-to-one name="SOLICITUD" constrained="true"/>
+        
         <property name="respuestaPreguntaA" type="string">
             <column name="respuesta_pregunta_a" length="1" not-null="true" />
         </property>
@@ -20,5 +23,6 @@
         <property name="fechaEnvio" type="timestamp">
             <column name="fecha_envio" length="19" not-null="true" />
         </property>
+        
     </class>
 </hibernate-mapping>

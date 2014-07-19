@@ -1,22 +1,22 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 14/07/2014 11:15:24 AM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="Solicitud" table="SOLICITUD" catalog="iwpqrs">
+    	<meta attribute="class-description">
+         	Esta clase contiene el detalle de la solicitud.
+      	</meta>
+      	
         <id name="id" type="string">
             <column name="id" length="100" />
             <generator class="assigned" />
         </id>
+        
         <many-to-one name="producto" class="Producto" fetch="select">
             <column name="PRODUCTO_codigo" length="100" not-null="true" />
         </many-to-one>
-        <many-to-one name="cliente" class="Cliente" fetch="select">
-            <column name="CLIENTE_tipo_documento" length="100" not-null="true" />
-            <column name="CLIENTE_numero_documento" length="45" not-null="true" />
-        </many-to-one>
         <many-to-one name="analista" class="Analista" fetch="select">
-            <column name="ANALISTA_dni" length="20" not-null="true" />
+            <column name="ANALISTA_codigo" length="20" not-null="true" />
         </many-to-one>
         <property name="tipo" type="string">
             <column name="tipo" length="50" not-null="true" />
@@ -33,20 +33,18 @@
         <property name="prioridad" type="string">
             <column name="prioridad" length="10" />
         </property>
-        <property name="tiempoAtencion" type="time">
-            <column name="tiempo_atencion" length="8" />
+        <property name="fechaCreacion" type="time">
+            <column name="fecha_creacion" length="8" not-null="true" />
         </property>
-        <property name="fechaCreacion" type="timestamp">
-            <column name="fecha_creacion" length="19" not-null="true" />
+        <property name="fechaAtencion" type="time">
+            <column name="fecha_atencion" length="8" />
         </property>
-        <property name="fechaAtencion" type="timestamp">
-            <column name="fecha_atencion" length="19" />
+        <property name="nombreCliente" type="string">
+            <column name="nombre_cliente" length="100" />
         </property>
-        <set name="encuestas" table="ENCUESTA" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="SOLICITUD_id" length="100" not-null="true" />
-            </key>
-            <one-to-many class="Encuesta" />
-        </set>
+        <property name="correoCliente" type="string">
+            <column name="correo_cliente" length="50" />
+        </property>
+        
     </class>
 </hibernate-mapping>
