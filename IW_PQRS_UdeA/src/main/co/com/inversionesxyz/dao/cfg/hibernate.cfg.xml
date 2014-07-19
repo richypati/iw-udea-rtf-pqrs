@@ -7,12 +7,11 @@
         <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.password">root</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/iwpqrs</property>
+        <property name="hibernate.connection.url">jdbc:mysql://ec2-54-191-141-206.us-west-2.compute.amazonaws.com:3306/iwpqrs</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.search.autoregister_listeners">false</property>
-        <mapping resource="co/com/inversionesxyz/dao/mapping/Analista.hbm.xml"/>
-        <mapping resource="co/com/inversionesxyz/dao/mapping/Cuenta.hbm.xml"/>
+        <mapping resource="co/com/inversionesxyz/dao/mapping/InformacionAnalista.hbm.xml"/>
         <mapping resource="co/com/inversionesxyz/dao/mapping/Encuesta.hbm.xml"/>
         <mapping resource="co/com/inversionesxyz/dao/mapping/Producto.hbm.xml"/>
         <mapping resource="co/com/inversionesxyz/dao/mapping/Solicitud.hbm.xml"/>
