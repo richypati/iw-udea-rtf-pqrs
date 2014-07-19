@@ -4,10 +4,15 @@
 <!-- Generated 14/07/2014 11:15:24 AM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="Producto" table="PRODUCTO" catalog="iwpqrs">
+    	<meta attribute="class-description">
+         	Esta clase contiene el detalle del producto.
+      	</meta>
+      
         <id name="codigo" type="string">
             <column name="codigo" length="100" />
             <generator class="assigned" />
         </id>
+        
         <many-to-one name="sucursal" class="Sucursal" fetch="select">
             <column name="SUCURSAL_codigo" length="100" not-null="true" />
         </many-to-one>
@@ -20,11 +25,6 @@
         <property name="valor" type="float">
             <column name="valor" precision="12" scale="0" not-null="true" />
         </property>
-        <set name="solicituds" table="SOLICITUD" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="PRODUCTO_codigo" length="100" not-null="true" />
-            </key>
-            <one-to-many class="Solicitud" />
-        </set>
+        
     </class>
 </hibernate-mapping>
