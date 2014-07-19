@@ -1,14 +1,20 @@
 package co.com.inversionesxyz.dao;
 
-import co.com.inversionesxyz.dto.Analista;
+import co.com.inversionesxyz.dto.InformacionAnalista;
+import co.com.inversionesxyz.exception.InexistentObjectException;
 
 /**
- * @author ricardo
+ * Interface que define los metodos que va a proveer el dao de Analista
+ * @author Jennifer Pérez
+ * @author Ricardo Patiño
  *
  */
 public interface IAnalistaDAO {
-	public void persist(Analista analista);
-	public void attachDirty(Analista instance);
-	public void delete(Analista persistentInstance);
-	public Analista findById(String id);
+	/**
+	 * Permite consultar la información de un analista para ser usada como detalle de una solicitud
+	 * @param codigo codigo del analista
+	 * @return InformacionAnalista
+	 * @throws InexistentObjectException
+	 */
+	public InformacionAnalista consultarPorCodigo(String codigo) throws InexistentObjectException;
 }

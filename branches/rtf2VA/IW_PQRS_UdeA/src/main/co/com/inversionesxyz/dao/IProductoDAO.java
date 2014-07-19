@@ -1,11 +1,20 @@
 package co.com.inversionesxyz.dao;
 
 import co.com.inversionesxyz.dto.Producto;
+import co.com.inversionesxyz.exception.InexistentObjectException;
 
-
+/**
+ * Interface que define los metodos que va a proveer el dao de Producto
+ * @author Jennifer Pérez
+ * @author Ricardo Patiño
+ *
+ */
 public interface IProductoDAO {
-	public void persist(Producto analistaDAO);
-	public void attachDirty(Producto instance);
-	public void delete(Producto persistentInstance);
-	public Producto findById(String id);
+	/**
+	 * Permite consultar la información de un producto por el codigo del mismo
+	 * @param codigo codigo de un producto
+	 * @return Producto
+	 * @throws InexistentObjectException
+	 */
+	public Producto consultarPorCodigo(String codigo) throws InexistentObjectException;
 }
