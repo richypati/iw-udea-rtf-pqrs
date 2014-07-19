@@ -17,8 +17,8 @@ import co.com.inversionesxyz.exception.InexistentObjectException;
  */
 public class EncuestaDAO extends AbstractDAO<Encuesta> implements IEncuestaDAO{
 	
-	public EncuestaDAO(Class<Encuesta> type) {
-		super(type);
+	public EncuestaDAO() {
+		super(Encuesta.class);
 	}
 
 	private static final Log log = LogFactory.getLog(EncuestaDAO.class);

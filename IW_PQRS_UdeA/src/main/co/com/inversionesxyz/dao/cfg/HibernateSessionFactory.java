@@ -43,7 +43,7 @@ public class HibernateSessionFactory {
 		}catch(HibernateException e){
 			log.error(MessageFormat.format(
 					"No fue posible construir el SessionFactory. Causa {0}", 
-					e.getCause()));
+					e.getMessage()));
 			throw new SessionFactoryException("No fue posible construir el SessionFactory");
 		}
 	}

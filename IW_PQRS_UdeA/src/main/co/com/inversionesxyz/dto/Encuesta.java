@@ -18,12 +18,6 @@ public class Encuesta implements java.io.Serializable {
 	public void setSolicitudId(String solicitudId) {
 		this.solicitudId = solicitudId;
 	}
-	public Solicitud getSolicitud() {
-		return this.solicitud;
-	}
-	public void setSolicitud(Solicitud solicitud) {
-		this.solicitud = solicitud;
-	}
 	public String getRespuestaPreguntaA() {
 		return this.respuestaPreguntaA;
 	}
@@ -41,6 +35,12 @@ public class Encuesta implements java.io.Serializable {
 	}
 	public void setFechaEnvio(Date fechaEnvio) {
 		this.fechaEnvio = fechaEnvio;
+	}
+	public Solicitud getSolicitud() {
+		return solicitud;
+	}
+	public void setSolicitud(Solicitud solicitud) {
+		this.solicitud = solicitud;
 	}
 	
 }
