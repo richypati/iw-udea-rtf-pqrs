@@ -1,14 +1,13 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 18/07/2014 11:53:58 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="Producto" table="PRODUCTO" catalog="iwpqrs">
+    <class name="co.com.inversionesxyz.dto.Producto" table="PRODUCTO" catalog="iwpqrs">
         <id name="codigo" type="string">
             <column name="codigo" length="100" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="sucursal" class="Sucursal" fetch="select">
+        <many-to-one name="sucursal" class="co.com.inversionesxyz.dto.Sucursal" fetch="select">
             <column name="SUCURSAL_codigo" length="100" not-null="true" />
         </many-to-one>
         <property name="nombre" type="string">

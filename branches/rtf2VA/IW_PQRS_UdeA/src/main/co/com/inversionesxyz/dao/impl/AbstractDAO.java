@@ -1,7 +1,5 @@
 package co.com.inversionesxyz.dao.impl;
 
-import java.io.Serializable;
-
 import org.hibernate.Session;
 
 import co.com.inversionesxyz.dao.cfg.HibernateSessionFactory;
@@ -29,8 +27,9 @@ public abstract class AbstractDAO<T> {
 	protected T consultar(String field) throws InexistentObjectException{
 		try{
 			session = getSession();
-			return (T)session.get(type, (Serializable) field);
+			return (T)session.get(type, field);
 		}catch(Exception e){
+			e.printStackTrace();
 			throw new InexistentObjectException(e);
 		}finally{
 			close();
