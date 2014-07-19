@@ -20,11 +20,5 @@
         <property name="ciudad" type="string">
             <column name="ciudad" length="50" not-null="true" />
         </property>
-        <set name="productos" table="PRODUCTO" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="SUCURSAL_codigo" length="100" not-null="true" />
-            </key>
-            <one-to-many class="Producto" />
-        </set>
     </class>
 </hibernate-mapping>

@@ -11,6 +11,9 @@
         <many-to-one name="producto" class="Producto" fetch="select">
             <column name="PRODUCTO_codigo" length="100" not-null="true" />
         </many-to-one>
+        <many-to-one name="informacionAnalista" class="Producto" fetch="select">
+            <column name="INFORMACION_ANALISTA_dni" length="20" not-null="true" />
+        </many-to-one>
         <property name="tipo" type="string">
             <column name="tipo" length="50" not-null="true" />
         </property>
@@ -38,6 +41,5 @@
         <property name="nombreCliente" type="string">
             <column name="nombre_cliente" length="45" not-null="true" />
         </property>
-        <one-to-one name="encuesta" class="Encuesta"></one-to-one>
     </class>
 </hibernate-mapping>
