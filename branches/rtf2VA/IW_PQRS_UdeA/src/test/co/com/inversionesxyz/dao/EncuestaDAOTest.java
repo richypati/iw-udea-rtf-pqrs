@@ -3,7 +3,6 @@ package co.com.inversionesxyz.dao;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 
 import co.com.inversionesxyz.dao.impl.EncuestaDAO;
 import co.com.inversionesxyz.dto.Encuesta;
@@ -11,7 +10,6 @@ import co.com.inversionesxyz.exception.InexistentObjectException;
 
 public class EncuestaDAOTest {
 	
-	@Mock
 	private IEncuestaDAO dao;
 	
 	@Before
