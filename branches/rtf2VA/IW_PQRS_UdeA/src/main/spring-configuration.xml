@@ -62,7 +62,10 @@
 
 	<!-- Beans Business Logic -->
 	
-	<bean id="SolicitudID" class="co.com.inversionesxyz.bl.impl.SolicitudBL">
+	<bean id="SolicitudBL" class="co.com.inversionesxyz.bl.impl.SolicitudBL">
 		<property name="SolicitudDAO" ref="SolicitudDAO"></property>
+	</bean>
+	<bean id="EncuestaBL" class="co.com.inversionesxyz.bl.impl.EncuestaBL">
+		<property name="EncuestaDAO" ref ="EncuestaDAO"></property>
 	</bean>
 </beans>
