@@ -1,7 +1,7 @@
 package co.com.inversionesxyz.dao;
 
 import co.com.inversionesxyz.dto.Encuesta;
-import co.com.inversionesxyz.exception.InexistentObjectException;
+import co.com.inversionesxyz.exception.BasicDBOperationException;
 
 /**
  * Interface que define los metodos que va a proveer el dao de Encuesta
@@ -14,7 +14,21 @@ public interface IEncuestaDAO {
 	 * Permite consultar la información de una encuesta según el id de una solicitud
 	 * @param idSolicitud codigo de la solicitud
 	 * @return Encuesta
-	 * @throws InexistentObjectException
+	 * @throws BasicDBOperationException
 	 */
-	public Encuesta consultarPorSolicitud(String idSolicitud) throws InexistentObjectException;
+	public Encuesta consultarPorSolicitud(int idSolicitud) throws BasicDBOperationException;
+	
+	/**
+	 * Permite insertar una encuesta en la base de datos
+	 * @param encuesta a insertar
+	 * @throws BasicDBOperationException 
+	 */
+	public void insertar(Encuesta encuesta) throws BasicDBOperationException;
+	
+	/**
+	 * Permite eliminar una encuesta en la base de datos
+	 * @param encuesta a eliminar
+	 * @throws BasicDBOperationException 
+	 */
+	public void eliminar(Encuesta encuesta) throws BasicDBOperationException;
 }

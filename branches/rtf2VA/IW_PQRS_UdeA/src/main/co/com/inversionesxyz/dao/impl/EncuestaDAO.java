@@ -7,7 +7,7 @@ import org.apache.commons.logging.LogFactory;
 
 import co.com.inversionesxyz.dao.IEncuestaDAO;
 import co.com.inversionesxyz.dto.Encuesta;
-import co.com.inversionesxyz.exception.InexistentObjectException;
+import co.com.inversionesxyz.exception.BasicDBOperationException;
 
 /**
  * Clase que define las operaciones a realizar en base de datos sobre una Encuesta
@@ -25,20 +25,50 @@ public class EncuestaDAO extends AbstractDAO<Encuesta> implements IEncuestaDAO{
 
 
 	@Override
-	public Encuesta consultarPorSolicitud(String idSolicitud) throws InexistentObjectException {
+	public Encuesta consultarPorSolicitud(int idSolicitud) throws BasicDBOperationException {
 		try{
-			return consultar(idSolicitud);
+			return getByField(idSolicitud);
 		}catch(Exception e){
+			e.printStackTrace();
 			log.error(MessageFormat.format(
 					"No fue posible consultar la encuesta de la solicitud {0}. Causa {1}",
 					idSolicitud,
 					e.getCause()));
-			throw new InexistentObjectException(MessageFormat.format(
+			throw new BasicDBOperationException(MessageFormat.format(
 					"No fue posible consultar la encuesta de la solicitud {0}",
 					idSolicitud));
 		}
 		
 	}
-	
-	
+
+	@Override
+	public void insertar(Encuesta encuesta) throws BasicDBOperationException {
+		try{
+			insert(encuesta);
+		}catch(Exception e){
+			log.error(MessageFormat.format(
+					"No fue posible insertar la encuesta de la solicitud {0}. Causa {1}",
+					encuesta.getSolicitudId(),
+					e.getCause()));
+			throw new BasicDBOperationException(MessageFormat.format(
+					"No fue posible insertar la encuesta de la solicitud {0}",
+					encuesta.getSolicitudId()));
+		}
+	}
+
+	@Override
+	public void eliminar(Encuesta encuesta) throws BasicDBOperationException {
+		try{
+			delete(encuesta);
+		}catch(Exception e){
+			log.error(MessageFormat.format(
+					"No fue posible eliminar la encuesta de la solicitud {0}. Causa {1}",
+					encuesta.getSolicitudId(),
+					e.getCause()));
+			throw new BasicDBOperationException(MessageFormat.format(
+					"No fue posible eliminar la encuesta de la solicitud {0}",
+					encuesta.getSolicitudId()));
+		}
+	}
+		
 }
