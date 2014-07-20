@@ -3,8 +3,8 @@
                                    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
  <class catalog="iwpqrs" name="co.com.inversionesxyz.dto.Solicitud" table="SOLICITUD">
-  <id name="id" type="string">
-   <column length="100" name="id"/>
+  <id name="id" type="int">
+   <column name="id"/>
    <generator class="assigned"/>
   </id>
   <many-to-one class="co.com.inversionesxyz.dto.Producto" fetch="select" name="producto">

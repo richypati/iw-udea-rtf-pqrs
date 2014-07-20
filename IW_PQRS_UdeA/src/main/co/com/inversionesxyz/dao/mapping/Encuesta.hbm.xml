@@ -3,8 +3,8 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class name="co.com.inversionesxyz.dto.Encuesta" table="ENCUESTA" catalog="iwpqrs">
-        <id name="solicitudId" type="string">
-            <column name="SOLICITUD_id" length="100" />
+        <id name="solicitudId" type="int">
+            <column name="SOLICITUD_id" />
             <generator class="foreign">
                 <param name="property">solicitud</param>
             </generator>
