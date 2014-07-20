@@ -6,7 +6,7 @@ public class Solicitud implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private String id;
+	private int id;
 	private Producto producto;
 	private InformacionAnalista informacionAnalista;
 	private String tipo;
@@ -20,10 +20,10 @@ public class Solicitud implements java.io.Serializable {
 	private String nombreCliente;
 	private String emailCliente;
 
-	public String getId() {
+	public int getId() {
 		return this.id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public Producto getProducto() {
