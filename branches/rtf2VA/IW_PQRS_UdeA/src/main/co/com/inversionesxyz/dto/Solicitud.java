@@ -18,6 +18,7 @@ public class Solicitud implements java.io.Serializable {
 	private Date fechaAtencion;
 	private String tipoDocumento;
 	private String nombreCliente;
+	private String emailCliente;
 
 	public String getId() {
 		return this.id;
@@ -90,6 +91,12 @@ public class Solicitud implements java.io.Serializable {
 	}
 	public void setInformacionAnalista(InformacionAnalista informacionAnalista) {
 		this.informacionAnalista = informacionAnalista;
+	}
+	public String getEmailCliente() {
+		return emailCliente;
+	}
+	public void setEmailCliente(String emailCliente) {
+		this.emailCliente = emailCliente;
 	}
 
 }
