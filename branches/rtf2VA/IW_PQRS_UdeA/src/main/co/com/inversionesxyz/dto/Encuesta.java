@@ -6,16 +6,16 @@ public class Encuesta implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private String solicitudId;
+	private int solicitudId;
 	private Solicitud solicitud;
 	private String respuestaPreguntaA;
 	private String respuestaPreguntaB;
 	private Date fechaEnvio;
 
-	public String getSolicitudId() {
+	public int getSolicitudId() {
 		return this.solicitudId;
 	}
-	public void setSolicitudId(String solicitudId) {
+	public void setSolicitudId(int solicitudId) {
 		this.solicitudId = solicitudId;
 	}
 	public String getRespuestaPreguntaA() {
