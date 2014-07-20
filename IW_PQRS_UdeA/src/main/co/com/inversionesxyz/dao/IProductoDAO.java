@@ -1,7 +1,7 @@
 package co.com.inversionesxyz.dao;
 
 import co.com.inversionesxyz.dto.Producto;
-import co.com.inversionesxyz.exception.InexistentObjectException;
+import co.com.inversionesxyz.exception.BasicDBOperationException;
 
 /**
  * Interface que define los metodos que va a proveer el dao de Producto
@@ -14,7 +14,7 @@ public interface IProductoDAO {
 	 * Permite consultar la información de un producto por el codigo del mismo
 	 * @param codigo codigo de un producto
 	 * @return Producto
-	 * @throws InexistentObjectException
+	 * @throws BasicDBOperationException
 	 */
-	public Producto consultarPorCodigo(String codigo) throws InexistentObjectException;
+	public Producto consultarPorCodigo(String codigo) throws BasicDBOperationException;
 }

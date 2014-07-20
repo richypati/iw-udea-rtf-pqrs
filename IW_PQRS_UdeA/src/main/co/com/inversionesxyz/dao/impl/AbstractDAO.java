@@ -1,11 +1,20 @@
 package co.com.inversionesxyz.dao.impl;
 
+import java.io.Serializable;
+import java.text.MessageFormat;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
-import co.com.inversionesxyz.dao.cfg.HibernateSessionFactory;
-import co.com.inversionesxyz.exception.InexistentObjectException;
+import co.com.inversionesxyz.exception.BasicDBOperationException;
+import co.com.inversionesxyz.exception.SessionFactoryException;
 
-public abstract class AbstractDAO<T> {
+public abstract class AbstractDAO<T> extends HibernateDaoSupport{
+	
+	private static final Log log = LogFactory.getLog(AbstractDAO.class);
 	
 	private Session session;
 	private Class<T> type;
@@ -13,8 +22,17 @@ public abstract class AbstractDAO<T> {
 	public AbstractDAO(Class<T> type){
 		this.type = type;
 	}
-	protected Session getSession() {
-		return HibernateSessionFactory.getInstance().getSession();
+	protected Session getCurrentSession() {
+		try{
+			session = getSessionFactory().getCurrentSession() ;
+			return session;
+		}catch(RuntimeException e){
+			e.printStackTrace();
+			log.error(MessageFormat.format(
+					"No fue posible obtener la sesion. Causa {0}", 
+					e.getMessage()));
+			throw new SessionFactoryException("No fue posible obtener la sesion");
+		}
 	}
 	
 	protected void close(){
@@ -24,17 +42,44 @@ public abstract class AbstractDAO<T> {
 	}
 	
 	@SuppressWarnings("unchecked")
-	protected T consultar(String field) throws InexistentObjectException{
+	protected T getByField(Object field) throws BasicDBOperationException{
 		try{
-			session = getSession();
-			return (T)session.get(type, field);
+			session = getCurrentSession();
+			return (T)session.get(type, (Serializable)field);
 		}catch(Exception e){
-			e.printStackTrace();
-			throw new InexistentObjectException(e);
+			throw new BasicDBOperationException(e);
 		}finally{
 			close();
 		}
 		
+	}
+	
+	protected void insert(Object object) throws BasicDBOperationException{
+		Transaction transaction = null;
+		try{
+			session = getCurrentSession();
+			transaction = session.beginTransaction();
+			session.save(object);
+			transaction.commit();
+		}catch(Exception e){
+			throw new BasicDBOperationException(e);
+		}finally{
+			close();
+		}
+	}
+	
+	protected void delete(Object object) throws BasicDBOperationException{
+		Transaction transaction = null;
+		try{
+			session = getCurrentSession();
+			transaction = session.beginTransaction();
+			session.delete(object);
+			transaction.commit();
+		}catch(Exception e){
+			throw new BasicDBOperationException(e);
+		}finally{
+			close();
+		}
 	}
 
 }
