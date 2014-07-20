@@ -42,19 +42,27 @@
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 
-	<bean id="InformacionAnalistaDAO" class="co.com.inversionesxyz.dao.impl.InformacionAnalistaDAO">
+	<!-- Beans DAO -->
+
+	<bean id="InformacionAnalistaDAO" class="co.com.inversionesxyz.dao.IAnalistaDAO">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-	<bean id="EncuestaDAO" class="co.com.inversionesxyz.dao.impl.EncuestaDAO">
+	<bean id="EncuestaDAO" class="co.com.inversionesxyz.dao.IEncuestaDAO">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-	<bean id="ProductoDAO" class="co.com.inversionesxyz.dao.impl.ProductoDAO">
+	<bean id="ProductoDAO" class="co.com.inversionesxyz.dao.IProductoDAO">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-	<bean id="SolicitudDAO" class="co.com.inversionesxyz.dao.impl.SolicitudDAO">
+	<bean id="SolicitudDAO" class="co.com.inversionesxyz.dao.ISolicitudDAO">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-	<bean id="SucursalDAO" class="co.com.inversionesxyz.dao.impl.SucursalDAO">
+	<bean id="SucursalDAO" class="co.com.inversionesxyz.dao.ISucursalDAO">
 		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<!-- Beans Business Logic -->
+	
+	<bean id="SolicitudID" class="co.com.inversionesxyz.bl.impl.SolicitudBL">
+		<property name="SolicitudDAO" ref="SolicitudDAO"></property>
 	</bean>
 </beans>
