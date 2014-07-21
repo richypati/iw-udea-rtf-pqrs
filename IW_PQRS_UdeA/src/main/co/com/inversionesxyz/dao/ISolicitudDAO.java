@@ -1,5 +1,7 @@
 package co.com.inversionesxyz.dao;
 
+import java.util.List;
+
 import co.com.inversionesxyz.dto.Solicitud;
 import co.com.inversionesxyz.exception.BasicDBOperationException;
 
@@ -11,10 +13,32 @@ import co.com.inversionesxyz.exception.BasicDBOperationException;
  */
 public interface ISolicitudDAO {
 	/**
-	 * Permite consultar la información de una solicitud por el codigo de la misma
-	 * @param codigo codigo de una solicitud
+	 * Permite consultar la información de una solicitud por un campo
+	 * @param campo campo de una solicitud
 	 * @return Solicitud
 	 * @throws BasicDBOperationException
 	 */
-	public Solicitud consultarPorCodigo(String codigo) throws BasicDBOperationException;
+	public Solicitud consultar(String campo) throws BasicDBOperationException;
+	
+	/**
+	 * Permite consultar la información de una coleccion de solicitudes por un campo
+	 * @param campo campo de una solicitud
+	 * @return List<Solicitud>
+	 * @throws BasicDBOperationException
+	 */
+	public List<Solicitud> consultarColeccion(String campo) throws BasicDBOperationException;
+	
+	/**
+	 * Permite insertar una solicitud en la base de datos
+	 * @param solicitud solicitud a insertar
+	 * @throws BasicDBOperationException 
+	 */
+	public void insertar(Solicitud solicitud) throws BasicDBOperationException;
+	
+	/**
+	 * Permite actualizar una solicitud en la base de datos
+	 * @param solicitud solicitud a actualizar
+	 * @throws BasicDBOperationException 
+	 */
+	public void actualizar(Solicitud solicitud) throws BasicDBOperationException;
 }

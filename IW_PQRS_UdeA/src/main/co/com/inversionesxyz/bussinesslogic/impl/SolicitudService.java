@@ -42,7 +42,7 @@ public class SolicitudService implements ISolicitudService {
 		solicitud.setEstado("ABIERTO");
 		solicitud.setFechaCreacion(new Date());
 
-		// solicitudDAO.persist(solicitud);
+		solicitudDAO.insertar(solicitud);
 	}
 
 	@Override
@@ -53,8 +53,7 @@ public class SolicitudService implements ISolicitudService {
 			throw new BasicDBOperationException(
 					"ID de la solicitud vacia, se debe ingresar el ID para poder realizar la consulta.");
 		}
-		// return solicitudDAO.findByID(idSolicitud);
-		return null;
+		return solicitudDAO.consultar(idSolicitud);
 	}
 
 	@Override
@@ -96,8 +95,7 @@ public class SolicitudService implements ISolicitudService {
 					"El estado no debe ser vacio para poder realizar la consulta.");
 		}
 
-		// return solicitudDAO.findbyState(estado);
-		return null;
+		return solicitudDAO.consultarColeccion(estado);
 	}
 
 	@Override
@@ -124,7 +122,7 @@ public class SolicitudService implements ISolicitudService {
 			throw new BasicDBOperationException("El estado no puede ser vacio.");
 		}
 
-		// solicitudDAO.update()
+		//solicitudDAO.update()
 	}
 
 	
