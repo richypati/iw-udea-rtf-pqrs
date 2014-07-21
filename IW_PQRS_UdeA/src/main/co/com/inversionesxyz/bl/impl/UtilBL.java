@@ -42,7 +42,7 @@ public class UtilBL implements IUtilBL {
 	public void notificarRespuestaALaSolicitud(Solicitud solicitud,
 			String emailCliente) throws BasicDBOperationException {
 
-		String subjectRespuestaALaSolicitud = "Respuesta a la solicitud";
+		//String subjectRespuestaALaSolicitud = "Respuesta a la solicitud";
 		// String body= MessageFormat.format("Señor",);
 	}
 

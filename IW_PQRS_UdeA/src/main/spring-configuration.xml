@@ -72,6 +72,9 @@
 	<bean id="UtilBL" class="co.com.inversionxyz.bl.impl.UtilBL">
 		<property name="EmailBL" ref="EmailBL"></property>
 	</bean>
+	<bean id="EncuestaService" class="co.com.inversionxyz.bl.impl.EncuestaService">
+		<property name="EncuestaDAO" ref="EncuestaDAO"></property>
+	</bean>
 	
 	<context:component-scan base-package="co.com.inversionesxyz"></context:component-scan>
 </beans>
