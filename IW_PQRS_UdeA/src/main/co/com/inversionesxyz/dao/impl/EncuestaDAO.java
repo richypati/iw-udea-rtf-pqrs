@@ -15,6 +15,7 @@ import co.com.inversionesxyz.exception.BasicDBOperationException;
  * @author Jennifer Pérez
  * @author Ricardo Patiño
  */
+
 public class EncuestaDAO extends AbstractDAO<Encuesta> implements IEncuestaDAO{
 	
 	public EncuestaDAO() {
@@ -22,7 +23,6 @@ public class EncuestaDAO extends AbstractDAO<Encuesta> implements IEncuestaDAO{
 	}
 
 	private static final Log log = LogFactory.getLog(EncuestaDAO.class);
-
 
 	@Override
 	public Encuesta consultarPorSolicitud(int idSolicitud) throws BasicDBOperationException {
