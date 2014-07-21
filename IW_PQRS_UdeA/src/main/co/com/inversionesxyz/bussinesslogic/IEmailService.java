@@ -1,8 +1,8 @@
-package co.com.inversionesxyz.bl;
+package co.com.inversionesxyz.bussinesslogic;
 
 import co.com.inversionesxyz.exception.BasicDBOperationException;
 
-public interface IEmailBL {
+public interface IEmailService {
 	public void enviar(String receiver, String subject, String body)
 			throws BasicDBOperationException;
 }

@@ -1,15 +1,15 @@
-package co.com.inversionesxyz.bl.impl;
+package co.com.inversionesxyz.bussinesslogic.impl;
 
 import java.text.MessageFormat;
 
-import co.com.inversionesxyz.bl.IEmailBL;
-import co.com.inversionesxyz.bl.IUtilBL;
+import co.com.inversionesxyz.bussinesslogic.IEmailService;
+import co.com.inversionesxyz.bussinesslogic.IUtilService;
 import co.com.inversionesxyz.dto.Solicitud;
 import co.com.inversionesxyz.exception.BasicDBOperationException;
 
-public class UtilBL implements IUtilBL {
+public class UtilService implements IUtilService {
 
-	IEmailBL emailBL;
+	IEmailService emailBL;
 
 	@Override
 	public void notificarSolicitudACliente(String idSolicitud,
@@ -18,8 +18,9 @@ public class UtilBL implements IUtilBL {
 
 		String subjectSolicitudACliente = "Solicitud Enviada";
 		String body = MessageFormat.format(
-				"Señor {1}, su solicitud ha sido abierta con id: {2}.",
-				nombreCliente, idSolicitud);
+				"Apreciado(a) {0}, su solicitud ha sido abierta con id: {1}.",
+				nombreCliente, 
+				idSolicitud);
 
 		emailBL.enviar(emailCliente, subjectSolicitudACliente, body);
 
@@ -32,8 +33,9 @@ public class UtilBL implements IUtilBL {
 
 		String subjectSolicitudDelegada = "Se le ha delegado una solicitud";
 		String body = MessageFormat.format(
-				"Señor {1}, la solicitud ha con id {2} le ha sido delegada.",
-				nombreAnalista, idSolicitud);
+				"Apreciado(a) {0}, la solicitud ha con id {1} le ha sido delegada.",
+				nombreAnalista, 
+				idSolicitud);
 
 		emailBL.enviar(emailAnalista, subjectSolicitudDelegada, body);
 	}
@@ -43,7 +45,11 @@ public class UtilBL implements IUtilBL {
 			String emailCliente) throws BasicDBOperationException {
 
 		String subjectRespuestaALaSolicitud = "Respuesta a la solicitud";
-		String body= MessageFormat.format("Señor {1}, esta es la respuesta a la solicitud con id {2}: {3}",solicitud.getNombreCliente(),solicitud.getId(),solicitud.getRespuestaSolicitud());
+		String body= MessageFormat.format(
+				"Apreciado(a) {0}, esta es la respuesta a la solicitud con id {1}: {2}",
+				solicitud.getNombreCliente(),
+				solicitud.getId(),
+				solicitud.getRespuestaSolicitud());
 		
 		emailBL.enviar(emailCliente, subjectRespuestaALaSolicitud, body);
 	}

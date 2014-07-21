@@ -1,14 +1,14 @@
-package co.com.inversionesxyz.bl.impl;
+package co.com.inversionesxyz.bussinesslogic.impl;
 
 import java.util.Date;
 import java.util.List;
 
-import co.com.inversionesxyz.bl.ISolicitudBL;
+import co.com.inversionesxyz.bussinesslogic.ISolicitudService;
 import co.com.inversionesxyz.dao.ISolicitudDAO;
 import co.com.inversionesxyz.dto.Solicitud;
 import co.com.inversionesxyz.exception.BasicDBOperationException;
 
-public class SolicitudBL implements ISolicitudBL {
+public class SolicitudService implements ISolicitudService {
 
 	ISolicitudDAO solicitudDAO;
 
@@ -18,25 +18,25 @@ public class SolicitudBL implements ISolicitudBL {
 
 		if ("".equals(solicitud.getTipo())) {
 			throw new BasicDBOperationException(
-					"El tipo de solicitud no debe ser vacía.");
+					"El tipo de solicitud no debe ser vacio.");
 		}
 		if ("".equals(solicitud.getDescripcion())) {
 			throw new BasicDBOperationException(
-					"La descripción no debe ser vacía.");
+					"La descripcion no debe ser vacia.");
 		}
 		if ("".equals(solicitud.getTipoDocumento())) {
 			throw new BasicDBOperationException(
-					"El tipo de documento no debe ser vacío.");
+					"El tipo de documento no debe ser vacio.");
 		}
 		if ("".equals(solicitud.getNombreCliente())) {
-			throw new BasicDBOperationException("El nombre no debe ser vacío.");
+			throw new BasicDBOperationException("El nombre no debe ser vacio.");
 		}
 		if ("".equals(solicitud.getEmailCliente())) {
-			throw new BasicDBOperationException("El email no debe ser vacía.");
+			throw new BasicDBOperationException("El email no debe ser vacio.");
 		}
 		if (null == solicitud.getProducto()) {
 			throw new BasicDBOperationException(
-					"El producto no debe ser vacío.");
+					"El producto no debe ser vacio.");
 		}
 
 		solicitud.setEstado("ABIERTO");
@@ -51,7 +51,7 @@ public class SolicitudBL implements ISolicitudBL {
 
 		if ("".equals(idSolicitud)) {
 			throw new BasicDBOperationException(
-					"ID de la solicitud vacía, se debe ingresar el ID para poder realizar la consulta.");
+					"ID de la solicitud vacia, se debe ingresar el ID para poder realizar la consulta.");
 		}
 		// return solicitudDAO.findByID(idSolicitud);
 		return null;
@@ -63,11 +63,11 @@ public class SolicitudBL implements ISolicitudBL {
 
 		if ("".equals(idSolicitud)) {
 			throw new BasicDBOperationException(
-					"El id de la solicitud no puede ser vacía.");
+					"El id de la solicitud no puede ser vacio.");
 		}
 		if ("".equals(dni)) {
 			throw new BasicDBOperationException(
-					"El DNI del analista no puede ser vacío.");
+					"El DNI del analista no puede ser vacio.");
 		}
 
 		// solicitudDAO.delegar
@@ -78,11 +78,11 @@ public class SolicitudBL implements ISolicitudBL {
 			throws BasicDBOperationException {
 		if ("".equals(idSolicitud)) {
 			throw new BasicDBOperationException(
-					"El id de la solicitud no puede ser vacía.");
+					"El id de la solicitud no puede ser vacio.");
 		}
 		if ("".equals(respuesta)) {
 			throw new BasicDBOperationException(
-					"La respuesta no puede ser vacío.");
+					"La respuesta no puede ser vacio.");
 		}
 
 	}
@@ -93,7 +93,7 @@ public class SolicitudBL implements ISolicitudBL {
 
 		if ("".equals(estado)) {
 			throw new BasicDBOperationException(
-					"El estado no debe ser vacío para poder realizar la consulta.");
+					"El estado no debe ser vacio para poder realizar la consulta.");
 		}
 
 		// return solicitudDAO.findbyState(estado);
@@ -105,10 +105,10 @@ public class SolicitudBL implements ISolicitudBL {
 			throws BasicDBOperationException {
 		if ("".equals(idSolicitud)) {
 			throw new BasicDBOperationException(
-					"El id de la solicitud no puede ser vacía.");
+					"El id de la solicitud no puede ser vacio.");
 		}
 		if ("".equals(motivo)) {
-			throw new BasicDBOperationException("El motivo no puede ser vacío.");
+			throw new BasicDBOperationException("El motivo no puede ser vacio.");
 		}
 
 	}
@@ -118,10 +118,10 @@ public class SolicitudBL implements ISolicitudBL {
 			throws BasicDBOperationException {
 		if ("".equals(idSolicitud)) {
 			throw new BasicDBOperationException(
-					"El id de la solicitud no puede ser vacía.");
+					"El id de la solicitud no puede ser vacia.");
 		}
 		if ("".equals(estado)) {
-			throw new BasicDBOperationException("El estado no puede ser vacío.");
+			throw new BasicDBOperationException("El estado no puede ser vacio.");
 		}
 
 		// solicitudDAO.update()
