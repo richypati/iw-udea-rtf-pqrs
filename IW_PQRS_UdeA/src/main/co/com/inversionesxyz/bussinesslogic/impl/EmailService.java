@@ -11,11 +11,11 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import co.com.inversionesxyz.exception.BasicDBOperationException;
+import co.com.inversionesxyz.exception.EmailException;
 
 public class EmailService {
 
-	public void enviar(String receiver, String subject, String body) throws BasicDBOperationException {
+	public void enviar(String receiver, String subject, String body) throws EmailException {
 		try {
 			ResourceBundle configuracion = ResourceBundle.getBundle("email-configuration");
 			Properties properties = System.getProperties();
@@ -54,11 +54,11 @@ public class EmailService {
 			t.close();
 
 		} catch (AddressException e) {
-			throw new BasicDBOperationException(
+			throw new EmailException(
 					"El e-mail ingresado es inválido",
 					e);
 		} catch (MessagingException e) {
-			throw new BasicDBOperationException(e);
+			throw new EmailException(e);
 		}
 	}
 }

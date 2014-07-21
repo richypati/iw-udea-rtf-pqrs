@@ -3,9 +3,6 @@ package co.com.inversionesxyz.dao.impl;
 import java.text.MessageFormat;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import co.com.inversionesxyz.dao.ISolicitudDAO;
 import co.com.inversionesxyz.dto.Solicitud;
 import co.com.inversionesxyz.exception.BasicDBOperationException;
@@ -13,8 +10,8 @@ import co.com.inversionesxyz.exception.BasicDBOperationException;
 /**
  * Clase que define las operaciones a realizar en base de datos sobre una Solicitud
  * @see .Solicitud
- * @author Jennifer Pérez
- * @author Ricardo Patiño
+ * @author Jennifer Pï¿½rez
+ * @author Ricardo Patiï¿½o
  */
 public class SolicitudDAO extends AbstractDAO<Solicitud> implements ISolicitudDAO{
 
@@ -22,21 +19,19 @@ public class SolicitudDAO extends AbstractDAO<Solicitud> implements ISolicitudDA
 		super(Solicitud.class);
 	}
 
-	private static final Log log = LogFactory.getLog(SolicitudDAO.class);
-
 	@Override
 	public Solicitud consultar(String campo) throws BasicDBOperationException {
 		try{
 			return getByField(campo);
 		}catch(Exception e){
-			e.printStackTrace();
-			log.error(MessageFormat.format(
-					"No fue posible consultar la solicitud por campo: {0}. Causa {1}",
-					campo,
-					e.getCause()));
+//			e.printStackTrace();
+//			log.error(MessageFormat.format(
+//					"No fue posible consultar la solicitud por campo: {0}. Causa {1}",
+//					campo,
+//					e.getCause()));
 			throw new BasicDBOperationException(MessageFormat.format(
 					"No fue posible consultar la solicitud por campo: {0}",
-					campo));
+					campo), e.getCause());
 		}
 	}
 
@@ -45,13 +40,13 @@ public class SolicitudDAO extends AbstractDAO<Solicitud> implements ISolicitudDA
 		try{
 			insert(solicitud);
 		}catch(Exception e){
-			log.error(MessageFormat.format(
-					"No fue posible insertar la solicitud del cliente {0}. Causa {1}",
-					solicitud.getEmailCliente(),
-					e.getCause()));
+//			log.error(MessageFormat.format(
+//					"No fue posible insertar la solicitud del cliente {0}. Causa {1}",
+//					solicitud.getEmailCliente(),
+//					e.getCause()));
 			throw new BasicDBOperationException(MessageFormat.format(
 					"No fue posible insertar la solicitud del cliente {0}",
-					solicitud.getEmailCliente()));
+					solicitud.getEmailCliente()), e.getCause());
 		}		
 	}
 
@@ -60,14 +55,14 @@ public class SolicitudDAO extends AbstractDAO<Solicitud> implements ISolicitudDA
 		try{
 			return consultarColeccion(campo);
 		}catch(Exception e){
-			e.printStackTrace();
-			log.error(MessageFormat.format(
-					"No fue posible consultar la lista de solicitudes por campo: {0}. Causa {1}",
-					campo,
-					e.getCause()));
+//			e.printStackTrace();
+//			log.error(MessageFormat.format(
+//					"No fue posible consultar la lista de solicitudes por campo: {0}. Causa {1}",
+//					campo,
+//					e.getCause()));
 			throw new BasicDBOperationException(MessageFormat.format(
 					"No fue posible consultar la lista de solicitudes por campo: {0}",
-					campo));
+					campo), e.getCause());
 		}
 	}
 
@@ -76,13 +71,13 @@ public class SolicitudDAO extends AbstractDAO<Solicitud> implements ISolicitudDA
 		try{
 			update(solicitud);
 		}catch(Exception e){
-			log.error(MessageFormat.format(
-					"No fue posible actualizar la solicitud {0}. Causa {1}",
-					solicitud.getId(),
-					e.getCause()));
+//			log.error(MessageFormat.format(
+//					"No fue posible actualizar la solicitud {0}. Causa {1}",
+//					solicitud.getId(),
+//					e.getCause()));
 			throw new BasicDBOperationException(MessageFormat.format(
 					"No fue posible actualizar la solicitud {0}",
-					solicitud.getId()));
+					solicitud.getId()), e.getCause());
 		}
 	}
 	
