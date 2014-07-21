@@ -1,4 +1,4 @@
-package co.com.inversionesxyz.bl.impl;
+package co.com.inversionesxyz.bussinesslogic.impl;
 
 import java.util.Properties;
 import java.util.ResourceBundle;
@@ -13,32 +13,26 @@ import javax.mail.internet.MimeMessage;
 
 import co.com.inversionesxyz.exception.BasicDBOperationException;
 
-public class EmailBL {
+public class EmailService {
 
 	public void enviar(String receiver, String subject, String body) throws BasicDBOperationException {
 		try {
-			// Se lee el archivo de configuración
-			ResourceBundle configuracion = ResourceBundle
-					.getBundle("email-configuration");
-
-			// Obtiene las propiedades
+			ResourceBundle configuracion = ResourceBundle.getBundle("email-configuration");
 			Properties properties = System.getProperties();
-
-			// Se configura el host
-			properties.setProperty("mail.smtp.host",
+			properties.setProperty(
+					"mail.smtp.host",
 					configuracion.getString("mail.smtp.host"));
 
-			// TLS si está disponible. Encriptacion
-			properties.setProperty("mail.smtp.starttls.enable",
+			properties.setProperty(
+					"mail.smtp.starttls.enable",
 					configuracion.getString("mail.smtp.starttls.enable"));
 
-			// Se configura el puerto
-			properties.setProperty("mail.smtp.port",
+			properties.setProperty(
+					"mail.smtp.port",
 					configuracion.getString("mail.smtp.port"));
 
-			// Se configura la autenticación
-
-			properties.setProperty("mail.smtp.auth",
+			properties.setProperty(
+					"mail.smtp.auth",
 					configuracion.getString("mail.smtp.auth"));
 
 			Session session = Session.getDefaultInstance(properties);

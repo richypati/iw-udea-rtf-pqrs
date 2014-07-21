@@ -1,9 +1,9 @@
-package co.com.inversionesxyz.bl;
+package co.com.inversionesxyz.bussinesslogic;
 
 import co.com.inversionesxyz.dto.Solicitud;
 import co.com.inversionesxyz.exception.BasicDBOperationException;
 
-public interface IUtilBL {
+public interface IUtilService {
 
 	public void notificarSolicitudACliente(String idSolicitud,
 			String nombreCliente, String emailCliente) throws BasicDBOperationException;

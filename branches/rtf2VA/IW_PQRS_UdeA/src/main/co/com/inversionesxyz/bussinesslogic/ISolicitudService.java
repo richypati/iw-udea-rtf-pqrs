@@ -1,11 +1,11 @@
-package co.com.inversionesxyz.bl;
+package co.com.inversionesxyz.bussinesslogic;
 
 import java.util.List;
 
 import co.com.inversionesxyz.dto.Solicitud;
 import co.com.inversionesxyz.exception.BasicDBOperationException;
 
-public interface ISolicitudBL {
+public interface ISolicitudService {
 
 	public void guardarSolicitud(Solicitud solicitud)
 			throws BasicDBOperationException;
