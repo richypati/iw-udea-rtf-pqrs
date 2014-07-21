@@ -20,7 +20,7 @@ public interface IEncuestaDAO {
 	
 	/**
 	 * Permite insertar una encuesta en la base de datos
-	 * @param encuesta a insertar
+	 * @param encuesta encuesta a insertar
 	 * @throws BasicDBOperationException 
 	 */
 	public void insertar(Encuesta encuesta) throws BasicDBOperationException;

@@ -2,6 +2,7 @@ package co.com.inversionesxyz.dao.impl;
 
 import java.io.Serializable;
 import java.text.MessageFormat;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -58,6 +59,19 @@ public abstract class AbstractDAO<T> {
 		
 	}
 	
+	@SuppressWarnings("unchecked")
+	protected List<T> getCollectionByField(Object field) throws BasicDBOperationException{
+		try{
+			session = getCurrentSession();
+			return (List<T>)session.get(type, (Serializable)field);
+		}catch(Exception e){
+			throw new BasicDBOperationException(e);
+		}finally{
+			close();
+		}
+		
+	}
+	
 	protected void insert(Object object) throws BasicDBOperationException{
 		Transaction transaction = null;
 		try{
@@ -78,6 +92,20 @@ public abstract class AbstractDAO<T> {
 			session = getCurrentSession();
 			transaction = session.beginTransaction();
 			session.delete(object);
+			transaction.commit();
+		}catch(Exception e){
+			throw new BasicDBOperationException(e);
+		}finally{
+			close();
+		}
+	}
+	
+	protected void update(Object object) throws BasicDBOperationException{
+		Transaction transaction = null;
+		try{
+			session = getCurrentSession();
+			transaction = session.beginTransaction();
+			session.update(object);
 			transaction.commit();
 		}catch(Exception e){
 			throw new BasicDBOperationException(e);

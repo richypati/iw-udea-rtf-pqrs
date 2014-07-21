@@ -17,4 +17,11 @@ public interface IProductoDAO {
 	 * @throws BasicDBOperationException
 	 */
 	public Producto consultarPorCodigo(String codigo) throws BasicDBOperationException;
+	
+	/**
+	 * Permite insertar un producto en la base de datos
+	 * @param producto producto a insertar
+	 * @throws BasicDBOperationException 
+	 */
+	public void insertar(Producto producto) throws BasicDBOperationException;
 }
