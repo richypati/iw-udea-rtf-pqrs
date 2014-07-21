@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import co.com.inversionesxyz.dao.impl.EncuestaDAO;
 import co.com.inversionesxyz.dto.Encuesta;
-import co.com.inversionesxyz.exception.InexistentObjectException;
+import co.com.inversionesxyz.exception.BasicDBOperationException;
 
 public class EncuestaDAOTest {
 	
@@ -19,8 +19,8 @@ public class EncuestaDAOTest {
 	
 
 	@Test
-	public void testDebeObtenerEncuestaPorIDSolicitid() throws InexistentObjectException {
-		String idSolicitud = "1000";
+	public void testDebeObtenerEncuestaPorIDSolicitid() throws BasicDBOperationException {
+		int idSolicitud = 1;
 		Encuesta encuesta = dao.consultarPorSolicitud(idSolicitud);
 		
 		Assert.assertNotNull(encuesta);
