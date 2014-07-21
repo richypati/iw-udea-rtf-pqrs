@@ -35,15 +35,16 @@ public class UtilBL implements IUtilBL {
 				"Señor {1}, la solicitud ha con id {2} le ha sido delegada.",
 				nombreAnalista, idSolicitud);
 
-		emailBL.enviar(nombreAnalista, subjectSolicitudDelegada, body);
+		emailBL.enviar(emailAnalista, subjectSolicitudDelegada, body);
 	}
 
 	@Override
 	public void notificarRespuestaALaSolicitud(Solicitud solicitud,
 			String emailCliente) throws BasicDBOperationException {
 
-		//String subjectRespuestaALaSolicitud = "Respuesta a la solicitud";
-		// String body= MessageFormat.format("Señor",);
+		String subjectRespuestaALaSolicitud = "Respuesta a la solicitud";
+		String body= MessageFormat.format("Señor {1}, esta es la respuesta a la solicitud con id {2}: {3}",solicitud.getNombreCliente(),solicitud.getId(),solicitud.getRespuestaSolicitud());
+		
+		emailBL.enviar(emailCliente, subjectRespuestaALaSolicitud, body);
 	}
-
 }
