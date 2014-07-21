@@ -14,12 +14,11 @@
 	</bean>
 
 	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="mappingResources">
 			<list>
-				<value>co/com/inversionesxyz/dao/mapping/InformacionAnalista.hbm.xml
-				</value>
+				<value>co/com/inversionesxyz/dao/mapping/InformacionAnalista.hbm.xml</value>
 				<value>co/com/inversionesxyz/dao/mapping/Encuesta.hbm.xml</value>
 				<value>co/com/inversionesxyz/dao/mapping/Producto.hbm.xml</value>
 				<value>co/com/inversionesxyz/dao/mapping/Solicitud.hbm.xml</value>
@@ -35,37 +34,42 @@
 			</props>
 		</property>
 	</bean>
-
+	
 	<bean id="transactionManager"
-		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 
 	<!-- Beans DAO -->
 
-	<bean id="InformacionAnalistaDAO" class="co.com.inversionesxyz.dao.IAnalistaDAO">
+	<bean id="encuestaDAO" class="co.com.inversionesxyz.dao.impl.EncuestaDAO">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-	<bean id="EncuestaDAO" class="co.com.inversionesxyz.dao.IEncuestaDAO">
+	<!--<bean id="analistaDAO" class="co.com.inversionesxyz.dao.impl.AnalistaDAO">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-	<bean id="ProductoDAO" class="co.com.inversionesxyz.dao.IProductoDAO">
+	<bean id="productoDAO" class="co.com.inversionesxyz.dao.impl.ProductoDAO">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-	<bean id="SolicitudDAO" class="co.com.inversionesxyz.dao.ISolicitudDAO">
+	<bean id="solicitudDAO" class="co.com.inversionesxyz.dao.impl.SolicitudDAO">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-	<bean id="SucursalDAO" class="co.com.inversionesxyz.dao.ISucursalDAO">
+	<bean id="sucursalDAO" class="co.com.inversionesxyz.dao.impl.SucursalDAO">
 		<property name="sessionFactory" ref="sessionFactory"></property>
-	</bean>
+	</bean>-->
 
-	<!-- Beans Business Logic -->
-	
-	<bean id="SolicitudBL" class="co.com.inversionesxyz.bl.impl.SolicitudBL">
+	<!-- Beans Business Logic 
+	<bean id="SolicitudID" class="co.com.inversionesxyz.bl.impl.SolicitudBL">
 		<property name="SolicitudDAO" ref="SolicitudDAO"></property>
 	</bean>
-	<bean id="EncuestaBL" class="co.com.inversionesxyz.bl.impl.EncuestaBL">
-		<property name="EncuestaDAO" ref ="EncuestaDAO"></property>
+	-->
+	
+	
+	
+	<bean id="encuestaService" class="co.com.inversionesxyz.bl.impl.EncuestaService">
+		<property name="encuestaDAO" ref="encuestaDAO"></property>
 	</bean>
+	
+	<context:component-scan base-package="co.com.inversionesxyz"></context:component-scan>
 </beans>
