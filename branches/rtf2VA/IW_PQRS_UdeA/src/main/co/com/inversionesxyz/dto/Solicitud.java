@@ -19,6 +19,7 @@ public class Solicitud implements java.io.Serializable {
 	private String tipoDocumento;
 	private String nombreCliente;
 	private String emailCliente;
+	private String respuestaSolicitud;
 
 	public int getId() {
 		return this.id;
@@ -97,6 +98,12 @@ public class Solicitud implements java.io.Serializable {
 	}
 	public void setEmailCliente(String emailCliente) {
 		this.emailCliente = emailCliente;
+	}
+	public String getRespuestaSolicitud() {
+		return respuestaSolicitud;
+	}
+	public void setRespuestaSolicitud(String respuestaSolicitud) {
+		this.respuestaSolicitud = respuestaSolicitud;
 	}
 
 }
