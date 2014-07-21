@@ -2,10 +2,7 @@ package co.com.inversionesxyz.bl;
 
 import co.com.inversionesxyz.exception.BasicDBOperationException;
 
-public interface IEncuestaBL {
-
-	public void responderEncuesta(int idSolicitud,
-			String respuestaPreguntaA, String respuestaPreguntaB)
+public interface IEmailBL {
+	public void enviar(String receiver, String subject, String body)
 			throws BasicDBOperationException;
-	
 }
