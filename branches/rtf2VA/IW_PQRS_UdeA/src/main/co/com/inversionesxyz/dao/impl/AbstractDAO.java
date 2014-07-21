@@ -6,16 +6,20 @@ import java.text.MessageFormat;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import co.com.inversionesxyz.exception.BasicDBOperationException;
 import co.com.inversionesxyz.exception.SessionFactoryException;
 
-public abstract class AbstractDAO<T> extends HibernateDaoSupport{
+public abstract class AbstractDAO<T> {
 	
 	private static final Log log = LogFactory.getLog(AbstractDAO.class);
 	
+	@Autowired
+    private SessionFactory sessionFactory;
+    
 	private Session session;
 	private Class<T> type;
 	
@@ -24,7 +28,7 @@ public abstract class AbstractDAO<T> extends HibernateDaoSupport{
 	}
 	protected Session getCurrentSession() {
 		try{
-			session = getSessionFactory().getCurrentSession() ;
+			session = sessionFactory.openSession();
 			return session;
 		}catch(RuntimeException e){
 			e.printStackTrace();
@@ -80,6 +84,10 @@ public abstract class AbstractDAO<T> extends HibernateDaoSupport{
 		}finally{
 			close();
 		}
+	}
+	
+	public void setSessionFactory(SessionFactory sessionFactory) {
+	    this.sessionFactory = sessionFactory;
 	}
 
 }
