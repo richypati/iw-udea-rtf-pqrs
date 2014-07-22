@@ -3,7 +3,7 @@ package co.com.inversionesxyz.exception;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-public class BasicDBOperationException extends Exception {
+public class BasicDBOperationException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 	private static final Log log = LogFactory

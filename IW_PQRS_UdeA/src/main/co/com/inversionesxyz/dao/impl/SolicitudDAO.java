@@ -10,8 +10,8 @@ import co.com.inversionesxyz.exception.BasicDBOperationException;
 /**
  * Clase que define las operaciones a realizar en base de datos sobre una Solicitud
  * @see .Solicitud
- * @author Jennifer P�rez
- * @author Ricardo Pati�o
+ * @author Jennifer Perez
+ * @author Ricardo Patino
  */
 public class SolicitudDAO extends AbstractDAO<Solicitud> implements ISolicitudDAO{
 
@@ -20,15 +20,10 @@ public class SolicitudDAO extends AbstractDAO<Solicitud> implements ISolicitudDA
 	}
 
 	@Override
-	public Solicitud consultar(String campo) throws BasicDBOperationException {
+	public Solicitud consultar(String campo) {
 		try{
 			return getByField(campo);
 		}catch(Exception e){
-//			e.printStackTrace();
-//			log.error(MessageFormat.format(
-//					"No fue posible consultar la solicitud por campo: {0}. Causa {1}",
-//					campo,
-//					e.getCause()));
 			throw new BasicDBOperationException(MessageFormat.format(
 					"No fue posible consultar la solicitud por campo: {0}",
 					campo), e.getCause());
@@ -36,14 +31,10 @@ public class SolicitudDAO extends AbstractDAO<Solicitud> implements ISolicitudDA
 	}
 
 	@Override
-	public void insertar(Solicitud solicitud) throws BasicDBOperationException {
+	public void insertar(Solicitud solicitud) {
 		try{
 			insert(solicitud);
 		}catch(Exception e){
-//			log.error(MessageFormat.format(
-//					"No fue posible insertar la solicitud del cliente {0}. Causa {1}",
-//					solicitud.getEmailCliente(),
-//					e.getCause()));
 			throw new BasicDBOperationException(MessageFormat.format(
 					"No fue posible insertar la solicitud del cliente {0}",
 					solicitud.getEmailCliente()), e.getCause());
@@ -51,15 +42,10 @@ public class SolicitudDAO extends AbstractDAO<Solicitud> implements ISolicitudDA
 	}
 
 	@Override
-	public List<Solicitud> consultarColeccion(String campo) throws BasicDBOperationException {
+	public List<Solicitud> consultarColeccion(String campo) {
 		try{
 			return consultarColeccion(campo);
 		}catch(Exception e){
-//			e.printStackTrace();
-//			log.error(MessageFormat.format(
-//					"No fue posible consultar la lista de solicitudes por campo: {0}. Causa {1}",
-//					campo,
-//					e.getCause()));
 			throw new BasicDBOperationException(MessageFormat.format(
 					"No fue posible consultar la lista de solicitudes por campo: {0}",
 					campo), e.getCause());
@@ -67,14 +53,10 @@ public class SolicitudDAO extends AbstractDAO<Solicitud> implements ISolicitudDA
 	}
 
 	@Override
-	public void actualizar(Solicitud solicitud) throws BasicDBOperationException {
+	public void actualizar(Solicitud solicitud) {
 		try{
 			update(solicitud);
 		}catch(Exception e){
-//			log.error(MessageFormat.format(
-//					"No fue posible actualizar la solicitud {0}. Causa {1}",
-//					solicitud.getId(),
-//					e.getCause()));
 			throw new BasicDBOperationException(MessageFormat.format(
 					"No fue posible actualizar la solicitud {0}",
 					solicitud.getId()), e.getCause());

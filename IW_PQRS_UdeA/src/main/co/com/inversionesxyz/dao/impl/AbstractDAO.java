@@ -14,6 +14,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import co.com.inversionesxyz.exception.BasicDBOperationException;
 import co.com.inversionesxyz.exception.SessionFactoryException;
 
+/**
+ * Clase abstracta ue define las operaciones generales a realizar sobre la base de datos
+ * @author Jennifer Perez
+ * @author Ricardo Patino
+ */
 public abstract class AbstractDAO<T> {
 	
 	private static final Log log = LogFactory.getLog(AbstractDAO.class);
@@ -27,6 +32,11 @@ public abstract class AbstractDAO<T> {
 	public AbstractDAO(Class<T> type){
 		this.type = type;
 	}
+	
+	/**
+	 * Permite obtener la sesion para el dao que extienda de esta clase
+	 * @return Session la sesion generada
+	 */
 	protected Session getCurrentSession() {
 		try{
 			session = sessionFactory.openSession();
@@ -40,12 +50,20 @@ public abstract class AbstractDAO<T> {
 		}
 	}
 	
+	/**
+	 * Permite cerrar una sesion previamente abierta
+	 */
 	protected void close(){
 		if(session.isOpen()){
 			session.close();
 		}
 	}
 	
+	/**
+	 * Permite consultar un objeto por un criterio cualquiera
+	 * @param field criterio de busqueda
+	 * @return T objeto que cumple con el criterio de busqueda
+	 */
 	@SuppressWarnings("unchecked")
 	protected T getByField(Object field) throws BasicDBOperationException{
 		try{
@@ -55,10 +73,14 @@ public abstract class AbstractDAO<T> {
 			throw new BasicDBOperationException(e);
 		}finally{
 			close();
-		}
-		
+		}	
 	}
 	
+	/**
+	 * Permite consultar una coleccion de objetos que cumplan con un sierto criterio de busqueda
+	 * @param field criterio de busqueda
+	 * @return List<T> lista de objetos que cumplen con el criterio de busqueda
+	 */
 	@SuppressWarnings("unchecked")
 	protected List<T> getCollectionByField(Object field) throws BasicDBOperationException{
 		try{
@@ -72,6 +94,10 @@ public abstract class AbstractDAO<T> {
 		
 	}
 	
+	/**
+	 * Permite insertar un objeto
+	 * @param object objeto a insertar
+	 */
 	protected void insert(Object object) throws BasicDBOperationException{
 		Transaction transaction = null;
 		try{
@@ -86,6 +112,10 @@ public abstract class AbstractDAO<T> {
 		}
 	}
 	
+	/**
+	 * Permite eliminar un objeto
+	 * @param object objeto a eliminar
+	 */
 	protected void delete(Object object) throws BasicDBOperationException{
 		Transaction transaction = null;
 		try{
@@ -100,6 +130,10 @@ public abstract class AbstractDAO<T> {
 		}
 	}
 	
+	/**
+	 * Permite actualizar un objeto 
+	 * @param object objeto a actualizar
+	 */
 	protected void update(Object object) throws BasicDBOperationException{
 		Transaction transaction = null;
 		try{
@@ -114,6 +148,10 @@ public abstract class AbstractDAO<T> {
 		}
 	}
 	
+	/**
+	 * Permite actualizar el sessionFactory. Es imperativa su implementacion para las dependecias de Spring
+	 * @param sessionFactory sessionFactory a actualizar
+	 */
 	public void setSessionFactory(SessionFactory sessionFactory) {
 	    this.sessionFactory = sessionFactory;
 	}
