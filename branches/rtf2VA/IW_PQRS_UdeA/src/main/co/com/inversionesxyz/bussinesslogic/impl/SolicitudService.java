@@ -1,127 +1,61 @@
 package co.com.inversionesxyz.bussinesslogic.impl;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import co.com.inversionesxyz.bussinesslogic.ISolicitudService;
 import co.com.inversionesxyz.dao.ISolicitudDAO;
 import co.com.inversionesxyz.dto.Solicitud;
-import co.com.inversionesxyz.exception.BasicDBOperationException;
 
+/**
+ * Clase que define las operaciones a realizar sobre las solicitudes
+ * @author Jennifer Perez
+ * @author Ricardo Patino
+ */
 public class SolicitudService implements ISolicitudService {
 
+	@Autowired
 	ISolicitudDAO solicitudDAO;
 
 	@Override
-	public void guardarSolicitud(Solicitud solicitud)
-			throws BasicDBOperationException {
-
-		if ("".equals(solicitud.getTipo())) {
-			throw new BasicDBOperationException(
-					"El tipo de solicitud no debe ser vacio.");
-		}
-		if ("".equals(solicitud.getDescripcion())) {
-			throw new BasicDBOperationException(
-					"La descripcion no debe ser vacia.");
-		}
-		if ("".equals(solicitud.getTipoDocumento())) {
-			throw new BasicDBOperationException(
-					"El tipo de documento no debe ser vacio.");
-		}
-		if ("".equals(solicitud.getNombreCliente())) {
-			throw new BasicDBOperationException("El nombre no debe ser vacio.");
-		}
-		if ("".equals(solicitud.getEmailCliente())) {
-			throw new BasicDBOperationException("El email no debe ser vacio.");
-		}
-		if (null == solicitud.getProducto()) {
-			throw new BasicDBOperationException(
-					"El producto no debe ser vacio.");
-		}
-
+	public void guardarSolicitud(Solicitud solicitud){
+		Calendar calendar = Calendar.getInstance();
+		
 		solicitud.setEstado("ABIERTO");
-		solicitud.setFechaCreacion(new Date());
+		solicitud.setFechaCreacion(calendar.getTime());
 
 		solicitudDAO.insertar(solicitud);
 	}
 
 	@Override
-	public Solicitud consultarSolicitud(String idSolicitud)
-			throws BasicDBOperationException {
-
-		if ("".equals(idSolicitud)) {
-			throw new BasicDBOperationException(
-					"ID de la solicitud vacia, se debe ingresar el ID para poder realizar la consulta.");
-		}
+	public Solicitud consultarSolicitud(String idSolicitud){
 		return solicitudDAO.consultar(idSolicitud);
 	}
 
 	@Override
-	public void DelegarSolicitud(String idSolicitud, String dni)
-			throws BasicDBOperationException {
-
-		if ("".equals(idSolicitud)) {
-			throw new BasicDBOperationException(
-					"El id de la solicitud no puede ser vacio.");
-		}
-		if ("".equals(dni)) {
-			throw new BasicDBOperationException(
-					"El DNI del analista no puede ser vacio.");
-		}
-
+	public void DelegarSolicitud(String idSolicitud, String dni) {
 		// solicitudDAO.delegar
 	}
 
 	@Override
-	public void ResponderSolicitud(String idSolicitud, String respuesta)
-			throws BasicDBOperationException {
-		if ("".equals(idSolicitud)) {
-			throw new BasicDBOperationException(
-					"El id de la solicitud no puede ser vacio.");
-		}
-		if ("".equals(respuesta)) {
-			throw new BasicDBOperationException(
-					"La respuesta no puede ser vacio.");
-		}
-
+	public void ResponderSolicitud(String idSolicitud, String respuesta){
+		// Aqui que va?
 	}
 
 	@Override
-	public List<Solicitud> obtenerSolicitudesPorEstado(String estado)
-			throws BasicDBOperationException {
-
-		if ("".equals(estado)) {
-			throw new BasicDBOperationException(
-					"El estado no debe ser vacio para poder realizar la consulta.");
-		}
-
+	public List<Solicitud> obtenerSolicitudesPorEstado(String estado){
 		return solicitudDAO.consultarColeccion(estado);
 	}
 
 	@Override
-	public void CancelarSolicitud(String idSolicitud, String motivo)
-			throws BasicDBOperationException {
-		if ("".equals(idSolicitud)) {
-			throw new BasicDBOperationException(
-					"El id de la solicitud no puede ser vacio.");
-		}
-		if ("".equals(motivo)) {
-			throw new BasicDBOperationException("El motivo no puede ser vacio.");
-		}
-
+	public void CancelarSolicitud(String idSolicitud, String motivo){
+		// Aqui que va?
 	}
 
 	@Override
-	public void actualizarEstadoSolicitud(String idSolicitud, String estado)
-			throws BasicDBOperationException {
-		if ("".equals(idSolicitud)) {
-			throw new BasicDBOperationException(
-					"El id de la solicitud no puede ser vacia.");
-		}
-		if ("".equals(estado)) {
-			throw new BasicDBOperationException("El estado no puede ser vacio.");
-		}
-
+	public void actualizarEstadoSolicitud(String idSolicitud, String estado){
 		//solicitudDAO.update()
 	}
 

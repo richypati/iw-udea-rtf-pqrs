@@ -9,8 +9,8 @@ import co.com.inversionesxyz.exception.BasicDBOperationException;
 /**
  * Clase que define las operaciones a realizar en base de datos sobre un Producto
  * @see .Producto
- * @author Jennifer P�rez
- * @author Ricardo Pati�o
+ * @author Jennifer Perez
+ * @author Ricardo Patino
  */
 public class ProductoDAO extends AbstractDAO<Producto> implements IProductoDAO{
 
@@ -19,15 +19,10 @@ public class ProductoDAO extends AbstractDAO<Producto> implements IProductoDAO{
 	}
 
 	@Override
-	public Producto consultarPorCodigo(String codigo) throws BasicDBOperationException {
+	public Producto consultarPorCodigo(String codigo){
 		try{
 			return getByField(codigo);
 		}catch(Exception e){
-//			e.printStackTrace();
-//			log.error(MessageFormat.format(
-//					"No fue posible consultar el producto {0}. Causa {1}",
-//					codigo,
-//					e.getCause()));
 			throw new BasicDBOperationException(MessageFormat.format(
 					"No fue posible consultar el producto {0}",
 					codigo), e.getCause());
@@ -35,14 +30,10 @@ public class ProductoDAO extends AbstractDAO<Producto> implements IProductoDAO{
 	}
 
 	@Override
-	public void insertar(Producto producto) throws BasicDBOperationException {
+	public void insertar(Producto producto) {
 		try{
 			insert(producto);
 		}catch(Exception e){
-//			log.error(MessageFormat.format(
-//					"No fue posible insertar el producto de codigo {0}. Causa {1}",
-//					producto.getCodigo(),
-//					e.getCause()));
 			throw new BasicDBOperationException(MessageFormat.format(
 					"No fue posible insertar el producto de codigo {0}",
 					producto.getCodigo()), e.getCause());

@@ -9,8 +9,8 @@ import co.com.inversionesxyz.exception.BasicDBOperationException;
 /**
  * Clase que define las operaciones a realizar en base de datos sobre una Encuesta
  * @see .Encuesta
- * @author Jennifer P�rez
- * @author Ricardo Pati�o
+ * @author Jennifer Perez
+ * @author Ricardo Patino
  */
 
 public class EncuestaDAO extends AbstractDAO<Encuesta> implements IEncuestaDAO{
@@ -20,15 +20,10 @@ public class EncuestaDAO extends AbstractDAO<Encuesta> implements IEncuestaDAO{
 	}
 
 	@Override
-	public Encuesta consultarPorSolicitud(int idSolicitud) throws BasicDBOperationException {
+	public Encuesta consultarPorSolicitud(int idSolicitud) {
 		try{
 			return getByField(idSolicitud);
 		}catch(Exception e){
-//			e.printStackTrace();
-//			log.error(MessageFormat.format(
-//					"No fue posible consultar la encuesta de la solicitud {0}. Causa {1}",
-//					idSolicitud,
-//					e.getCause()));
 			throw new BasicDBOperationException(MessageFormat.format(
 					"No fue posible consultar la encuesta de la solicitud {0}",
 					idSolicitud), e.getCause());
@@ -37,14 +32,10 @@ public class EncuestaDAO extends AbstractDAO<Encuesta> implements IEncuestaDAO{
 	}
 
 	@Override
-	public void insertar(Encuesta encuesta) throws BasicDBOperationException {
+	public void insertar(Encuesta encuesta) {
 		try{
 			insert(encuesta);
 		}catch(Exception e){
-//			log.error(MessageFormat.format(
-//					"No fue posible insertar la encuesta de la solicitud {0}. Causa {1}",
-//					encuesta.getSolicitudId(),
-//					e.getCause()));
 			throw new BasicDBOperationException(MessageFormat.format(
 					"No fue posible insertar la encuesta de la solicitud {0}",
 					encuesta.getSolicitudId()), e.getCause());
@@ -52,14 +43,10 @@ public class EncuestaDAO extends AbstractDAO<Encuesta> implements IEncuestaDAO{
 	}
 
 	@Override
-	public void eliminar(Encuesta encuesta) throws BasicDBOperationException {
+	public void eliminar(Encuesta encuesta) {
 		try{
 			delete(encuesta);
 		}catch(Exception e){
-//			log.error(MessageFormat.format(
-//					"No fue posible eliminar la encuesta de la solicitud {0}. Causa {1}",
-//					encuesta.getSolicitudId(),
-//					e.getCause()));
 			throw new BasicDBOperationException(MessageFormat.format(
 					"No fue posible eliminar la encuesta de la solicitud {0}",
 					encuesta.getSolicitudId()), e.getCause());

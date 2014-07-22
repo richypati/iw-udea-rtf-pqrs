@@ -13,6 +13,11 @@ import javax.mail.internet.MimeMessage;
 
 import co.com.inversionesxyz.exception.EmailException;
 
+/**
+ * Clase que define las operaciones a realizar sobre los correos electronicos
+ * @author Jennifer Perez
+ * @author Ricardo Patino
+ */
 public class EmailService {
 
 	public void enviar(String receiver, String subject, String body) throws EmailException {
@@ -55,7 +60,7 @@ public class EmailService {
 
 		} catch (AddressException e) {
 			throw new EmailException(
-					"El e-mail ingresado es inválido",
+					"El e-mail ingresado es invalido",
 					e);
 		} catch (MessagingException e) {
 			throw new EmailException(e);
