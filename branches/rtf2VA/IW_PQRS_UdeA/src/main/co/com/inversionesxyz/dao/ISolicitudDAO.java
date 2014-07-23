@@ -6,24 +6,24 @@ import co.com.inversionesxyz.dto.Solicitud;
 
 /**
  * Interface que define los metodos que va a proveer el dao de Solicitud
- * @author Jennifer Pérez
- * @author Ricardo Patiño
+ * @author Jennifer Pï¿½rez
+ * @author Ricardo Patiï¿½o
  *
  */
 public interface ISolicitudDAO {
 	/**
-	 * Permite consultar la información de una solicitud por un campo
+	 * Permite consultar la informaciï¿½n de una solicitud por un campo
 	 * @param campo campo de una solicitud
 	 * @return Solicitud
 	 */
-	public Solicitud consultar(String campo);
+	public Solicitud consultar(int idSolicitud);
 	
 	/**
-	 * Permite consultar la información de una coleccion de solicitudes por un campo
+	 * Permite consultar la informaciï¿½n de una coleccion de solicitudes por un campo
 	 * @param campo campo de una solicitud
 	 * @return List<Solicitud>
 	 */
-	public List<Solicitud> consultarColeccion(String campo) ;
+	public List<Solicitud> consultarColeccion(String campo, String valor) ;
 	
 	/**
 	 * Permite insertar una solicitud en la base de datos
@@ -36,4 +36,12 @@ public interface ISolicitudDAO {
 	 * @param solicitud solicitud a actualizar
 	 */
 	public void actualizar(Solicitud solicitud);
+
+	/**
+	 * Permite actualizar el estado de una solicitud en la base de datos
+	 * @param idSolicitud ID de la solicitud
+	 * @param estado Estado de la solicitud a actualizar
+	 */
+	void actualizarEstado(int idSolicitud, String estado);
+	
 }

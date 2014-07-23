@@ -18,7 +18,7 @@ public interface IUtilService {
 	 * @param emailCliente correo electronico del cliente al cual se le notifica la solicitud
 	 * @throws EmailException
 	 */
-	public void notificarSolicitudACliente(String idSolicitud, String nombreCliente, String emailCliente) throws EmailException;
+	public void notificarSolicitudACliente(int idSolicitud, String nombreCliente, String emailCliente) throws EmailException;
 
 	/**
 	 * Permite notificar a un analista la delegacion de una solicitud
@@ -27,7 +27,7 @@ public interface IUtilService {
 	 * @param emailAnalista correo electronico del analista al cual se le notifica la solicitud
 	 * @throws EmailException
 	 */
-	public void notificarSolicitudDelegada(String idSolicitud, String nombreAnalista, String emailAnalista) throws EmailException;
+	public void notificarSolicitudDelegada(int idSolicitud, String nombreAnalista, String emailAnalista) throws EmailException;
 
 	/**
 	 * Permite notificar a un cliente la respuesta de una solicitud
@@ -36,4 +36,14 @@ public interface IUtilService {
 	 * @throws EmailException
 	 */
 	public void notificarRespuestaALaSolicitud(Solicitud solicitud, String emailCliente) throws EmailException;
+
+	/**
+	 * Permite notificar a un cliente que se ha cancelado la solicitud
+	 * @param idSolicitud Identificador de la solicitud a notificad
+	 * @param emailCliente Correo electronico del cliente al cual se le notifica la solicitud
+	 * @param motivo Motivo por el cual la solicitud fue cancelada
+	 * @throws EmailException
+	 */
+	public void notificarSolicitudCancelada(int idSolicitud, String emailCliente,
+			String motivo) throws EmailException;
 }
