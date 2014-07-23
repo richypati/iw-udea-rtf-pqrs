@@ -27,8 +27,7 @@ public class SolicitudService implements ISolicitudService {
 	@Autowired
 	IAnalistaDAO analistaDAO;
 	
-	@Autowired
-	IUtilService utilService;
+	IUtilService utilService = new UtilService();
 
 	@Override
 	public void guardarSolicitud(Solicitud solicitud) {

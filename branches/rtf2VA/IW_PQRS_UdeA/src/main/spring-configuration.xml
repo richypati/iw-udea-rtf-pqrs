@@ -46,7 +46,7 @@
 	<bean id="encuestaDAO" class="co.com.inversionesxyz.dao.impl.EncuestaDAO">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-	<!--<bean id="analistaDAO" class="co.com.inversionesxyz.dao.impl.AnalistaDAO">
+	<bean id="analistaDAO" class="co.com.inversionesxyz.dao.impl.AnalistaDAO">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	<bean id="productoDAO" class="co.com.inversionesxyz.dao.impl.ProductoDAO">
@@ -57,17 +57,14 @@
 	</bean>
 	<bean id="sucursalDAO" class="co.com.inversionesxyz.dao.impl.SucursalDAO">
 		<property name="sessionFactory" ref="sessionFactory"></property>
-	</bean>-->
-
-	<!-- Beans Business Logic 
-	<bean id="SolicitudID" class="co.com.inversionesxyz.bl.impl.SolicitudBL">
-		<property name="SolicitudDAO" ref="SolicitudDAO"></property>
 	</bean>
-	-->
-	
-	
-	
-	<bean id="encuestaService" class="co.com.inversionesxyz.bl.impl.EncuestaService">
+
+	<!-- Beans Business Logic --> 
+	<bean id="solicitudService" class="co.com.inversionesxyz.bussinesslogic.impl.SolicitudService">
+		<property name="solicitudDAO" ref="solicitudDAO"></property>
+		<property name="analistaDAO" ref="analistaDAO"></property>
+	</bean>
+	<bean id="encuestaService" class="co.com.inversionesxyz.bussinesslogic.impl.EncuestaService">
 		<property name="encuestaDAO" ref="encuestaDAO"></property>
 	</bean>
 	
