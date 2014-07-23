@@ -64,9 +64,9 @@ public class SolicitudServiceTest {
 	
 	@Test
 	public void testDebeObtenerEncuesta() {
-		when(dao.consultar("123")).thenReturn(solicitud);		
-		service.consultarSolicitud("123");
-		verify(dao).consultar("123");
+		when(dao.consultar(123)).thenReturn(solicitud);		
+		service.consultarSolicitud(123);
+		verify(dao).consultar(123);
 	}
 
 }

@@ -73,7 +73,7 @@ public abstract class AbstractDAO<T> {
 			throw new BasicDBOperationException(e);
 		}finally{
 			close();
-		}	
+		}
 	}
 	
 	/**
@@ -149,6 +149,26 @@ public abstract class AbstractDAO<T> {
 	}
 	
 	/**
+	 * Permite ejecutar una sentencia SQL
+	 * @param query Sentencia a ejecutar
+	 */
+	protected Object executeSQLQuery(String query){
+		Transaction transaction = null;
+		Object o=null;
+		try{
+			session = getCurrentSession();
+			transaction = session.beginTransaction();
+			o = session.createSQLQuery(query);
+			transaction.commit();
+			return o;
+		}catch(Exception e){
+			throw new BasicDBOperationException(e);
+		}finally{
+			close();
+		}
+	}
+	
+	/**
 	 * Permite actualizar el sessionFactory. Es imperativa su implementacion para las dependecias de Spring
 	 * @param sessionFactory sessionFactory a actualizar
 	 */
@@ -156,4 +176,5 @@ public abstract class AbstractDAO<T> {
 	    this.sessionFactory = sessionFactory;
 	}
 
+	
 }
