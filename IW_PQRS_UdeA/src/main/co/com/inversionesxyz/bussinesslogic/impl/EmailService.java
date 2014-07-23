@@ -11,6 +11,7 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import co.com.inversionesxyz.bussinesslogic.IEmailService;
 import co.com.inversionesxyz.exception.EmailException;
 
 /**
@@ -18,11 +19,11 @@ import co.com.inversionesxyz.exception.EmailException;
  * @author Jennifer Perez
  * @author Ricardo Patino
  */
-public class EmailService {
+public class EmailService implements IEmailService{
 
 	public void enviar(String receiver, String subject, String body) throws EmailException {
 		try {
-			ResourceBundle configuracion = ResourceBundle.getBundle("email-configuration");
+			ResourceBundle configuracion = ResourceBundle.getBundle("email-configuracion");
 			Properties properties = System.getProperties();
 			properties.setProperty(
 					"mail.smtp.host",
@@ -43,7 +44,6 @@ public class EmailService {
 			Session session = Session.getDefaultInstance(properties);
 
 			MimeMessage message = new MimeMessage(session);
-			System.out.println(configuracion.getString("mail.smtp.user"));
 			message.setFrom(new InternetAddress(configuracion
 					.getString("mail.smtp.user")));
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(

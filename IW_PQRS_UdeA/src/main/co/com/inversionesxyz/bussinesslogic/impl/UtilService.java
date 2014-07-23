@@ -2,8 +2,6 @@ package co.com.inversionesxyz.bussinesslogic.impl;
 
 import java.text.MessageFormat;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import co.com.inversionesxyz.bussinesslogic.IEmailService;
 import co.com.inversionesxyz.bussinesslogic.IUtilService;
 import co.com.inversionesxyz.dto.Solicitud;
@@ -19,8 +17,7 @@ import co.com.inversionesxyz.exception.EmailException;
  */
 public class UtilService implements IUtilService {
 
-	@Autowired
-	IEmailService emailBL;
+	IEmailService emailBL = new EmailService();
 
 	@Override
 	public void notificarSolicitudACliente(int idSolicitud,
@@ -66,9 +63,8 @@ public class UtilService implements IUtilService {
 
 		String subjectSolicitudCancelada = "Solicitud Cancelada";
 		String body = MessageFormat
-				.format("Apreciado cliente, la solicitud con ID {1} ha sido cancelada por el siguiente motivo: {2}",
+				.format("Apreciado cliente, la solicitud con ID {0} ha sido cancelada por el siguiente motivo: {1}",
 						idSolicitud, motivo);
-
 		emailBL.enviar(emailCliente, subjectSolicitudCancelada, body);
 	}
 }
