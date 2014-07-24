@@ -28,8 +28,9 @@ public interface ISolicitudDAO {
 	/**
 	 * Permite insertar una solicitud en la base de datos
 	 * @param solicitud solicitud a insertar
+	 * @return int codigo de la solicitud almacenada
 	 */
-	public void insertar(Solicitud solicitud);
+	public int insertar(Solicitud solicitud);
 	
 	/**
 	 * Permite actualizar una solicitud en la base de datos

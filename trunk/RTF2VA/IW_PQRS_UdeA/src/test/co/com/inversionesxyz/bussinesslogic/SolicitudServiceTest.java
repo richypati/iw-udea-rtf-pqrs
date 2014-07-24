@@ -132,18 +132,16 @@ public class SolicitudServiceTest {
 		assertTrue(solicitudes.isEmpty());
 	}
 
-//	@Test
-//	public void testCancelarSolicitud() throws EmailException {
-//		
-//		service.CancelarSolicitud(solicitud.getId(),
-//				solicitud.getEmailCliente(), "Porque me da la gana");
-//		assertEquals("CANCELADO", solicitud.getEstado());
-//	}
-
-//	@Test 
-//	public void testActualizarSolicitudNula() {
-//		solicitud = null;
-//		service.ActualizarSolicitud(solicitud);
-//	}
+	@Test
+	public void testInsertar(){
+		service.guardarSolicitud(solicitud);
+		verify(solicitudDAO).insertar(solicitud);
+	}
+	
+	@Test
+	public void testActualizar(){
+		service.ActualizarSolicitud(solicitud);
+		verify(solicitudDAO).insertar(solicitud);
+	}
 
 }
