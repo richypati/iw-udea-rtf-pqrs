@@ -16,8 +16,9 @@ public interface ISolicitudService {
 	/**
 	 * Permite almacenar una solicitud
 	 * @param solicitud solicitud a almacenar
+	 * @return int codigo de la solicitud almacenada
 	 */
-	public void guardarSolicitud(Solicitud solicitud);
+	public int guardarSolicitud(Solicitud solicitud);
 
 	/**
 	 * Permite consultar una solicitud por su identificador

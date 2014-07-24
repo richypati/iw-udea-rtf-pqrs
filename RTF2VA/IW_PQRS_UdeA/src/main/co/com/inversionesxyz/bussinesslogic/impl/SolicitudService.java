@@ -30,11 +30,11 @@ public class SolicitudService implements ISolicitudService {
 	IUtilService utilService = new UtilService();
 
 	@Override
-	public void guardarSolicitud(Solicitud solicitud) {
+	public int guardarSolicitud(Solicitud solicitud) {
 		Calendar calendar = Calendar.getInstance();
 		solicitud.setEstado("ABIERTO");
 		solicitud.setFechaCreacion(calendar.getTime());
-		solicitudDAO.insertar(solicitud);
+		return solicitudDAO.insertar(solicitud);
 	}
 
 	@Override

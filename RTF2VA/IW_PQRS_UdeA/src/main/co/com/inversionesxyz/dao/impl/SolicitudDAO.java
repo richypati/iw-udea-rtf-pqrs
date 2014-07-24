@@ -3,6 +3,9 @@ package co.com.inversionesxyz.dao.impl;
 import java.text.MessageFormat;
 import java.util.List;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import co.com.inversionesxyz.dao.ISolicitudDAO;
 import co.com.inversionesxyz.dto.Solicitud;
 import co.com.inversionesxyz.exception.BasicDBOperationException;
@@ -34,13 +37,24 @@ public class SolicitudDAO extends AbstractDAO<Solicitud> implements
 	}
 
 	@Override
-	public void insertar(Solicitud solicitud) {
+	public int insertar(Solicitud solicitud) {
+		Transaction transaction = null;
+		Session session = null;
 		try {
-			insert(solicitud);
+			session = getCurrentSession();
+			transaction = session.beginTransaction();
+			
+			session.save(solicitud);
+			
+			transaction.commit();
+			session.flush();
+			return solicitud.getId();
 		} catch (Exception e) {
 			throw new BasicDBOperationException(MessageFormat.format(
 					"No fue posible insertar la solicitud del cliente {0}",
 					solicitud.getEmailCliente()), e.getCause());
+		}finally{
+			session.close();
 		}
 	}
 
