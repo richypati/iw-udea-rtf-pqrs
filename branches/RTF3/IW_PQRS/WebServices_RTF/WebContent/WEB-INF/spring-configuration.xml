@@ -68,11 +68,10 @@
 		<property name="encuestaDAO" ref="encuestaDAO"></property>
 	</bean>
 	
-	<!-- Beans WebServices 
-	<bean id="solicitudWebService" class="co.com.inversionesxyz.webservices">
+	<!-- Beans WebServices -->
+	<bean id="solicitudWebService" class="co.com.inversionesxyz.webservices.SolicitudWebService">
 		<property name="solicitudService" ref="solicitudService"></property>
 	</bean>
-	-->
 	
 	<context:component-scan base-package="co.com.inversionesxyz"></context:component-scan>
 </beans>
