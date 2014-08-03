@@ -7,7 +7,7 @@
             <column name="codigo" length="100" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="sucursal" class="co.com.inversionesxyz.dto.Sucursal" fetch="select">
+        <many-to-one name="sucursal" class="co.com.inversionesxyz.dto.Sucursal" fetch="join">
             <column name="SUCURSAL_codigo" length="100" not-null="true" />
         </many-to-one>
         <property name="nombre" type="string">

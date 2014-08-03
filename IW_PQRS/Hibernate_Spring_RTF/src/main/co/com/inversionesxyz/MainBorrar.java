@@ -15,7 +15,7 @@ public class MainBorrar {
 		ISolicitudService service = (ISolicitudService) context
 				.getBean("solicitudService");
 
-		int idSolicitud = 1;
+		int idSolicitud = 3;
 		Solicitud solicitud = null;
 		try {
 			solicitud = service.consultarSolicitud(idSolicitud);
