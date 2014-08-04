@@ -45,4 +45,11 @@ public interface ISolicitudDAO {
 	 */
 	void actualizarEstado(int idSolicitud, String estado);
 	
+	/**
+	 * Permite realizar la consulta de las solicitudes hechas a una sucursal
+	 * @param codigoSucursal
+	 * @return List<Solicitud>
+	 */
+	public List<Solicitud> consultarSolicitudPorSucursal(String codigoSucursal);
+	
 }

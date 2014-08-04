@@ -63,4 +63,12 @@ public interface ISolicitudService {
 	 * @param solicitud Solicitud a ser actualizada en la base de datos
 	 */
 	public void ActualizarSolicitud(Solicitud solicitud);
+	
+	/**
+	 * Permite consultar las solicitudes hechas a una sucursal
+	 * @param codigoSucursal codigo de la sucursal
+	 * @return List<Solicitud>
+	 */
+	
+	public List<Solicitud> consultarPorSucursal(String codigoSucursal);
 }

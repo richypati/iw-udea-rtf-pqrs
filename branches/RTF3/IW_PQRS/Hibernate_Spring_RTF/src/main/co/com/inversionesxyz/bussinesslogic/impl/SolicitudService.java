@@ -77,6 +77,12 @@ public class SolicitudService implements ISolicitudService {
 		solicitudDAO.actualizar(solicitud);
 	}
 	
+	@Override
+	public List<Solicitud> consultarPorSucursal(String codigoSucursal) {
+		solicitudDAO.consultarSolicitudPorSucursal(codigoSucursal);
+		return null;
+	}
+	
 	public void setSolicitudDAO(ISolicitudDAO solicitudDAO) {
 		this.solicitudDAO = solicitudDAO;
 	}
@@ -84,5 +90,7 @@ public class SolicitudService implements ISolicitudService {
 	public void setAnalistaDAO(IAnalistaDAO analistaDAO) {
 		this.analistaDAO = analistaDAO;
 	}
+
+	
 
 }
