@@ -52,10 +52,9 @@ public class SolicitudService implements ISolicitudService {
 	}
 
 	@Override
-	public void ResponderSolicitud(Solicitud solicitud, String respuesta) throws EmailException {
+	public void ResponderSolicitud(Solicitud solicitud) throws EmailException {
 		Calendar calendar = Calendar.getInstance();
 		solicitud.setEstado("RESUELTO");
-		solicitud.setRespuestaSolicitud(respuesta);
 		solicitud.setFechaAtencion(calendar.getTime());
 		solicitudDAO.actualizar(solicitud);
 		utilService.notificarRespuestaALaSolicitud(solicitud, solicitud.getEmailCliente());

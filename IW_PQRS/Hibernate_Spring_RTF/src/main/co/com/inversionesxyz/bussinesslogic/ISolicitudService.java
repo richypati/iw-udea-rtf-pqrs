@@ -37,11 +37,10 @@ public interface ISolicitudService {
 
 	/**
 	 * Permite responder una solicitud 
-	 * @param Solicitud Solicitud a responder
-	 * @param respuesta respuesta de la solicitud
+	 * @param Solicitud informacion de la solicitud con la nueva respuesta
 	 * @throws EmailException 
 	 */
-	public void ResponderSolicitud(Solicitud idSolicitud, String respuesta) throws EmailException;
+	public void ResponderSolicitud(Solicitud solicitud) throws EmailException;
 
 	/**
 	 * Permite obtener una lista de solicitudes por su estado 
