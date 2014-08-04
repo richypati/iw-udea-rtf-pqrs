@@ -12,6 +12,8 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -28,6 +30,8 @@ import co.com.inversionesxyz.exception.EmailException;
 @Path("solicitud")
 @Component
 public class SolicitudWebService {
+	
+	private static final Log log = LogFactory.getLog(SolicitudWebService.class);
 	
 	@Autowired
 	private ISolicitudService solicitudService;
@@ -46,6 +50,7 @@ public class SolicitudWebService {
 			return Response.ok(solicitudService.consultarSolicitud(id)).build();
 		}catch(IllegalArgumentException iae){
 			iae.printStackTrace();
+			log.error(iae.getStackTrace());
 			throw new WebApplicationException(Response.Status.NOT_FOUND);
 		}
 	}
@@ -63,6 +68,7 @@ public class SolicitudWebService {
 		try{
 			return Response.ok(solicitudService.guardarSolicitud(solicitud)).build();
 		}catch(IllegalStateException e){
+			log.error(e.getStackTrace());
 			throw new WebApplicationException(Response.Status.NO_CONTENT);
 		}
 		
@@ -92,6 +98,7 @@ public class SolicitudWebService {
 			solicitudService.ResponderSolicitud(solicitud);
 			return Response.ok().build();
 		} catch (IllegalStateException | EmailException e) {
+			log.error(e.getStackTrace());
 			throw new WebApplicationException(Response.Status.NO_CONTENT);
 		}
 	}
