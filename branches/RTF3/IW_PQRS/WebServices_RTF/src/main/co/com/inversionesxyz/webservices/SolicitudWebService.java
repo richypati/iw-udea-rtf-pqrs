@@ -1,6 +1,5 @@
 package co.com.inversionesxyz.webservices;
 
-import java.text.MessageFormat;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -18,7 +17,6 @@ import org.springframework.stereotype.Component;
 
 import co.com.inversionesxyz.bussinesslogic.ISolicitudService;
 import co.com.inversionesxyz.dto.Solicitud;
-import co.com.inversionesxyz.exception.BasicDBOperationException;
 import co.com.inversionesxyz.exception.EmailException;
 
 /**
@@ -37,14 +35,15 @@ public class SolicitudWebService {
 	/**
 	 * Permite consultar una solicitud por su id
 	 * @param id codigo de la solicitud
-	 * @return Solicitud identificada por id
+	 * @return Response respuesta con la solicitud identificada por id y un codigo que indica si la peticion fue fallida o no
+	 * @throws WebApplicationException cuando no es posible consultar la solicitud
 	 */	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/consultarSolicitud/{id}")
-	public Solicitud consultarSolicitud(@PathParam("id") int id){
+	public Response consultarSolicitud(@PathParam("id") int id){
 		try{
-			return solicitudService.consultarSolicitud(id);
+			return Response.ok(solicitudService.consultarSolicitud(id)).build();
 		}catch(IllegalArgumentException iae){
 			iae.printStackTrace();
 			throw new WebApplicationException(Response.Status.NOT_FOUND);
@@ -54,12 +53,19 @@ public class SolicitudWebService {
 	/**
 	 * Permite insertar una nueva solicitud
 	 * @param solicitud nueva solicitud
+	 * @return Response respuesta con un codigo que indica si la peticion fue fallida o no
+	 * @throws WebApplicationException cuando no es posible insertar la solicitud
 	 */	
 	@POST
 	@Path("/realizarSolicitud")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void realizarSolicitud(Solicitud solicitud){
-		solicitudService.guardarSolicitud(solicitud);
+	public Response realizarSolicitud(Solicitud solicitud){
+		try{
+			return Response.ok(solicitudService.guardarSolicitud(solicitud)).build();
+		}catch(IllegalStateException e){
+			throw new WebApplicationException(Response.Status.NO_CONTENT);
+		}
+		
 	}
 	
 	@GET
@@ -69,19 +75,25 @@ public class SolicitudWebService {
 		return solicitudService.consultarPorSucursal(codigoSucursal);
 	}
 	
+	/**
+	 * Permite insertar la respuesta a una solicitud
+	 * @param id identificador de la solicitud
+	 * @param respuesta nueva respuesta a la solicitud
+	 * @return Response respuesta con un codigo que indica si la peticion fue fallida o no
+	 * @throws WebApplicationException | EmailException cuando no es posible insertar la solicitud
+	 */	
 	@POST
-	@Consumes(MediaType.TEXT_PLAIN)
+	@Consumes({MediaType.TEXT_PLAIN, MediaType.TEXT_PLAIN})
 	@Path("/darRespuestaASolicitud/{id}/{respuesta}")
-	public String darRespuestaASolicitud(@PathParam("id")int id, @PathParam("respuesta") String respuesta){
-		Solicitud solicitud = solicitudService.consultarSolicitud(id);
+	public Response darRespuestaASolicitud(@PathParam("id")int id, @PathParam("respuesta") String respuesta){
 		try {
-			solicitudService.ResponderSolicitud(solicitud, respuesta);
-		} catch (EmailException e) {
-			throw new BasicDBOperationException(MessageFormat.format(
-					"No fue posible dar respuesta a la solicitud: {0}", id),
-					e.getCause());
+			Solicitud solicitud = solicitudService.consultarSolicitud(id);
+			solicitud.setRespuestaSolicitud(respuesta);
+			solicitudService.ResponderSolicitud(solicitud);
+			return Response.ok().build();
+		} catch (IllegalStateException | EmailException e) {
+			throw new WebApplicationException(Response.Status.NO_CONTENT);
 		}
-		return "Se ha dado respuesta a la solicitud";
 	}
 	
 	public void setSolicitudService(ISolicitudService solicitudService) {
