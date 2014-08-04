@@ -47,8 +47,8 @@ public interface ISolicitudDAO {
 	
 	/**
 	 * Permite realizar la consulta de las solicitudes hechas a una sucursal
-	 * @param codigoSucursal
-	 * @return List<Solicitud>
+	 * @param codigoSucursal codigo de la sucursal que se va a consultar
+	 * @return List<Solicitud> lista de solicitudes que tienen asignados productos de la sucursal con codigo @param
 	 */
 	public List<Solicitud> consultarSolicitudPorSucursal(String codigoSucursal);
 	

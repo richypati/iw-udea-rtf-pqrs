@@ -9,6 +9,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -74,11 +75,25 @@ public class SolicitudWebService {
 		
 	}
 	
+	/**
+	 * Permite consultar una lista de solicitudes por sucursal
+	 * @param codigoSucursal codigo de la sucursal por la que se consulta
+	 * @return Response respuesta con la lista de solicitudes que tienen asignada la sucursal @param y un codigo que indica si la peticion fue fallida o no
+	 * @throws WebApplicationException cuando no es posible consultar las solicitudes
+	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/consultarPorSucursal/{codigoSucursal}")
-	public List<Solicitud> consultarPorSucursal(@PathParam("codigoSucursal") String codigoSucursal){
-		return solicitudService.consultarPorSucursal(codigoSucursal);
+	public Response consultarPorSucursal(@PathParam("codigoSucursal") String codigoSucursal){
+		try{
+			List<Solicitud> listaDeSolicitudes = solicitudService.consultarPorSucursal(codigoSucursal);
+			GenericEntity<List<Solicitud>> entity = new GenericEntity<List<Solicitud>>(listaDeSolicitudes){};
+			return Response.ok(entity).build();
+		}catch(IllegalArgumentException iae){
+			log.error(iae.getStackTrace());
+			iae.printStackTrace();
+			throw new WebApplicationException(Response.Status.NOT_FOUND);
+		}
 	}
 	
 	/**
@@ -86,7 +101,7 @@ public class SolicitudWebService {
 	 * @param id identificador de la solicitud
 	 * @param respuesta nueva respuesta a la solicitud
 	 * @return Response respuesta con un codigo que indica si la peticion fue fallida o no
-	 * @throws WebApplicationException | EmailException cuando no es posible insertar la solicitud
+	 * @throws WebApplicationException | EmailException cuando no es posible responder la solicitud
 	 */	
 	@POST
 	@Consumes({MediaType.TEXT_PLAIN, MediaType.TEXT_PLAIN})

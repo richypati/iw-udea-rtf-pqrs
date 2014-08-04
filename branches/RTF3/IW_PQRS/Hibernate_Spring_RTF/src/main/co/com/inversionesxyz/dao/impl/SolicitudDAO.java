@@ -42,10 +42,8 @@ public class SolicitudDAO extends AbstractDAO<Solicitud> implements
 		Session session = null;
 		try {
 			session = getCurrentSession();
-			transaction = session.beginTransaction();
-			
-			session.save(solicitud);
-			
+			transaction = session.beginTransaction();			
+			session.save(solicitud);			
 			transaction.commit();
 			session.flush();
 			return solicitud.getId();
@@ -104,18 +102,21 @@ public class SolicitudDAO extends AbstractDAO<Solicitud> implements
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Solicitud> consultarSolicitudPorSucursal(String codigoSucursal) {
+		Session session = null;
 		List<Solicitud> solicitudes=null;
 		try{
+			session = getCurrentSession();
 			String query = MessageFormat.format(
-					"SELECT s.* FROM SOLICITUD AS s, PRODUCTO AS p WHERE s.PRODUCTO_codigo=p.codigo AND p.SUCURSAL_codigo='{0}'", codigoSucursal);
-			query = "SELECT s.* FROM SOLICITUD AS s, PRODUCTO AS p WHERE s.PRODUCTO_codigo=p.codigo AND p.SUCURSAL_codigo='1'";
-			System.out.println(query);
-			solicitudes = (List<Solicitud>)executeSQLQuery(query);
+					"SELECT s.* FROM SOLICITUD AS s, PRODUCTO AS p WHERE s.PRODUCTO_codigo=p.codigo AND p.SUCURSAL_codigo={0}", codigoSucursal);
+			solicitudes = (List<Solicitud>)session.createSQLQuery(query).list();
 			return solicitudes;
 		}catch (Exception e) {
+			e.printStackTrace();
 			throw new BasicDBOperationException(MessageFormat.format(
 					"No fue posible encontrar las solicitudes realizadas a la sucursal con codigo: ", codigoSucursal),
 					e.getCause());
+		}finally{
+			close();
 		}
 	}
 }
