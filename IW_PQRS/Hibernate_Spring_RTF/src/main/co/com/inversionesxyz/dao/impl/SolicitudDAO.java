@@ -114,7 +114,7 @@ public class SolicitudDAO extends AbstractDAO<Solicitud> implements
 			return solicitudes;
 		}catch (Exception e) {
 			throw new BasicDBOperationException(MessageFormat.format(
-					"No fue posible encontrar las solicitudes realizadas a la sucursal con código: ", codigoSucursal),
+					"No fue posible encontrar las solicitudes realizadas a la sucursal con codigo: ", codigoSucursal),
 					e.getCause());
 		}
 	}
