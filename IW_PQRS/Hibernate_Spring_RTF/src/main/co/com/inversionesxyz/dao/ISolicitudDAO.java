@@ -52,4 +52,11 @@ public interface ISolicitudDAO {
 	 */
 	public List<Solicitud> consultarSolicitudPorSucursal(String codigoSucursal);
 	
+	/**
+	 * Permite realizar la consulta de las solcitiudes en cierto estado
+	 * @param estado estado de las solicitudes a consultar
+	 * @return lista de solicitudes en cierto estado
+	 */
+	public List<Solicitud> consultarSolicitudPorEstado(String estado);
+	
 }
