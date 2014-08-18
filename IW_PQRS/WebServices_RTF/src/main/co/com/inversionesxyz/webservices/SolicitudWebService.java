@@ -145,7 +145,7 @@ public class SolicitudWebService {
 	 * @return Response respuesta con un codigo que indica si la peticion fue fallida o no
 	 */
 	@GET
-	@Path("/asignar/{idSolicitud}/{dniAnalista}")
+	@Path("/asignarSolicitudAAnalista/{idSolicitud}/{dniAnalista}")
 	public Response asignarSolicitud(@PathParam("idSolicitud") int idSolicitud, @PathParam("dniAnalista") String dniAnalista){
 		try {
 			solicitudService.DelegarSolicitud(idSolicitud, dniAnalista);
@@ -156,6 +156,20 @@ public class SolicitudWebService {
 		}
 	}
 	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/obtenerSolicitudesPorAnalista/{dni}")
+	public Response obtenerSolicitudesPorAnalista(@PathParam("dni") String dni){
+		try{
+			List<Solicitud> listaDeSolicitudes = solicitudService.consultarSolicitudesPorAnalista(dni);
+			GenericEntity<List<Solicitud>> entity = new GenericEntity<List<Solicitud>>(listaDeSolicitudes){};
+			return Response.ok(entity).build();
+		}catch(IllegalArgumentException iae){
+			log.error(iae.getStackTrace());
+			iae.printStackTrace();
+			throw new WebApplicationException(Response.Status.NOT_FOUND);
+		}
+	}
 	
 	public void setSolicitudService(ISolicitudService solicitudService) {
 		this.solicitudService = solicitudService;
