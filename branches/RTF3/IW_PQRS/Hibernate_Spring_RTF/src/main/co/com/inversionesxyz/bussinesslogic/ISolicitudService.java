@@ -73,7 +73,14 @@ public interface ISolicitudService {
 	/**
 	 * Permite buscar todas las solicitud con cierto estado
 	 * @param estado Estado de las solicitudes a consultar
-	 * @return Lista de las solicitudes con tal estado
+	 * @return List<Solicitud> Lista de las solicitudes con tal estado
 	 */
 	public List<Solicitud> consultarPorEstado(String estado);
+	
+	/**
+	 * Permite consultar todas las solicitudes asignadas a un analista 
+	 * @param dni DNI del analista 
+	 * @return List<Solicitud> Lista de las solicitudes asignadas al analista con DNI tal
+	 */
+	public List<Solicitud> consultarSolicitudesPorAnalista(String dni);
 }

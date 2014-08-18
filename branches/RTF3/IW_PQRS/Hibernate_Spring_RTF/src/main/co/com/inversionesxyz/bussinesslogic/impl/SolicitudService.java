@@ -94,6 +94,11 @@ public class SolicitudService implements ISolicitudService {
 		this.analistaDAO = analistaDAO;
 	}
 
+	@Override
+	public List<Solicitud> consultarSolicitudesPorAnalista(String dni) {
+		return solicitudDAO.consultarSolicitudesPorAnalista(dni);
+	}
+
 	
 
 }

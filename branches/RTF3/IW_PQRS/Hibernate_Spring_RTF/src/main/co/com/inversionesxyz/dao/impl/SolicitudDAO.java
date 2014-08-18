@@ -138,5 +138,25 @@ public class SolicitudDAO extends AbstractDAO<Solicitud> implements
 		}finally{
 			close();
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Solicitud> consultarSolicitudesPorAnalista(String dni) {
+		Session session = null;
+		List<Solicitud> solicitudes = null;
+		try{
+			session = getCurrentSession();
+			String query = "SELECT * FROM SOLICITUD WHERE INFORMACION_ANALISTA_dni ='" + dni +"'";
+			solicitudes = (List<Solicitud>)session.createSQLQuery(query).list();
+			return solicitudes;
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new BasicDBOperationException(MessageFormat.format(
+					"No fue posible encontrar las solicitudes asignadas al analista con DNI: ", dni),
+					e.getCause());
+		}finally{
+			close();
+		}
 	}	
 }

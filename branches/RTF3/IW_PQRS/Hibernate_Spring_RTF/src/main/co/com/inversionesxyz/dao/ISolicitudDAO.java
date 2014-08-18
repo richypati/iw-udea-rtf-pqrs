@@ -59,4 +59,11 @@ public interface ISolicitudDAO {
 	 */
 	public List<Solicitud> consultarSolicitudPorEstado(String estado);
 	
+	/**
+	 * Permite realizar la consulta de las solicitudes asignadas a cierto analista
+	 * @param dni DNI del analista
+	 * @return List<Solicitud> Lista de solicitudes asignadas a cierto analista
+	 */
+	public List<Solicitud> consultarSolicitudesPorAnalista(String dni);
+	
 }
