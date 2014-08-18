@@ -119,4 +119,24 @@ public class SolicitudDAO extends AbstractDAO<Solicitud> implements
 			close();
 		}
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Solicitud> consultarSolicitudPorEstado(String estado) {
+		Session session = null;
+		List<Solicitud> solicitudes = null;
+		try{
+			session = getCurrentSession();
+			String query = "SELECT * FROM SOLICITUD WHERE estado ='" + estado +"'";
+			solicitudes = (List<Solicitud>)session.createSQLQuery(query).list();
+			return solicitudes;
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new BasicDBOperationException(MessageFormat.format(
+					"No fue posible encontrar las solicitudes con estado: ", estado),
+					e.getCause());
+		}finally{
+			close();
+		}
+	}	
 }

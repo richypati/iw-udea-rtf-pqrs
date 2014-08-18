@@ -118,6 +118,45 @@ public class SolicitudWebService {
 		}
 	}
 	
+	/**
+	 * Permite realizar la busqueda de las solicitudes con cierto estado
+	 * @param estado estado de las solicitudes a buscar
+	 * @return Response respuesta con un codigo que indica si la peticion fue fallida o no
+	 */
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/consultarPorEstado/{estado}")
+	public Response consultarPorEstado(@PathParam("estado") String estado){
+		try{
+			List<Solicitud> listaDeSolicitudes = solicitudService.consultarPorEstado(estado);
+			GenericEntity<List<Solicitud>> entity = new GenericEntity<List<Solicitud>>(listaDeSolicitudes){};
+			return Response.ok(entity).build();
+		}catch(IllegalArgumentException iae){
+			log.error(iae.getStackTrace());
+			iae.printStackTrace();
+			throw new WebApplicationException(Response.Status.NOT_FOUND);
+		}
+	}
+	
+	/**
+	 * Permite relizar asignar una solicitud a un analista
+	 * @param idSolicitud ID de la solicitud a asignar
+	 * @param dniAnalista DNI del analista a quien se va a asignar la solicitud
+	 * @return Response respuesta con un codigo que indica si la peticion fue fallida o no
+	 */
+	@GET
+	@Path("/asignar/{idSolicitud}/{dniAnalista}")
+	public Response asignarSolicitud(@PathParam("idSolicitud") int idSolicitud, @PathParam("dniAnalista") String dniAnalista){
+		try {
+			solicitudService.DelegarSolicitud(idSolicitud, dniAnalista);
+			return Response.ok().build();
+		} catch (IllegalStateException | EmailException e) {
+			log.error(e.getStackTrace());
+			throw new WebApplicationException(Response.Status.NO_CONTENT);
+		}
+	}
+	
+	
 	public void setSolicitudService(ISolicitudService solicitudService) {
 		this.solicitudService = solicitudService;
 	}

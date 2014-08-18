@@ -68,6 +68,12 @@ public interface ISolicitudService {
 	 * @param codigoSucursal codigo de la sucursal
 	 * @return List<Solicitud>
 	 */
-	
 	public List<Solicitud> consultarPorSucursal(String codigoSucursal);
+	
+	/**
+	 * Permite buscar todas las solicitud con cierto estado
+	 * @param estado Estado de las solicitudes a consultar
+	 * @return Lista de las solicitudes con tal estado
+	 */
+	public List<Solicitud> consultarPorEstado(String estado);
 }

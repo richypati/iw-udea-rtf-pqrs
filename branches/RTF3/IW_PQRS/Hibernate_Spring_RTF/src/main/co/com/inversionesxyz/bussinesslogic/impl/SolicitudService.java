@@ -81,6 +81,11 @@ public class SolicitudService implements ISolicitudService {
 		return solicitudDAO.consultarSolicitudPorSucursal(codigoSucursal);
 	}
 	
+	@Override
+	public List<Solicitud> consultarPorEstado(String estado){
+		return solicitudDAO.consultarSolicitudPorEstado(estado);
+	}
+	
 	public void setSolicitudDAO(ISolicitudDAO solicitudDAO) {
 		this.solicitudDAO = solicitudDAO;
 	}

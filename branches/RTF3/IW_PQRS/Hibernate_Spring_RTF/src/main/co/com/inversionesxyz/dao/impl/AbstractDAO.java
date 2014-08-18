@@ -77,7 +77,7 @@ public abstract class AbstractDAO<T> {
 	}
 	
 	/**
-	 * Permite consultar una coleccion de objetos que cumplan con un sierto criterio de busqueda
+	 * Permite consultar una coleccion de objetos que cumplan con un cierto criterio de busqueda
 	 * @param field criterio de busqueda
 	 * @return List<T> lista de objetos que cumplen con el criterio de busqueda
 	 */
