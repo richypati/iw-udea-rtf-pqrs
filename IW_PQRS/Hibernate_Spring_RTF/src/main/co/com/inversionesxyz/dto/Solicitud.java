@@ -22,6 +22,8 @@ public class Solicitud implements java.io.Serializable {
 	private String nombreCliente;
 	private String emailCliente;
 	private String respuestaSolicitud;
+	
+	public Solicitud(){};
 
 	public int getId() {
 		return this.id;

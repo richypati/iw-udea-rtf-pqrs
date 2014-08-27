@@ -2,6 +2,7 @@ package co.com.inversionesxyz.dao;
 
 import java.util.List;
 
+import co.com.inversionesxyz.dto.InformacionAnalista;
 import co.com.inversionesxyz.dto.Solicitud;
 
 /**
