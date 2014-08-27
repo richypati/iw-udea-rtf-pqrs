@@ -1,33 +1,34 @@
 package co.com.inversionesxyz;
 
+import java.util.List;
+
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import co.com.inversionesxyz.bussinesslogic.ISolicitudService;
-import co.com.inversionesxyz.dto.Solicitud;
+import co.com.inversionesxyz.bussinesslogic.IProductoService;
+import co.com.inversionesxyz.dto.Producto;
 import co.com.inversionesxyz.exception.BasicDBOperationException;
+
+import com.google.gson.Gson;
 
 public class MainBorrar {
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context = new ClassPathXmlApplicationContext(
 				new String[] { "spring-configuration.xml" });
-		ISolicitudService service = (ISolicitudService) context
-				.getBean("solicitudService");
+		IProductoService service = (IProductoService) context
+				.getBean("productoService");
 
-		int idSolicitud = 3;
-		Solicitud solicitud = null;
 		try {
-			solicitud = service.consultarSolicitud(idSolicitud);
+			Gson gson = new Gson();
+			
+
+			List<Producto> productos = (List<Producto>) service.consultarProductos();
+			System.out.println(gson.toJson(productos));
+			
+			
 		} catch (BasicDBOperationException e) {
 			e.printStackTrace();
-		}
-
-		if (solicitud == null) {
-			System.out.println("La solicitud es nula");
-		} else {
-			System.out.println("Descripcion Solicitud: "
-					+ solicitud.getDescripcion());
 		}
 
 		context.close();

@@ -5,8 +5,11 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Example;
+import org.hibernate.criterion.Restrictions;
 
 import co.com.inversionesxyz.dao.ISolicitudDAO;
+import co.com.inversionesxyz.dto.InformacionAnalista;
 import co.com.inversionesxyz.dto.Solicitud;
 import co.com.inversionesxyz.exception.BasicDBOperationException;
 
@@ -42,8 +45,8 @@ public class SolicitudDAO extends AbstractDAO<Solicitud> implements
 		Session session = null;
 		try {
 			session = getCurrentSession();
-			transaction = session.beginTransaction();			
-			session.save(solicitud);			
+			transaction = session.beginTransaction();
+			session.save(solicitud);
 			transaction.commit();
 			session.flush();
 			return solicitud.getId();
@@ -51,7 +54,7 @@ public class SolicitudDAO extends AbstractDAO<Solicitud> implements
 			throw new BasicDBOperationException(MessageFormat.format(
 					"No fue posible insertar la solicitud del cliente {0}",
 					solicitud.getEmailCliente()), e.getCause());
-		}finally{
+		} finally {
 			session.close();
 		}
 	}
@@ -103,19 +106,22 @@ public class SolicitudDAO extends AbstractDAO<Solicitud> implements
 	@Override
 	public List<Solicitud> consultarSolicitudPorSucursal(String codigoSucursal) {
 		Session session = null;
-		List<Solicitud> solicitudes=null;
-		try{
+		List<Solicitud> solicitudes = null;
+		try {
 			session = getCurrentSession();
-			String query = MessageFormat.format(
-					"SELECT s.* FROM SOLICITUD AS s, PRODUCTO AS p WHERE s.PRODUCTO_codigo=p.codigo AND p.SUCURSAL_codigo={0}", codigoSucursal);
-			solicitudes = (List<Solicitud>)session.createSQLQuery(query).list();
+			String query = MessageFormat
+					.format("SELECT s.* FROM SOLICITUD AS s, PRODUCTO AS p WHERE s.PRODUCTO_codigo=p.codigo AND p.SUCURSAL_codigo={0}",
+							codigoSucursal);
+			solicitudes = (List<Solicitud>) session.createSQLQuery(query)
+					.list();
 			return solicitudes;
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-			throw new BasicDBOperationException(MessageFormat.format(
-					"No fue posible encontrar las solicitudes realizadas a la sucursal con codigo: ", codigoSucursal),
-					e.getCause());
-		}finally{
+			throw new BasicDBOperationException(
+					MessageFormat.format(
+							"No fue posible encontrar las solicitudes realizadas a la sucursal con codigo: ",
+							codigoSucursal), e.getCause());
+		} finally {
 			close();
 		}
 	}
@@ -125,17 +131,19 @@ public class SolicitudDAO extends AbstractDAO<Solicitud> implements
 	public List<Solicitud> consultarSolicitudPorEstado(String estado) {
 		Session session = null;
 		List<Solicitud> solicitudes = null;
-		try{
+		try {
 			session = getCurrentSession();
-			String query = "SELECT * FROM SOLICITUD WHERE estado ='" + estado +"'";
-			solicitudes = (List<Solicitud>)session.createSQLQuery(query).list();
+			Solicitud solicitud = new Solicitud();
+			solicitud.setEstado(estado);
+			solicitudes = session.createCriteria(Solicitud.class)
+					.add(Example.create(solicitud)).list();
 			return solicitudes;
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			throw new BasicDBOperationException(MessageFormat.format(
-					"No fue posible encontrar las solicitudes con estado: ", estado),
-					e.getCause());
-		}finally{
+					"No fue posible encontrar las solicitudes con estado: ",
+					estado), e.getCause());
+		} finally {
 			close();
 		}
 	}
@@ -145,18 +153,22 @@ public class SolicitudDAO extends AbstractDAO<Solicitud> implements
 	public List<Solicitud> consultarSolicitudesPorAnalista(String dni) {
 		Session session = null;
 		List<Solicitud> solicitudes = null;
-		try{
+		try {
 			session = getCurrentSession();
-			String query = "SELECT * FROM SOLICITUD WHERE INFORMACION_ANALISTA_dni ='" + dni +"'";
-			solicitudes = (List<Solicitud>)session.createSQLQuery(query).list();
+			solicitudes = session
+					.createCriteria(Solicitud.class)
+					.createAlias("informacionAnalista", "iA")
+					.add(Restrictions.eq("iA.dni",
+							dni)).list();
 			return solicitudes;
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
-			throw new BasicDBOperationException(MessageFormat.format(
-					"No fue posible encontrar las solicitudes asignadas al analista con DNI: ", dni),
-					e.getCause());
-		}finally{
+			throw new BasicDBOperationException(
+					MessageFormat.format(
+							"No fue posible encontrar las solicitudes asignadas al analista con DNI: ",
+							dni), e.getCause());
+		} finally {
 			close();
 		}
-	}	
+	}
 }

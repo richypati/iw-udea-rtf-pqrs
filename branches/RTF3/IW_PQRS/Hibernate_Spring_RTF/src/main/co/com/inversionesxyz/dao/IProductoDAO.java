@@ -1,16 +1,18 @@
 package co.com.inversionesxyz.dao;
 
+import java.util.List;
+
 import co.com.inversionesxyz.dto.Producto;
 
 /**
  * Interface que define los metodos que va a proveer el dao de Producto
- * @author Jennifer Pérez
- * @author Ricardo Patiño
+ * @author Jennifer Pï¿½rez
+ * @author Ricardo Patiï¿½o
  *
  */
 public interface IProductoDAO {
 	/**
-	 * Permite consultar la información de un producto por el codigo del mismo
+	 * Permite consultar la informaciï¿½n de un producto por el codigo del mismo
 	 * @param codigo codigo de un producto
 	 * @return Producto
 	 */
@@ -21,4 +23,10 @@ public interface IProductoDAO {
 	 * @param producto producto a insertar
 	 */
 	public void insertar(Producto producto);
+
+	/**
+	 * Permite consultar todos los productos
+	 * @return List<Producto> Lista de productos
+	 */
+	public List<Producto> consultarTodos();
 }

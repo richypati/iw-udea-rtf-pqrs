@@ -30,4 +30,6 @@ dependencies {
 	compile 'org.apache.commons:commons-lang3:3.3.2'
     compile 'junit:junit:4.11'
     compile 'org.mockito:mockito-all:1.8.4'
+    compile 'com.google.code.gson:gson:2.2.4'
+    
 }
