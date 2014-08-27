@@ -1,5 +1,6 @@
 package co.com.inversionesxyz.webservices;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -8,6 +9,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
@@ -45,8 +47,8 @@ public class SolicitudWebService {
 	 */	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/consultarSolicitud/{id}")
-	public Response consultarSolicitud(@PathParam("id") int id){
+	@Path("/consultarSolicitud")
+	public Response consultarSolicitud(@QueryParam("id") int id){
 		try{
 			return Response.ok(solicitudService.consultarSolicitud(id)).build();
 		}catch(IllegalArgumentException iae){
@@ -125,12 +127,12 @@ public class SolicitudWebService {
 	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/consultarPorEstado/{estado}")
-	public Response consultarPorEstado(@PathParam("estado") String estado){
+	@Path("/consultarPorEstado")
+	public Response consultarPorEstado(@QueryParam("estado") String estado){
 		try{
-			List<Solicitud> listaDeSolicitudes = solicitudService.consultarPorEstado(estado);
-			GenericEntity<List<Solicitud>> entity = new GenericEntity<List<Solicitud>>(listaDeSolicitudes){};
-			return Response.ok(entity).build();
+			ArrayList<Solicitud> listaDeSolicitudes = (ArrayList<Solicitud>) solicitudService.consultarPorEstado(estado);
+			GenericEntity<ArrayList<Solicitud>> entity = new GenericEntity<ArrayList<Solicitud>>(listaDeSolicitudes){};
+			return Response.ok(entity,MediaType.APPLICATION_JSON).build();
 		}catch(IllegalArgumentException iae){
 			log.error(iae.getStackTrace());
 			iae.printStackTrace();
@@ -145,8 +147,8 @@ public class SolicitudWebService {
 	 * @return Response respuesta con un codigo que indica si la peticion fue fallida o no
 	 */
 	@GET
-	@Path("/asignarSolicitudAAnalista/{idSolicitud}/{dniAnalista}")
-	public Response asignarSolicitud(@PathParam("idSolicitud") int idSolicitud, @PathParam("dniAnalista") String dniAnalista){
+	@Path("/asignarSolicitudAAnalista")
+	public Response asignarSolicitud(@QueryParam("idSolicitud") int idSolicitud, @QueryParam("dniAnalista") String dniAnalista){
 		try {
 			solicitudService.DelegarSolicitud(idSolicitud, dniAnalista);
 			return Response.ok().build();
@@ -158,8 +160,8 @@ public class SolicitudWebService {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/obtenerSolicitudesPorAnalista/{dni}")
-	public Response obtenerSolicitudesPorAnalista(@PathParam("dni") String dni){
+	@Path("/obtenerSolicitudesPorAnalista")
+	public Response obtenerSolicitudesPorAnalista(@QueryParam("dni") String dni){
 		try{
 			List<Solicitud> listaDeSolicitudes = solicitudService.consultarSolicitudesPorAnalista(dni);
 			GenericEntity<List<Solicitud>> entity = new GenericEntity<List<Solicitud>>(listaDeSolicitudes){};

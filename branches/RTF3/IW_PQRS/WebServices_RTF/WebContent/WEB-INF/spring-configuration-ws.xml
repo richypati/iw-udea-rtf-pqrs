@@ -64,14 +64,18 @@
 		<property name="solicitudDAO" ref="solicitudDAO"></property>
 		<property name="analistaDAO" ref="analistaDAO"></property>
 	</bean>
+	<bean id="productoService" class="co.com.inversionesxyz.bussinesslogic.impl.ProductoService">
+		<property name="productoDAO" ref="productoDAO"></property>
+	</bean>
 	<bean id="encuestaService" class="co.com.inversionesxyz.bussinesslogic.impl.EncuestaService">
 		<property name="encuestaDAO" ref="encuestaDAO"></property>
 	</bean>
 	
-	<!-- Beans WebServices -->
+	<!-- Beans WebServices 
 	<bean id="solicitudWebService" class="co.com.inversionesxyz.webservices.SolicitudWebService">
 		<property name="solicitudService" ref="solicitudService"></property>
-	</bean>
+	</bean>-->
+	
 	
 	<context:component-scan base-package="co.com.inversionesxyz"></context:component-scan>
 </beans>
