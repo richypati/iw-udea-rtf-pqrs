@@ -6,5 +6,9 @@
 			}
 
 		};
+		
+		$scope.irA = function ( path ) {
+			  $location.path( path );
+			};
 
 	});
