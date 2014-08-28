@@ -67,6 +67,9 @@
 	<bean id="productoService" class="co.com.inversionesxyz.bussinesslogic.impl.ProductoService">
 		<property name="productoDAO" ref="productoDAO"></property>
 	</bean>
+	<bean id="analistaService" class="co.com.inversionesxyz.bussinesslogic.impl.AnalistaService">
+		<property name="analistaDAO" ref="analistaDAO"></property>
+	</bean>
 	<bean id="encuestaService" class="co.com.inversionesxyz.bussinesslogic.impl.EncuestaService">
 		<property name="encuestaDAO" ref="encuestaDAO"></property>
 	</bean>
