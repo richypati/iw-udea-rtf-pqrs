@@ -1,6 +1,9 @@
 package co.com.inversionesxyz.dao.impl;
 
 import java.text.MessageFormat;
+import java.util.List;
+
+import org.hibernate.Session;
 
 import co.com.inversionesxyz.dao.IAnalistaDAO;
 import co.com.inversionesxyz.dto.InformacionAnalista;
@@ -28,6 +31,21 @@ public class AnalistaDAO extends AbstractDAO<InformacionAnalista> implements IAn
 					codigo), e.getCause());
 		}
 		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<InformacionAnalista> consultarTodos() {
+		Session session = null;
+		try{
+			session = getCurrentSession();
+			return session.createCriteria(InformacionAnalista.class).list();
+		}catch(Exception e){
+			throw new BasicDBOperationException(
+					"No fue posible consultar la información de los Analistas", e.getCause());
+		}finally{
+			close();
+		}
 	}
 		
 	
