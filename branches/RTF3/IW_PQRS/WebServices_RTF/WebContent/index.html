@@ -33,6 +33,17 @@
 			ng-click="delegarSolicitud()" />
 		<p>{{"SOLICITUD DELEGADA: " + solicitudDelegada}}</p>
 	</div>
+	
+	<div ng-controller="ctrlrProductos">
+		<h1>PRODUCTOS</h1>
+		<input type="button" value="Consultar Productos" ng-click="consultarProductos()"/>
+		<p ng-repeat="producto in productos">{{producto.nombre}}</p>
+	</div>
+	<div ng-controller="ctrlrAnalistas">
+		<h1>ANALISTAS</h1>
+		<input type="button" value="Consultar Analistas" ng-click="consultarAnalistas()"/>
+		<p ng-repeat="analista in analistas">{{analista.nombre}}</p>
+	</div>
 
 
 </body>
