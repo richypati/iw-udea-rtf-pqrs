@@ -18,6 +18,8 @@
 		<h1>SOLICITUDES ABIERTAS</h1>
 		<input type="button" value="buscar por Estados"
 			ng-click="consultarSolicitudesAbiertas()" />
+			<p >{{"Solicitud con id: "+ solicitud.id}}</p>
+			<p >{{"Solicitud con tipo: "+ solicitud.tipo}}</p>
 		<p ng-repeat="s in solicitudes">{{"Solicitud con id: "+ s.id}}</p>
 
 		<h1>SOLICITUDES POR ANALSITA</h1>
@@ -44,6 +46,7 @@
 		<h1>ANALISTAS</h1>
 		<input type="button" value="Consultar Analistas" ng-click="consultarAnalistas()"/>
 		<p ng-repeat="analista in analistas">{{analista.nombre}}</p>
+		<p ng-repeat="analista in analistas">{{analista.dni}}</p>
 	</div>
 
 
