@@ -13,6 +13,7 @@
 	<div ng-controller="ctrlrSolicitudes">
 		ID: <input type="text" ng-model="idSolicitud" name="idSolicitud" /> <input
 			type="button" value="buscar" ng-click="consultarSolicitud()" /><br />
+			<p ng-repeat="s in solicitudes">{{"Solicitud con id: "+ s.id}}</p>
 
 		<h1>SOLICITUDES ABIERTAS</h1>
 		<input type="button" value="buscar por Estados"
