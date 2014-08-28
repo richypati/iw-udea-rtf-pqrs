@@ -1,0 +1,51 @@
+body {
+    padding: 10px;
+}
+
+.container {
+    max-width: 550px;
+}
+
+.container header {
+    border-bottom: 2px solid #E5E5E5;
+}
+
+#images {
+    padding: 10px 0px;
+    float: right;
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1;
+  border-radius: 15px;
+}
+
+table,th,td {
+	border: 1px solid silver;
+	border-collapse: collapse;
+	text-align: center
+}
+
+th,td {
+	font-family: Arial; 
+	font-size: 15px;
+	padding: 10px;
+}
+
+th {
+	background-color: green;
+    color: white;
+}
+
+table {
+	font-family: Arial; 
+	font-size: 18px;
+	border-spacing: 5px;
+}
+
+

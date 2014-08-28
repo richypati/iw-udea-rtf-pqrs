@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="iwApp">
+<head>
+<meta charset="ISO-8859-1">
+
+<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../css/app/resources.css">
+<script src="../js/angular.js"></script>
+<script src="../js/jquery-1.11.1.js"></script>
+<script src="../js/modules/myModule.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+<title>Consultar Solicitud</title>
+</head>
+<body ng-controller="ctrlrSolicitudes" data-ng-init="consultarSolicitudesAbiertas()">
+	<div class="container">
+		<header>
+			<h3 class="text-muted">SOLICITUDES NO ASIGNADAS</h3>
+		</header>
+	</div>
+<div class="container">
+<div id="images" class="row">
+				<img class="media-object" src="../images/encabezado-min.PNG">
+		</div>
+	<br><br><table border="1" style="width: 300px">
+		<thead>
+			<tr>
+				<td>ID Solicitud</td>
+				<td>Ver Detalle</td>
+			</tr>
+		<tbody ng:repeat="s in solicitudes">
+			<tr>
+				<td>{{s.id}}</td>
+				<td><button type="button"
+						class="btn btn-primary btn-lg btn-circle">
+						<span class="glyphicon glyphicon-search"></span>
+					</button></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+
+</body>
+</html>
