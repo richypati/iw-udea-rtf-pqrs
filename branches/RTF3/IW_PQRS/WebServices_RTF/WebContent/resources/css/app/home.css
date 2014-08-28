@@ -1,0 +1,16 @@
+body {
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+}
+
+.container header {
+    overflow: hidden;
+    border-bottom: 2px solid #E5E5E5;
+}
+
+#images {
+    padding: 20px 0;
+}
