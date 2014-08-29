@@ -56,7 +56,7 @@
 		</property>
 		<property generated="never" lazy="false" name="respuestaSolicitud"
 			type="string">
-			<column length="100" name="respuestaSolicitud" not-null="true" />
+			<column length="100" name="respuestaSolicitud" />
 		</property>
 	</class>
 </hibernate-mapping>

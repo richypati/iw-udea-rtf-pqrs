@@ -4,6 +4,7 @@ import java.util.List;
 
 import co.com.inversionesxyz.dto.Solicitud;
 import co.com.inversionesxyz.exception.EmailException;
+import co.com.inversionesxyz.webservices.dto.SolicitudWS;
 
 /**
  * Interface que define los metodos que va a proveer la logica de negocio de la gestion de solicitudes
@@ -17,8 +18,9 @@ public interface ISolicitudService {
 	 * Permite almacenar una solicitud
 	 * @param solicitud solicitud a almacenar
 	 * @return int codigo de la solicitud almacenada
+	 * @throws EmailException 
 	 */
-	public int guardarSolicitud(Solicitud solicitud);
+	public int guardarSolicitud(SolicitudWS solicitud) throws EmailException;
 
 	/**
 	 * Permite consultar una solicitud por su identificador

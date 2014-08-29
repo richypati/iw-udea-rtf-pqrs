@@ -29,7 +29,6 @@ public class Solicitud implements java.io.Serializable {
 		return this.id;
 	}
 	public void setId(int id) {
-		Validate.notNull(id, "El ID de la solicitud no puede ser nulo");
 		this.id = id;
 	}
 	public Producto getProducto() {
@@ -64,14 +63,12 @@ public class Solicitud implements java.io.Serializable {
 		return this.complejidad;
 	}
 	public void setComplejidad(String complejidad) {
-		Validate.notEmpty(complejidad, "La coplejidad de la solicitud no puede ser nula ni vacia");
 		this.complejidad = complejidad;
 	}
 	public String getPrioridad() {
 		return this.prioridad;
 	}
 	public void setPrioridad(String prioridad) {
-		Validate.notEmpty(prioridad, "La prioridad de la solicitud no puede ser nula ni vacia");
 		this.prioridad = prioridad;
 	}
 	public Date getFechaCreacion() {
