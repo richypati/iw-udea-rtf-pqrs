@@ -52,9 +52,9 @@ public class SolicitudService implements ISolicitudService {
 		solicitud.setEstado("ABIERTO");
 		solicitud.setFechaCreacion(calendar.getTime());
 		
-		InformacionAnalista infoAnalista = analistaDAO
-				.consultarPorCodigo(solicitudWS.getDniAnalista());
-		solicitud.setInformacionAnalista(infoAnalista);
+//		InformacionAnalista infoAnalista = analistaDAO
+//				.consultarPorCodigo(solicitudWS.getDniAnalista());
+//		solicitud.setInformacionAnalista(infoAnalista);
 
 		Producto producto = productoDAO.consultarPorCodigo(solicitudWS
 				.getCodigoProducto());
@@ -81,6 +81,7 @@ public class SolicitudService implements ISolicitudService {
 		Solicitud solicitud = solicitudDAO.consultar(idSolicitud);
 		InformacionAnalista infoAnalista = analistaDAO.consultarPorCodigo(dni);
 		solicitud.setInformacionAnalista(infoAnalista);
+		solicitud.setEstado("ASIGNADO");
 		solicitudDAO.actualizar(solicitud);
 		utilService.notificarSolicitudDelegada(idSolicitud,
 				infoAnalista.getNombre(), infoAnalista.getCorreo());

@@ -102,7 +102,6 @@ public class Solicitud implements java.io.Serializable {
 		return informacionAnalista;
 	}
 	public void setInformacionAnalista(InformacionAnalista informacionAnalista) {
-		Validate.notNull(informacionAnalista, "La informacion del analista no puede ser nula");
 		this.informacionAnalista = informacionAnalista;
 	}
 	public String getEmailCliente() {
