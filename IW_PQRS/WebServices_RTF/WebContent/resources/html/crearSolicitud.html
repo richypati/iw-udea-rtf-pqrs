@@ -3,48 +3,72 @@
 <head>
 <meta charset="ISO-8859-1">
 
-<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="../css/app/resources.css">
-<link rel="stylesheet" type="text/css" href="../css/ngDialog-theme-default.css">
-<link rel="stylesheet" type="text/css" href="../css/ngDialog.css">
-<script src="../js/angular.js"></script>
-<script src="../js/angular-route.js"></script>
-<script src="../js/angular-cookies.js"></script>
-<script src="../js/jquery-1.11.1.js"></script>
-<script src="../js/modules/myModule.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/ngDialog.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="resources/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="resources/css/app/resources.css">
+<link rel="stylesheet" type="text/css"
+	href="resources/css/ngDialog-theme-default.css">
+<link rel="stylesheet" type="text/css" href="resources/css/ngDialog.css">
+<script src="resources/js/angular.js"></script>
+<script src="resources/js/angular-route.js"></script>
+<script src="resources/js/angular-cookies.js"></script>
+<script src="resources/js/jquery-1.11.1.js"></script>
+<script src="resources/js/modules/myModule.js"></script>
+<script src="resources/js/bootstrap.min.js"></script>
+<script src="resources/js/ngDialog.js"></script>
 
 <title>Crear Solicitud</title>
 </head>
-<body ng-controller="ctrlrSolicitudes"
-	data-ng-init="consultarSolicitudesAbiertas()">
+<body ng-controller="ctrlrSolicitudes" >
 	<div class="container">
 		<header>
-			<h3 class="text-muted">CREACIÓN DE SOLICITUD</h3>
+			<h3 class="text-muted">CREACIï¿½N DE SOLICITUD</h3>
 			<div id="images" class="row">
 				<div class="col-lg-12 media">
-					<img class="media-object" src="../images/encabezado-min.PNG">
+					<img class="media-object" src="resources/images/encabezado-min.PNG">
 				</div>
 			</div>
 		</header>
 
 		<br>
 		<div class="col-sm-7 ">
-			<label>Nombre</label> <input type="text" class="form-control"
-				ng-model="idSolicitudADelegar" name="idSolicitudADelegar"
-				placeholder="Ingrese su nombre" required /> <br>
-				
-			<label>E-mail</label> <input type="text" class="form-control"
-				ng-model="dniAnalistaDelegado" name="dniAnalistaDelegado"
-				placeholder="Ingrese su e-mail" required /> <br>
-				
+			<label>Nombre: </label> <input type="text" class="form-control"
+				ng-model="solicitudWS.nombreCliente" name="idSolicitudADelegar"
+				placeholder="Ingrese su nombre" required /> <br> 
+			<label>E-mail: </label><input type="text" class="form-control"
+				ng-model="solicitudWS.emailCliente" name="dniAnalistaDelegado"
+				placeholder="Ingrese su e-mail" required /> <br> 
+			<label>Tipo Documento: </label><input type="text" class="form-control"
+				ng-model="solicitudWS.tipoDocumento" name="dniAnalistaDelegado"
+				placeholder="Ingrese su tipo de Documento (ejm. CC, TI)" required /> <br>
+			<label>Tipo: </label>
+			<select ng-model="solicitudWS.tipo" class="form-control" required>
+				<option value="PETICION">PETICION</option>
+				<option value="QUEJA">QUEJA</option>
+				<option value="RECLAMO">RECLAMO</option>
+				<option value="SUGERENCIA">SUGERENCIA</option>	
+			</select> <br> 
+			<label>Descripcion de la solicitud: </label><input type="text" class="form-control"
+				ng-model="solicitudWS.descripcion" name="dniAnalistaDelegado"
+				placeholder="Ingrese la descripciÃ³n de la solicitud" required /> <br>
+			<label>Producto: </label>
+			<div ng-controller="ctrlrProductos" data-ng-init="consultarProductos()">
+				<select class="form-control"  ng-model="solicitudWS.codigoProducto"  ng-repeat="p in productos" required>
+					<option value="{{p.codigo}}">{{p.nombre}}</option>
+				</select>
+			</div>
+			<br>
+			<div ng-if="solicitudRealizada">
+				<h4>LA SOLICITUD SE HA REALIZADO CORRECTAMENTE</h4>
+			</div>
+			<br>
 			<button type="button" class="btn btn-primary btn-lg btn-group"
-				ng-click="delegarSolicitud()">
+				ng-click="realizarSolicitud()">
 				<span class="glyphicon glyphicon-ok"></span> Generar Solicitud
 			</button>
 		</div>
 	</div>
-	
+
 </body>
 </html>

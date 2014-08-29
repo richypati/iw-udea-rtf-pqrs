@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html ng-app="iwApp">
+<html ng-app="iwApp" ng-datainit>
 <head>
 <meta charset="ISO-8859-1">
 
-<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="../css/app/resources.css">
+<link rel="stylesheet" type="text/css" href="resources/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="resources/css/app/resources.css">
 <link rel="stylesheet" type="text/css"
-	href="../css/ngDialog-theme-default.css">
-<link rel="stylesheet" type="text/css" href="../css/ngDialog.css">
-<script src="../js/angular.js"></script>
-<script src="../js/angular-route.js"></script>
-<script src="../js/angular-cookies.js"></script>
-<script src="../js/jquery-1.11.1.js"></script>
-<script src="../js/modules/myModule.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/ngDialog.js"></script>
+	href="resources/css/ngDialog-theme-default.css">
+<link rel="stylesheet" type="text/css" href="resources/css/ngDialog.css">
+<script src="resources/js/angular.js"></script>
+<script src="resources/js/angular-route.js"></script>
+<script src="resources/js/angular-cookies.js"></script>
+<script src="resources/js/jquery-1.11.1.js"></script>
+<script src="resources/js/modules/myModule.js"></script>
+<script src="resources/js/bootstrap.min.js"></script>
+<script src="resources/js/ngDialog.js"></script>
 
 <title>Consultar Solicitud</title>
 </head>
@@ -25,14 +25,14 @@
 			<div id="images" class="row">
 
 				<div class="col-lg-12 media">
-					<img class="media-object" src="../images/encabezado-min.PNG">
+					<img class="media-object" src="resources/images/encabezado-min.PNG">
 				</div>
 			</div>
 		</header>
 
 		<br> <br>
 		<div ng-controller="ctrlrRoles">
-			<a ng-if="rol == 'admin' || rol == 'analista'">
+			<a ng-if="rol == 'admin'">
 				<button type="button" class="btn btn-primary btn-lg"
 					ng-click="consultarSolicitudesNoAsignadas()">
 					<span class="glyphicon glyphicon-search"></span> Solicitudes no
@@ -47,6 +47,15 @@
 				<button type="button" class="btn btn-primary btn-lg"
 					ng-click="consultarSolicitudesPorAnalista()">
 					<span class="glyphicon glyphicon-search"></span> Mis solicitudes
+				</button>
+			</a>
+
+		</div>
+			<div ng-controller="ctrlrRoles">
+			<a ng-if="rol == 'cliente'">
+				<button type="button" class="btn btn-primary btn-lg"
+					ng-click="realizarSolicitud()">
+					<span class="glyphicon glyphicon-search"></span> Realizar Solicitud
 				</button>
 			</a>
 

@@ -19,6 +19,7 @@ var URL_SERVICIO_VALIDAR_CLIENTE = URL_PATH + "/cliente/validarCliente";
 // ESTADOS DE SOLICITUD
 var ABIERTO = "ABIERTO";
 var RESUELTO = "RESUELTO";
+var ASIGNADO = "ASIGNADO";
 
 // Factory para el login
 iwApp.factory('auth', function($cookies, $cookieStore, $location) {
@@ -78,6 +79,10 @@ iwApp.config([ '$routeProvider', function($routeProvider) {
 		controller : 'ctrlrSolicitudes'
 	});
 	
+	$routeProvider.when('/realizarSolicitud', {
+		templateUrl : 'resources/html/crearSolicitud.html',
+		controller : 'ctrlrSolicitudes'
+	});
 	
 } ]);
 
@@ -215,7 +220,7 @@ iwApp.controller('ctrlrRoles', function($scope, $cookies, $location){
 	$scope.rol = $cookies.rol;
 	
 	$scope.consultarSolicitudesNoAsignadas = function(){
-		if ($cookies.rol == 'admin' || $cookies.rol=='analista'){
+		if ($cookies.rol == 'admin'){
 			$location.url('/consultarSolicitudesNoAsignadas');
 		}else{
 			alert("No Autorizado");
@@ -225,6 +230,14 @@ iwApp.controller('ctrlrRoles', function($scope, $cookies, $location){
 	$scope.consultarSolicitudesPorAnalista = function(){
 		if ($cookies.rol == 'admin' || $cookies.rol=='analista'){
 			$location.url('/consultarSolicitudesPorAnalista');
+		}else{
+			alert("No Autorizado");
+		}
+	}
+	
+	$scope.realizarSolicitud = function(){
+		if ($cookies.rol == 'cliente'){
+			$location.url('/realizarSolicitud');
 		}else{
 			alert("No Autorizado");
 		}
@@ -294,6 +307,15 @@ iwApp.controller('ctrlrSolicitudes', function($scope, Solicitudes, ngDialog) {
 				function(data) {
 					$scope.solicitudRealizada = true;
 					$scope.idSolicitudRealizada = data;
+					$scope.solicitudWS = {
+							codigoProducto : '',
+							dniAnalista : '',
+							tipo : '',
+							descripcion : '',
+							tipoDocumento : '',
+							nombreCliente : '',
+							emailCliente : '',
+						};
 				});
 	};
 });
