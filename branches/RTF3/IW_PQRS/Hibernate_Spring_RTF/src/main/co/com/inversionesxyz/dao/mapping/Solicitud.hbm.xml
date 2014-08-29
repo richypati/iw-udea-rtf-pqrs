@@ -14,7 +14,7 @@
 		</many-to-one>
 		<many-to-one class="co.com.inversionesxyz.dto.InformacionAnalista"
 			fetch="join" name="informacionAnalista">
-			<column length="20" name="INFORMACION_ANALISTA_dni" not-null="true" />
+			<column length="20" name="INFORMACION_ANALISTA_dni" />
 		</many-to-one>
 		<property generated="never" lazy="false" name="tipo" type="string">
 			<column length="50" name="tipo" not-null="true" />
