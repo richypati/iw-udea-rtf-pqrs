@@ -21,22 +21,24 @@ var ABIERTO = "ABIERTO";
 var RESUELTO = "RESUELTO";
 
 // Factory para el login
-iwApp.factory('auth', function($cookies, $location) {
+iwApp.factory('auth', function($cookies, $cookieStore, $location) {
 	return {
 
-		login : function(email, pws) {
+		login : function(email, pws, rol) {
 			// creamos la cookie con el nombre que nos han pasado
-			alert("EMAIL: " + email);
-
 			$cookies.emailCliente = email;
 			$cookies.password = pws;
-			// mandamos a la lista de clientes
-			//$location.url('/consultarSolicitud');
+			$cookies.rol = rol;
+		},
+		
+		cerrarSession : function(){
+			$cookieStore.remove("emailCliente");
+			$cookieStore.remove("password");
+			$cookieStore.remove("rol");
 		},
 
 		validarEstado : function() {
 
-			alert("COOKIE: " + $cookies.emailCliente);
 			if (typeof ($cookies.emailCliente) == 'undefined') {
 				$location.url('/');
 			}
@@ -44,6 +46,8 @@ iwApp.factory('auth', function($cookies, $location) {
 			// sesi�n lo mandamos a la lista de clientes
 			if (typeof ($cookies.emailCliente) != 'undefined'
 					&& $location.url() == '/') {
+				
+				// Aquí va lo de los roles
 				$location.url('/consultarSolicitud');
 			}
 		}
@@ -60,13 +64,21 @@ iwApp.config([ '$routeProvider', function($routeProvider) {
 	});
 
 	$routeProvider.when('/consultarSolicitud', {
-		templateUrl : 'resources/html/consultarSolicitud.html', // Cuando se
-		// carga la raiz
-		// del
-		// aplicativo se carga en la vista
-		// la lista de clientes
+		templateUrl : 'resources/html/consultarSolicitud.html',
 		controller : 'ctrlrSolicitudes'
 	});
+	
+	$routeProvider.when('/consultarSolicitudesNoAsignadas', {
+		templateUrl : 'resources/html/consultarSolicitudesNoAsignadas.html',
+		controller : 'ctrlrSolicitudes'
+	});
+	
+	$routeProvider.when('/consultarSolicitudesPorAnalista', {
+		templateUrl : 'resources/html/solicitudesPorAnalista.html',
+		controller : 'ctrlrSolicitudes'
+	});
+	
+	
 } ]);
 
 // Servicio Angular encargado de llamar los Servicios Web de Clientes
@@ -82,7 +94,6 @@ iwApp.service('Clientes', function($http) {
 			}
 		});
 	};
-
 });
 
 // Servicio Angular encargado de llamar los Servicios Web de Productos
@@ -200,6 +211,27 @@ iwApp.controller('ctrlrAnalistas', function($scope, Analistas, ngDialog) {
 	}
 });
 
+iwApp.controller('ctrlrRoles', function($scope, $cookies, $location){
+	$scope.rol = $cookies.rol;
+	
+	$scope.consultarSolicitudesNoAsignadas = function(){
+		if ($cookies.rol == 'admin' || $cookies.rol=='analista'){
+			$location.url('/consultarSolicitudesNoAsignadas');
+		}else{
+			alert("No Autorizado");
+		}
+	}
+	
+	$scope.consultarSolicitudesPorAnalista = function(){
+		if ($cookies.rol == 'admin' || $cookies.rol=='analista'){
+			$location.url('/consultarSolicitudesPorAnalista');
+		}else{
+			alert("No Autorizado");
+		}
+	}
+	
+});
+
 
 // Controlador Solicitudes
 iwApp.controller('ctrlrSolicitudes', function($scope, Solicitudes, ngDialog) {
@@ -273,15 +305,20 @@ iwApp.controller('ctrlrLogin', function($scope, $location, auth, Clientes) {
 
 		Clientes.validar($scope.emailCliente, $scope.password).success(
 				function(data) {
-					if (data == "ok") {
-						auth.login($scope.emailCliente, $scope.password);
-						alert(data);
+					if ((data == "admin") || (data =="analista") || (data="cliente")) {
+						auth.login($scope.emailCliente, $scope.password, data);
 						$scope.emailCliente = '';
 						$scope.password = '';
 						$location.url('/consultarSolicitud');
 						return;
 					}
 				});
+	};
+	
+	$scope.cerrarSession = function(){
+		//alert("CER");
+		auth.cerrarSession();
+		$location.url('/');
 	};
 
 });

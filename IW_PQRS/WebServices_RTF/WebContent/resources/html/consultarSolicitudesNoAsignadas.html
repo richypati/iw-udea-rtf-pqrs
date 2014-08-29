@@ -1,30 +1,25 @@
-<!DOCTYPE html>
-<html ng-app="iwApp">
-<head>
-<meta charset="ISO-8859-1">
-
-<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="../css/app/resources.css">
-<link rel="stylesheet" type="text/css" href="../css/ngDialog-theme-default.css">
-<link rel="stylesheet" type="text/css" href="../css/ngDialog.css">
-<script src="../js/angular.js"></script>
-<script src="../js/angular-route.js"></script>
-<script src="../js/angular-cookies.js"></script>
-<script src="../js/jquery-1.11.1.js"></script>
-<script src="../js/modules/myModule.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/ngDialog.js"></script>
-
-<title>Consultar Solicitud</title>
-</head>
-<body ng-controller="ctrlrSolicitudes"
+<link rel="stylesheet" type="text/css"
+	href="resources/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="resources/css/app/resources.css">
+<link rel="stylesheet" type="text/css"
+	href="resources/css/ngDialog-theme-default.css">
+<link rel="stylesheet" type="text/css" href="resources/css/ngDialog.css">
+<script src="resources/js/angular.js"></script>
+<script src="resources/js/angular-route.js"></script>
+<script src="resources/js/angular-cookies.js"></script>
+<script src="resources/js/jquery-1.11.1.js"></script>
+<script src="resources/js/modules/myModule.js"></script>
+<script src="resources/js/bootstrap.min.js"></script>
+<script src="resources/js/ngDialog.js"></script>
+<div ng-controller="ctrlrSolicitudes"
 	data-ng-init="consultarSolicitudesAbiertas()">
 	<div class="container">
 		<header>
 			<h3 class="text-muted">SOLICITUDES NO ASIGNADAS</h3>
 			<div id="images" class="row">
 				<div class="col-lg-12 media">
-					<img class="media-object" src="../images/encabezado-min.PNG">
+					<img class="media-object" src="resources/images/encabezado-min.PNG">
 				</div>
 			</div>
 		</header>
@@ -33,12 +28,11 @@
 		<div class="col-sm-7 ">
 			<label>ID Solicitud</label> <input type="text" class="form-control"
 				ng-model="idSolicitudADelegar" name="idSolicitudADelegar"
-				placeholder="ID Solicitud" required /> <br>
-				
-			<label>DNI Analista</label> <input type="text" class="form-control"
+				placeholder="ID Solicitud" required /> <br> <label>DNI
+				Analista</label> <input type="text" class="form-control"
 				ng-model="dniAnalistaDelegado" name="dniAnalistaDelegado"
 				placeholder="DNI Analista" required /> <br>
-				
+
 			<button type="button" class="btn btn-primary btn-lg btn-group"
 				ng-click="delegarSolicitud()">
 				<span class="glyphicon glyphicon-ok"></span> Asignar Solicitud
@@ -53,7 +47,7 @@
 					<td>Producto</td>
 					<td>Sucursal</td>
 					<td>Tipo Solicitud</td>
-					<td>Descripción</td>
+					<td>Descripciï¿½n</td>
 					<td>Nombre Cliente</td>
 					<td>E-mail Cliente</td>
 				</tr>
@@ -70,14 +64,14 @@
 			</tbody>
 		</table>
 		<div>
-		<script type="text/ng-template" id="enviar">
+			<script type="text/ng-template" id="enviar">
  		<div id="popup-exito" name="enviarExito">
 			<h1>En hora buena :)</h1>
   			<p>Mensaje Enviado Correctamente</p>
 		</div>		
 	</script>
 
-	<script type="text/ng-template" id="enviarError">
+			<script type="text/ng-template" id="enviarError">
  		<div id="popup-error" name="enviarError">
 	 		<h1>Error!. Lo sentimos :(</h1>
 	  		<p>La solicitud no se pudo asignar. Verifique que los datos son correctos</p>	
@@ -85,5 +79,4 @@
 	</script>
 		</div>
 	</div>
-</body>
-</html>
+</div>

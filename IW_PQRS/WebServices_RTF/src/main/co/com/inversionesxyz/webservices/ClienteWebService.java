@@ -13,6 +13,7 @@ public class ClienteWebService {
 	String cliente[][] = { { "richypati@gmail.com", "12345", "admin" },
 			{ "jenniferperezb@gmail.com", "54321", "cliente" },
 			{ "6969", "6969", "analista" }, { "12345", "12345", "analista" } };
+	private static String rol="";
 
 	@GET
 	@Path("/validarCliente")
@@ -26,13 +27,14 @@ public class ClienteWebService {
 					.build();
 		}
 
-		return Response.ok("ok").build();
+		return Response.ok(rol).build();
 	}
 
 	private boolean clienteValido(String emailCliente, String password) {
 		for (int i = 0; i < cliente.length; i++) {
 			if (cliente[i][0].equalsIgnoreCase(emailCliente)
 					&& cliente[i][1].equals(password)) {
+				rol = cliente[i][2];
 				return true;
 			}
 

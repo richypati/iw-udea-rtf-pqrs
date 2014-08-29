@@ -1,20 +1,12 @@
-<!DOCTYPE html>
-<html ng-app="iwApp">
-<head>
-<meta charset="ISO-8859-1">
-
-<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="../css/app/resources.css">
+<link rel="stylesheet" type="text/css" href="resources/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="resources/css/app/resources.css">
 <script src="../js/angular.js"></script>
 <script src="../js/angular-route.js"></script>
 <script src="../js/angular-cookies.js"></script>
 <script src="../js/jquery-1.11.1.js"></script>
 <script src="../js/modules/myModule.js"></script>
 <script src="../js/bootstrap.min.js"></script>
-
-<title>Mis Solicitudes</title>
-</head>
-<body ng-controller="ctrlrSolicitudes">
+<div ng-controller="ctrlrSolicitudes">
 	<div class="container">
 		<header>
 			<h3 class="text-muted">Mis Solicitudes</h3>
@@ -22,7 +14,7 @@
 	</div>
 	<div class="container">
 		<div id="images" class="row">
-			<img class="media-object" src="../images/encabezado-min.PNG">
+			<img class="media-object" src="resources/images/encabezado-min.PNG">
 		</div>
  <form name="userForm" >
 		<div class="form-group col-lg-8">
@@ -65,5 +57,4 @@
 		</form>
 	</div>
 
-</body>
-</html>
+</div>
