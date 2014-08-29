@@ -269,15 +269,17 @@ iwApp.controller('ctrlrSolicitudes', function($scope, Solicitudes, ngDialog) {
 		Solicitudes.obtenerSolicitudesPorAnalista($scope.dniAnalista).success(
 				function(data) {
 					$scope.solicitudesDeAnalista = data;
-				});
-	};
+				}).error(function() {
+		            ngDialog.open({ template: 'enviarError',
+        				closeByEscape: false});
+	});
+};
 
 	// DELEGAR SOLICITUD
 	$scope.delegarSolicitud = function() {
 		Solicitudes.asignarSolicitudAAnalista($scope.idSolicitudADelegar,
 				$scope.dniAnalistaDelegado).success(function() {
 			$scope.solicitudDelegada = true;
-			//$scope.analistas = data;
 			ngDialog.open({ template: 'enviar',
 				closeByEscape: false});
 		}).error(function() {

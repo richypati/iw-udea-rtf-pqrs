@@ -168,6 +168,9 @@ public class SolicitudWebService {
 		try{
 			List<Solicitud> listaDeSolicitudes = solicitudService.consultarSolicitudesPorAnalista(dni);
 			GenericEntity<List<Solicitud>> entity = new GenericEntity<List<Solicitud>>(listaDeSolicitudes){};
+			if(listaDeSolicitudes.isEmpty()){
+				throw new WebApplicationException(Response.Status.NOT_FOUND);
+			}
 			return Response.ok(entity).build();
 		}catch(IllegalArgumentException iae){
 			log.error(iae.getStackTrace());
