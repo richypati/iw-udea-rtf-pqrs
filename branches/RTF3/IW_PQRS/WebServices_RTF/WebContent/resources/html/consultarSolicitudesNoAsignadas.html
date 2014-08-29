@@ -5,43 +5,85 @@
 
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../css/app/resources.css">
+<link rel="stylesheet" type="text/css" href="../css/ngDialog-theme-default.css">
+<link rel="stylesheet" type="text/css" href="../css/ngDialog.css">
 <script src="../js/angular.js"></script>
 <script src="../js/angular-route.js"></script>
 <script src="../js/angular-cookies.js"></script>
 <script src="../js/jquery-1.11.1.js"></script>
 <script src="../js/modules/myModule.js"></script>
 <script src="../js/bootstrap.min.js"></script>
+<script src="../js/ngDialog.js"></script>
 
 <title>Consultar Solicitud</title>
 </head>
-<body ng-controller="ctrlrSolicitudes" data-ng-init="consultarSolicitudesAbiertas()">
+<body ng-controller="ctrlrSolicitudes"
+	data-ng-init="consultarSolicitudesAbiertas()">
 	<div class="container">
 		<header>
 			<h3 class="text-muted">SOLICITUDES NO ASIGNADAS</h3>
+			<div id="images" class="row">
+				<div class="col-lg-12 media">
+					<img class="media-object" src="../images/encabezado-min.PNG">
+				</div>
+			</div>
 		</header>
-	</div>
-<div class="container">
-<div id="images" class="row">
-				<img class="media-object" src="../images/encabezado-min.PNG">
+
+		<br>
+		<div class="col-sm-7 ">
+			<label>ID Solicitud</label> <input type="text" class="form-control"
+				ng-model="idSolicitudADelegar" name="idSolicitudADelegar"
+				placeholder="ID Solicitud" required /> <br>
+				
+			<label>DNI Analista</label> <input type="text" class="form-control"
+				ng-model="dniAnalistaDelegado" name="dniAnalistaDelegado"
+				placeholder="DNI Analista" required /> <br>
+				
+			<button type="button" class="btn btn-primary btn-lg btn-group"
+				ng-click="delegarSolicitud()">
+				<span class="glyphicon glyphicon-ok"></span> Asignar Solicitud
+			</button>
 		</div>
-	<br><br><table border="1" style="width: 300px">
-		<thead>
-			<tr>
-				<td>ID Solicitud</td>
-				<td>Ver Detalle</td>
-			</tr>
-		<tbody ng:repeat="s in solicitudes">
-			<tr>
-				<td>{{s.id}}</td>
-				<td><button type="button"
-						class="btn btn-primary btn-lg btn-circle" ng-click="consultarSolicitud()">
-						<span class="glyphicon glyphicon-search"></span>
-					</button></td>
-			</tr>
-		</tbody>
-	</table>
-</div>
+	</div>
+	<div class="big-container">
+		<table border="1" style="width: 500px">
+			<thead>
+				<tr>
+					<td>ID Solicitud</td>
+					<td>Producto</td>
+					<td>Sucursal</td>
+					<td>Tipo Solicitud</td>
+					<td>Descripción</td>
+					<td>Nombre Cliente</td>
+					<td>E-mail Cliente</td>
+				</tr>
+			<tbody ng:repeat="s in solicitudes">
+				<tr>
+					<td>{{s.id}}</td>
+					<td>{{s.producto.nombre}}</td>
+					<td>{{s.producto.sucursal.nombre}}</td>
+					<td>{{s.tipo}}</td>
+					<td>{{s.descripcion}}</td>
+					<td>{{s.nombreCliente}}</td>
+					<td>{{s.emailCliente}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<div>
+		<script type="text/ng-template" id="enviar">
+ 		<div id="popup-exito" name="enviarExito">
+			<h1>En hora buena :)</h1>
+  			<p>Mensaje Enviado Correctamente</p>
+		</div>		
+	</script>
 
-
+	<script type="text/ng-template" id="enviarError">
+ 		<div id="popup-error" name="enviarError">
+	 		<h1>Error!. Lo sentimos :(</h1>
+	  		<p>La solicitud no se pudo asignar. Verifique que los datos son correctos</p>	
+		</div>	
+	</script>
+		</div>
+	</div>
 </body>
 </html>

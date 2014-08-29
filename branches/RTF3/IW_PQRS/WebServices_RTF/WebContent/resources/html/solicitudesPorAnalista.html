@@ -40,18 +40,24 @@
 			<table border="1" style="width: 300px" style="align: right">
 				<thead>
 					<tr>
-						<td>ID Solicitud</td>
-						<td>Ver Detalle</td>
+					<td>ID Solicitud</td>
+					<td>Producto</td>
+					<td>Sucursal</td>
+					<td>Tipo Solicitud</td>
+					<td>Descripción</td>
+					<td>Nombre Cliente</td>
+					<td>E-mail Cliente</td>
 					</tr>
 					</thead>
 				<tbody ng:repeat="s in solicitudesDeAnalista">
 					<tr>
 						<td>{{s.id}}</td>
-						<td><button type="button"
-								class="btn btn-primary btn-lg btn-circle"
-								ng-click="consultarSolicitud()">
-								<span class="glyphicon glyphicon-search"></span>
-							</button></td>
+					<td>{{s.producto.nombre}}</td>
+					<td>{{s.producto.sucursal.nombre}}</td>
+					<td>{{s.tipo}}</td>
+					<td>{{s.descripcion}}</td>
+					<td>{{s.nombreCliente}}</td>
+					<td>{{s.emailCliente}}</td>
 					</tr>
 				</tbody>
 			</table>

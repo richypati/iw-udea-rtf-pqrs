@@ -6,6 +6,11 @@ body {
     max-width: 550px;
 }
 
+.big-container{
+    max-width: 550px;   
+    margin: 40px auto 0 200px; 
+}
+
 .container header {
     border-bottom: 2px solid #E5E5E5;
 }
@@ -15,36 +20,27 @@ body {
     float: right;
 }
 
-.btn-circle {
-  width: 30px;
-  height: 30px;
-  text-align: center;
-  padding: 6px 0;
-  font-size: 12px;
-  line-height: 1;
-  border-radius: 15px;
-}
-
 table,th,td {
 	border: 1px solid silver;
 	border-collapse: collapse;
-	text-align: center
+	text-align: center;
 }
 
 th,td {
 	font-family: Arial; 
 	font-size: 15px;
-	padding: 10px;
+	padding: 15px;
 }
 
-th {
-	background-color: green;
+thead {
+	background-color: teal;
     color: white;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 table {
-	font-family: Arial; 
-	font-size: 18px;
+	font-family: Arial;
 	border-spacing: 5px;
 }
 

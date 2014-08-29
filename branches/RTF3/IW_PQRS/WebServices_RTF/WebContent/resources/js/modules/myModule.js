@@ -1,5 +1,5 @@
 //Se crea el modulo y se le inyecta ngRoute que nos permite tener varias vistas
-var iwApp = angular.module('iwApp', [ 'ngRoute', 'ngCookies' ]);
+var iwApp = angular.module('iwApp', [ 'ngRoute', 'ngCookies', 'ngDialog', ]);
 
 // URLs de los servicios REST
 var URL_PATH = "http://localhost:8080/WebServices_RTF/rest";
@@ -184,17 +184,25 @@ iwApp.controller('ctrlrProductos', function($scope, Productos) {
 });
 
 // Controlador Analistas
-iwApp.controller('ctrlrAnalistas', function($scope, Analistas) {
+iwApp.controller('ctrlrAnalistas', function($scope, Analistas, ngDialog) {
 
 	$scope.consultarAnalistas = function() {
 		Analistas.consultarAnalistas().success(function(data) {
 			$scope.analistas = data;
+			ngDialog.open({ template: 'enviar',
+				closeByEscape: false});
+		}).error(function(data, status) {
+            $scope.data = data || "Peticion fallida";
+            $scope.status = status;
+            ngDialog.open({ template: 'enviarError',
+            				closeByEscape: false});
 		});
 	}
 });
 
+
 // Controlador Solicitudes
-iwApp.controller('ctrlrSolicitudes', function($scope, Solicitudes) {
+iwApp.controller('ctrlrSolicitudes', function($scope, Solicitudes, ngDialog) {
 
 	$scope.solicitudRealizada = false;
 	$scope.solicitudDelegada = false;
@@ -237,6 +245,12 @@ iwApp.controller('ctrlrSolicitudes', function($scope, Solicitudes) {
 		Solicitudes.asignarSolicitudAAnalista($scope.idSolicitudADelegar,
 				$scope.dniAnalistaDelegado).success(function() {
 			$scope.solicitudDelegada = true;
+			//$scope.analistas = data;
+			ngDialog.open({ template: 'enviar',
+				closeByEscape: false});
+		}).error(function() {
+            ngDialog.open({ template: 'enviarError',
+            				closeByEscape: false});
 		});
 	};
 
