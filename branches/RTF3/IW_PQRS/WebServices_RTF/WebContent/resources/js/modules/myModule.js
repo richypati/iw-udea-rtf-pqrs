@@ -1,42 +1,113 @@
 //Se crea el modulo y se le inyecta ngRoute que nos permite tener varias vistas
-var iwApp = angular.module('iwApp', []);
+var iwApp = angular.module('iwApp', [ 'ngRoute', 'ngCookies' ]);
 
 // URLs de los servicios REST
 var URL_PATH = "http://localhost:8080/WebServices_RTF/rest";
-var URL_SERVICIO_CONSULTAR_SOLICITUD = URL_PATH + "/solicitud/consultarSolicitud";
-var URL_SERVICIO_CONSULTAR_POR_ESTADO = URL_PATH + "/solicitud/consultarPorEstado";
-var URL_SERVICIO_ASIGNAR_SOLICITUD = URL_PATH + "/solicitud/asignarSolicitudAAnalista";
+var URL_SERVICIO_CONSULTAR_SOLICITUD = URL_PATH
+		+ "/solicitud/consultarSolicitud";
+var URL_SERVICIO_CONSULTAR_POR_ESTADO = URL_PATH
+		+ "/solicitud/consultarPorEstado";
+var URL_SERVICIO_ASIGNAR_SOLICITUD = URL_PATH
+		+ "/solicitud/asignarSolicitudAAnalista";
 var URL_SERVICIO_OBTENER_SOLICITUD_POR_ANALISTA = URL_PATH
 		+ "/solicitud/obtenerSolicitudesPorAnalista";
 var URL_SERVICIO_REALIZAR_SOLICITUD = URL_PATH + "/solicitud/realizarSolicitud";
 var URL_SERVICIO_CONSULTAR_PRODUCTOS = URL_PATH + "/producto/consultarTodos";
 var URL_SERVICIO_CONSULTAR_ANALISTAS = URL_PATH + "/analista/consultarTodos";
+var URL_SERVICIO_VALIDAR_CLIENTE = URL_PATH + "/cliente/validarCliente";
 
 // ESTADOS DE SOLICITUD
 var ABIERTO = "ABIERTO";
 var RESUELTO = "RESUELTO";
 
-iwApp.service('Productos', function($http){
-	//Método para consultar todos los productos
-	this.consultarProductos = function(){
+// Factory para el login
+iwApp.factory('auth', function($cookies, $location) {
+	return {
+
+		login : function(email, pws) {
+			// creamos la cookie con el nombre que nos han pasado
+			alert("EMAIL: " + email);
+
+			$cookies.emailCliente = email;
+			$cookies.password = pws;
+			// mandamos a la lista de clientes
+			//$location.url('/consultarSolicitud');
+		},
+
+		validarEstado : function() {
+
+			alert("COOKIE: " + $cookies.emailCliente);
+			if (typeof ($cookies.emailCliente) == 'undefined') {
+				$location.url('/');
+			}
+			// en el caso de que intente acceder al login y ya haya iniciado
+			// sesi�n lo mandamos a la lista de clientes
+			if (typeof ($cookies.emailCliente) != 'undefined'
+					&& $location.url() == '/') {
+				$location.url('/consultarSolicitud');
+			}
+		}
+	};
+});
+
+// Configura las vistas del aplicativo
+iwApp.config([ '$routeProvider', function($routeProvider) {
+	$routeProvider.when('/', {
+		templateUrl : 'home.html', // Cuando se carga la raiz del
+		// aplicativo se carga en la vista
+		// la lista de clientes
+		controller : 'ctrlrLogin'
+	});
+
+	$routeProvider.when('/consultarSolicitud', {
+		templateUrl : 'resources/html/consultarSolicitud.html', // Cuando se
+		// carga la raiz
+		// del
+		// aplicativo se carga en la vista
+		// la lista de clientes
+		controller : 'ctrlrSolicitudes'
+	});
+} ]);
+
+// Servicio Angular encargado de llamar los Servicios Web de Clientes
+iwApp.service('Clientes', function($http) {
+	// Llama el servicio web para validar el usuario y la contrase�a
+	this.validar = function(email, contrasena) {
 		return $http({
-			method: 'GET',
-			url: URL_SERVICIO_CONSULTAR_PRODUCTOS,
+			method : 'GET',
+			url : URL_SERVICIO_VALIDAR_CLIENTE,
+			params : {
+				emailCliente : email,
+				password : contrasena
+			}
+		});
+	};
+
+});
+
+// Servicio Angular encargado de llamar los Servicios Web de Productos
+iwApp.service('Productos', function($http) {
+	// Método para consultar todos los productos
+	this.consultarProductos = function() {
+		return $http({
+			method : 'GET',
+			url : URL_SERVICIO_CONSULTAR_PRODUCTOS,
 		});
 	};
 });
 
-iwApp.service('Analistas', function($http){
-	//Método para consultar los analistas
-	this.consultarAnalistas = function(){
+// Servicio Angular encargado de llamar los Servicios Web de Analista
+iwApp.service('Analistas', function($http) {
+	// Método para consultar los analistas
+	this.consultarAnalistas = function() {
 		return $http({
-			method: 'GET',
-			url :URL_SERVICIO_CONSULTAR_ANALISTAS
+			method : 'GET',
+			url : URL_SERVICIO_CONSULTAR_ANALISTAS
 		});
 	};
 });
 
-// Servicio Angular encargado de llamar los Servicios Web
+// Servicio Angular encargado de llamar los Servicios Web de Solicitud
 iwApp.service('Solicitudes', function($http) {
 
 	// Método para consultar una solicitud por ID
@@ -85,43 +156,18 @@ iwApp.service('Solicitudes', function($http) {
 	};
 
 	// Método para realizar una solicitud
-	this.realizarSolicitud = function(solicitud) {
+	this.realizarSolicitud = function(solicitudWS) {
 		return $http({
 			method : 'POST',
 			url : URL_SERVICIO_REALIZAR_SOLICITUD,
-			params : {
-				// Enviar solo el parametro solicitud
-				id : solicitud.id,
-				producto : {
-					codigo : solicitud.producto.codigo,
-					sucursal : {
-						codigo : solicitud.producto.sucursal.codigo,
-						nombre : solicitud.producto.sucursal.nombre,
-						direccion : solicitud.producto.sucursal.direccion,
-						pais : solicitud.producto.sucursal.pais,
-						ciudad : solicitud.producto.sucursal.ciudad
-					},
-					nombre : solicitud.producto.nombre,
-					tipo : solicitud.producto.tipo,
-					valor : solicitud.producto.valor
-				},
-				informacionAnalista : {
-					dni : solicitud.informacionAnalista.dni,
-					nombre : solicitud.informacionAnalista.nombre,
-					correo : solicitud.informacionAnalista.correo,
-					telefono : solicitud.informacionAnalista.telefono
-				},
-				tipo : tipo,
-				descripcion : descripcion,
-				estado : estado,
-				complejidad : complejidad,
-				prioridad : prioridad,
-				fechaCreacion : fechaCreacion,
-				fechaAtencion : fechaAtencion,
-				tipoDocumento : tipoDocumento,
-				nombreCliente : nombreCliente,
-				emailCliente : emailCliente,
-				respuestaSolicitud : respuestaSolicitud
+			data : {
+				codigoProducto : solicitudWS.codigoProducto,
+				dniAnalista : solicitudWS.dniAnalista,
+				tipo : solicitudWS.tipo,
+				descripcion : solicitudWS.descripcion,
+				tipoDocumento : solicitudWS.tipoDocumento,
+				nombreCliente : solicitudWS.nombreCliente,
+				emailCliente : solicitudWS.emailCliente,
 			}
 		});
 	};
@@ -129,9 +175,9 @@ iwApp.service('Solicitudes', function($http) {
 
 // Controlador Productos
 iwApp.controller('ctrlrProductos', function($scope, Productos) {
-	
-	$scope.consultarProductos = function(){
-		Productos.consultarProductos().success(function(data){
+
+	$scope.consultarProductos = function() {
+		Productos.consultarProductos().success(function(data) {
 			$scope.productos = data;
 		});
 	}
@@ -139,9 +185,9 @@ iwApp.controller('ctrlrProductos', function($scope, Productos) {
 
 // Controlador Analistas
 iwApp.controller('ctrlrAnalistas', function($scope, Analistas) {
-	
-	$scope.consultarAnalistas = function(){
-		Analistas.consultarAnalistas().success(function(data){
+
+	$scope.consultarAnalistas = function() {
+		Analistas.consultarAnalistas().success(function(data) {
 			$scope.analistas = data;
 		});
 	}
@@ -152,7 +198,17 @@ iwApp.controller('ctrlrSolicitudes', function($scope, Solicitudes) {
 
 	$scope.solicitudRealizada = false;
 	$scope.solicitudDelegada = false;
-	
+	$scope.solicitudWS = {
+		codigoProducto : '',
+		dniAnalista : '',
+		tipo : '',
+		descripcion : '',
+		tipoDocumento : '',
+		nombreCliente : '',
+		emailCliente : '',
+	};
+
+	// CONSULTAR SOLICITUD
 	$scope.consultarSolicitud = function() {
 		Solicitudes.consultarSolicitud($scope.idSolicitud).success(
 				function(data) {
@@ -160,6 +216,7 @@ iwApp.controller('ctrlrSolicitudes', function($scope, Solicitudes) {
 				});
 	};
 
+	// CONSULTAR SOLICITUDES ABIERTAS
 	$scope.consultarSolicitudesAbiertas = function() {
 		Solicitudes.consultarSolicitudesPorEstado(ABIERTO).success(
 				function(data) {
@@ -167,6 +224,7 @@ iwApp.controller('ctrlrSolicitudes', function($scope, Solicitudes) {
 				});
 	};
 
+	// CONSULTAR SOLICITUDESvalidarEstado POR ANALISTA
 	$scope.consultarSolicitudesPorAnalista = function() {
 		Solicitudes.obtenerSolicitudesPorAnalista($scope.dniAnalista).success(
 				function(data) {
@@ -174,16 +232,52 @@ iwApp.controller('ctrlrSolicitudes', function($scope, Solicitudes) {
 				});
 	};
 
+	// DELEGAR SOLICITUD
 	$scope.delegarSolicitud = function() {
 		Solicitudes.asignarSolicitudAAnalista($scope.idSolicitudADelegar,
-				$scope.dniAnalistaDelegado).success(function(){
-					$scope.solicitudDelegada = true;
-				});
-	};
-	
-	$scope.realizarSolicitud = function(){
-		Solicitudes.realizarSolicitud($scope.solicitud).success(function(){
-			$scope.solicitudRealizada = true;
+				$scope.dniAnalistaDelegado).success(function() {
+			$scope.solicitudDelegada = true;
 		});
 	};
+
+	// REALIZAR SOLICITUD
+	$scope.realizarSolicitud = function() {
+		Solicitudes.realizarSolicitud($scope.solicitudWS).success(
+				function(data) {
+					$scope.solicitudRealizada = true;
+					$scope.idSolicitudRealizada = data;
+				});
+	};
+});
+
+// Controlador Login
+iwApp.controller('ctrlrLogin', function($scope, $location, auth, Clientes) {
+	// la funci�n login que llamamos en la vista llama a la funci�n
+	// login de la factoria auth pasando lo que contiene el campo
+	// de texto del formularvalidarEstadoio
+	$scope.login = function() {
+
+		Clientes.validar($scope.emailCliente, $scope.password).success(
+				function(data) {
+					if (data == "ok") {
+						auth.login($scope.emailCliente, $scope.password);
+						alert(data);
+						$scope.emailCliente = '';
+						$scope.password = '';
+						$location.url('/consultarSolicitud');
+						return;
+					}
+				});
+	};
+
+});
+
+// se ejecuta cuando se inicia el modulo angular
+iwApp.run(function($rootScope, auth) {
+	// Se ejecuta cada vez que cambia la ruta
+	$rootScope.$on('$routeChangeStart', function() {
+		// llamamos a checkStatus, el cual lo hemos definido en la factoria auth
+		// la cu�l hemos inyectado en la acci�n run de la aplicaci�n
+		auth.validarEstado();
+	});
 });

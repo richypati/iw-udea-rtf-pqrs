@@ -23,6 +23,7 @@ import org.springframework.stereotype.Component;
 import co.com.inversionesxyz.bussinesslogic.ISolicitudService;
 import co.com.inversionesxyz.dto.Solicitud;
 import co.com.inversionesxyz.exception.EmailException;
+import co.com.inversionesxyz.webservices.dto.SolicitudWS;
 
 /**
  * Clase que implementa las operaciones basadas en servicios web Rest a realizar sobre una solicitud
@@ -62,14 +63,16 @@ public class SolicitudWebService {
 	 * Permite insertar una nueva solicitud
 	 * @param solicitud nueva solicitud
 	 * @return Response respuesta con un codigo que indica si la peticion fue fallida o no
+	 * @throws EmailException 
 	 * @throws WebApplicationException cuando no es posible insertar la solicitud
 	 */	
 	@POST
 	@Path("/realizarSolicitud")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response realizarSolicitud(Solicitud solicitud){
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response realizarSolicitud(SolicitudWS solicitud) throws EmailException{
 		try{
-			return Response.ok(solicitudService.guardarSolicitud(solicitud)).build();
+			return Response.ok(solicitudService.guardarSolicitud(solicitud)+"").build();
 		}catch(IllegalStateException e){
 			log.error(e.getStackTrace());
 			throw new WebApplicationException(Response.Status.NO_CONTENT);

@@ -1,54 +1,22 @@
 <!DOCTYPE html>
-<html ng-app="iwApp">
+<html>
 <head>
 <meta charset="UTF-8">
-
+<link href="resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="resources/css/app/home.css" rel="stylesheet">
 <script src="resources/js/angular.js"></script>
+<script src="resources/js/angular-route.js"></script>
+<script src="resources/js/angular-cookies.js"></script>
 <script src="resources/js/modules/myModule.js"></script>
-
-<title>Insert title here</title>
+<script src="resources/js/jquery-1.11.1.js"></script>
+<script src="resources/js/bootstrap.min.js"></script>
+<script src="resources/js/app/login.js"></script>
+<title>PQRS</title>
 </head>
 <body>
-	<h3>CONSULTAR SOLICITUD</h3>
-	<div ng-controller="ctrlrSolicitudes">
-		ID: <input type="text" ng-model="idSolicitud" name="idSolicitud" /> <input
-			type="button" value="buscar" ng-click="consultarSolicitud()" /><br />
-			<p ng-repeat="s in solicitudes">{{"Solicitud con id: "+ s.id}}</p>
-
-		<h1>SOLICITUDES ABIERTAS</h1>
-		<input type="button" value="buscar por Estados"
-			ng-click="consultarSolicitudesAbiertas()" />
-			<p >{{"Solicitud con id: "+ solicitud.id}}</p>
-			<p >{{"Solicitud con tipo: "+ solicitud.tipo}}</p>
-		<p ng-repeat="s in solicitudes">{{"Solicitud con id: "+ s.id}}</p>
-
-		<h1>SOLICITUDES POR ANALSITA</h1>
-		<input type="text" ng-model="dniAnalista" name="dniAnalista" /> 
-		<input type="button" value="buscar"
-			ng-click="consultarSolicitudesPorAnalista()" />
-		<p ng-repeat="sA in solicitudesDeAnalista">{{"Solicitud con id:" +
-			sA.id}}</p>
-
-		<h1>DELEGAR SOLICITUD</h1>
-		ID SOLICITUD: <input type="text" ng-model="idSolicitudADelegar" name="idSolicitudADelegar" />
-		DNI ANALISTA: <input type="text" ng-model="dniAnalistaDelegado" name="dniAnalistaDelegado" />
-		<input type="button" value="Delegar"
-			ng-click="delegarSolicitud()" />
-		<p>{{"SOLICITUD DELEGADA: " + solicitudDelegada}}</p>
+	<h1>¡PRUEBA!</h1>
+	<div ng-app="iwApp">
+		<ng-view></ng-view>
 	</div>
-	
-	<div ng-controller="ctrlrProductos">
-		<h1>PRODUCTOS</h1>
-		<input type="button" value="Consultar Productos" ng-click="consultarProductos()"/>
-		<p ng-repeat="producto in productos">{{producto.nombre}}</p>
-	</div>
-	<div ng-controller="ctrlrAnalistas">
-		<h1>ANALISTAS</h1>
-		<input type="button" value="Consultar Analistas" ng-click="consultarAnalistas()"/>
-		<p ng-repeat="analista in analistas">{{analista.nombre}}</p>
-		<p ng-repeat="analista in analistas">{{analista.dni}}</p>
-	</div>
-
-
 </body>
 </html>
