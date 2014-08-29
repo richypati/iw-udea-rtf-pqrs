@@ -15,14 +15,15 @@
 <title>PQRS</title>
 </head>
 <body ng-app="iwApp">
-	<h5>¡PRUEBA!</h5>
 
-	<div ng-controller="ctrlrLogin">
-		<input type="submit" value="Cerrar Session" ng-click="cerrarSession()" />
+	
+<div ng-controller="ctrlrLogin" style="text-align:right">
+		<button type="button" class="btn btn-primary btn-sm" ng-click="cerrarSession()" >
+		<span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</button>
 	</div>
 
 	<div>
 		<ng-view></ng-view>
 	</div>
-</body>
+	</body>
 </html>
