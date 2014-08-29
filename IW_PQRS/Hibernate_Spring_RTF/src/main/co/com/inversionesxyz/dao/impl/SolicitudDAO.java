@@ -9,7 +9,6 @@ import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Restrictions;
 
 import co.com.inversionesxyz.dao.ISolicitudDAO;
-import co.com.inversionesxyz.dto.InformacionAnalista;
 import co.com.inversionesxyz.dto.Solicitud;
 import co.com.inversionesxyz.exception.BasicDBOperationException;
 
@@ -46,11 +45,12 @@ public class SolicitudDAO extends AbstractDAO<Solicitud> implements
 		try {
 			session = getCurrentSession();
 			transaction = session.beginTransaction();
-			session.save(solicitud);
+			session.persist(solicitud);
 			transaction.commit();
 			session.flush();
 			return solicitud.getId();
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new BasicDBOperationException(MessageFormat.format(
 					"No fue posible insertar la solicitud del cliente {0}",
 					solicitud.getEmailCliente()), e.getCause());
