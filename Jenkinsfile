@@ -1,9 +1,9 @@
 pipeline {
   agent any
   stages {
-    stage('') {
+    stage('error') {
       steps {
-        git(url: 'https://github.com/richypati/iw-udea-rtf-pqrs/', branch: 'RTF3')
+        ws(dir: 'iwpqrs')
       }
     }
   }
